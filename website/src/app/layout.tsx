@@ -8,14 +8,14 @@ export const metadata: Metadata = {
     template: "%s | Kapil Shah",
   },
   description:
-    "Personal brand, technical blog, portfolio, resources, and future digital business platform for Kapil Shah.",
+    "Practical cybersecurity guidance for small businesses without a security team.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Kapil Shah",
     description:
-      "Personal brand, technical blog, portfolio, resources, and future digital business platform for Kapil Shah.",
+      "Practical cybersecurity guidance for small businesses without a security team.",
     url: "https://kapilshah.com.np",
     siteName: "Kapil Shah",
     locale: "en_US",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kapil Shah",
     description:
-      "Personal brand, technical blog, portfolio, resources, and future digital business platform for Kapil Shah.",
+      "Practical cybersecurity guidance for small businesses without a security team.",
   },
 };
 
