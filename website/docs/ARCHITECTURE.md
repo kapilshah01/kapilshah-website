@@ -162,9 +162,16 @@ MDX file
 
 Future D1, R2, and KV usage must enter through `src/lib` adapters rather than being imported directly into route components.
 
+## Comments
+
+Article content remains statically generated. The article comments widget fetches approved comments from the dynamic Edge route at `/api/comments` after hydration, keeping Supabase data out of the static MDX build. Submissions are validated server-side and written through the Supabase publishable key under RLS; no service-role key is used by this application.
+
+## Content Discovery and SEO
+
+The static content registry is the source of truth for guide routes, related links, and sitemap entries. `robots.ts` and `sitemap.ts` are App Router metadata routes and use no runtime filesystem access. Article SEO metadata and structured data are generated server-side from typed registry values; the separate comments API remains the only dynamic content route.
+
 ## Cloudflare Boundary
 
 The current app is deployed through OpenNext for Cloudflare. `wrangler.jsonc` defines the Worker entry and static assets binding. `open-next.config.ts` keeps the app static-first with dummy cache configuration until real cache infrastructure is needed.
 
 Do not add Cloudflare D1, R2, KV, authentication, newsletter backends, APIs, CMS integrations, or UI components during Phase 2.
-

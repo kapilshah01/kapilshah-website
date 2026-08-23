@@ -98,3 +98,12 @@ Reading time can be calculated at build time from MDX content. Store calculated 
 - Keep content utilities compatible with Web Platform APIs.
 - Do not introduce a CMS, database, or remote content backend in Phase 2.
 
+## Comment Association
+
+Dynamic comments reference the canonical article slug. The comments API verifies that a slug exists in the static content registry before accepting a submission, preventing orphaned comment records. New comments remain pending until a moderator approves them in Supabase; only approved, email-free comment fields are rendered publicly.
+
+## Final Taxonomy and Linking
+
+Published guides use six stable pillar values: `account-identity`, `email-phishing`, `website-device`, `data-recovery`, `incident-response`, and `security-management`. The UI presents their human-readable labels. Tools and reviews are a commercial/content layer that can apply across pillars rather than a primary category.
+
+All published articles use `/guides/[slug]`; there are no category archive URLs that duplicate content. Drafts are excluded by the registry from pages, internal links, static params, and the sitemap. Related guides prefer editorial `relatedSlugs`, then use shared pillar and tags as a deterministic fallback.

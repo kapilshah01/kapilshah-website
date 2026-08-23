@@ -113,3 +113,8 @@ Structured data must come from typed metadata and visible page content.
 - Use build-time content indexes for large content collections.
 - Do not add external SEO libraries unless they are Worker-compatible and necessary.
 
+## Implemented Static SEO
+
+`src/app/robots.ts` allows public pages, disallows `/api/`, and declares the generated sitemap. `src/app/sitemap.ts` uses the static content registry and includes only public hubs plus published guide URLs. Drafts, APIs, and internal routes are not included.
+
+The root layout supplies canonical-ready metadata, robots directives, and accurate `WebSite` structured data. Published guide pages supply `Article` and `BreadcrumbList` structured data using registry metadata only. No Organization, ratings, keywords, or fabricated facts are emitted.

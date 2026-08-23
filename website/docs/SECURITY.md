@@ -66,6 +66,10 @@ Contact and newsletter flows should eventually include:
 
 No form backend is added in Phase 2.
 
+## Comments
+
+Comments use a public Supabase publishable key only in the server-side Edge route. The `comments` table has RLS enabled: the public role can insert only pending comments and has no direct table read permission. Approved comments are exposed through an email-free `approved_comments` view. Moderation status changes and private email access remain restricted to Supabase administrators. Required environment variables are `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`; neither belongs in Git or browser JavaScript.
+
 ## Future Rate Limiting
 
 Use Cloudflare WAF or rate limiting for:
@@ -93,4 +97,3 @@ Recommended controls for production:
 ## Deferred Security Work
 
 Phase 2 does not add authentication, databases, APIs, newsletter infrastructure, or SaaS security controls. Those belong to later phases when the related product surface exists.
-

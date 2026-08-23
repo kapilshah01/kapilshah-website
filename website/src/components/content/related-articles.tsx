@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import type { Article } from "@/types/content";
+export function RelatedArticles({ articles }: { articles: Article[] }) { if (!articles.length) return null; return <aside className="mt-14 border-t border-border pt-10" aria-labelledby="related-articles-title"><h2 id="related-articles-title" className="text-2xl font-bold tracking-tight text-foreground">Related guides</h2><div className="mt-6 grid gap-4 md:grid-cols-2">{articles.map((article) => <Card key={article.slug}><h3 className="text-lg font-semibold text-foreground"><Link href={`/guides/${article.slug}`} className="hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{article.title}</Link></h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{article.description}</p></Card>)}</div></aside>; }

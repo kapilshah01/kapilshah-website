@@ -21,6 +21,7 @@
 - Build site shell, navbar, footer, theme switch, breadcrumbs, and base page layout.
 - Add accessible loading, error, empty, and not-found states.
 - Implement initial route structure without full content depth.
+- Establish the six-pillar guide taxonomy, static guide discovery, canonical `/guides/[slug]` URLs, robots, sitemap, and accurate structured data.
 
 ## Phase 4 - Content Engine
 

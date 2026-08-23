@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { structuredData, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -27,6 +30,10 @@ export const metadata: Metadata = {
     description:
       "Practical cybersecurity guidance for small businesses without a security team.",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +43,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full scroll-smooth">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData(websiteSchema) }} />
+        <SiteHeader />
+        <div className="flex flex-1 flex-col">{children}</div>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
