@@ -1,7 +1,146 @@
-## Why MFA matters
+## Introduction
 
-Multi-factor authentication adds a second check when someone signs in. It makes a stolen password much less useful to an attacker.
+Multi-factor authentication (MFA) is one of the most practical ways a small business can improve account security. It asks for more than a password when someone signs in—for example, a code from an authenticator app, approval on a device, or a security key. That extra check can make a password alone insufficient to access an account.
 
-## Where to begin
+This matters because business accounts are used for email, payments, customer information, website administration, and password resets. [NIST’s small-business MFA guidance](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/multi-factor-authentication) says passwords alone are not effective protection for sensitive business assets and recommends enabling MFA on accounts that offer it. You do not need to roll it out everywhere in one afternoon. Start with the accounts that could most disrupt the business, then use a clear recovery plan so MFA does not lock you out.
 
-Enable MFA first for email, financial services, administrator accounts, and any service that stores customer information.
+## MFA Explained Simply
+
+Signing in normally starts with something you know: a password. MFA adds a different kind of proof, commonly something you have, such as an app on your phone or a physical key. Some methods also use something you are, such as a fingerprint or face to unlock an authenticator on your own device.
+
+The important point is not the jargon. MFA means that a password by itself should not be enough to sign in. It is a protective layer, not a promise that every account attack will fail. Use it alongside unique passwords, careful phishing habits, supported devices, and sensible recovery controls.
+
+## Why Passwords Alone Are Not Enough
+
+A password can be guessed, reused from another service, exposed in a breach, or entered on a convincing fake sign-in page. MFA reduces the value of a password by asking for an additional verification step. NIST’s [Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/) note that passwords are not phishing-resistant; methods vary in how well they withstand deceptive sign-in pages.
+
+MFA also supports safer everyday operations. If a staff member accidentally enters a password somewhere suspicious, the extra factor may create an opportunity to stop and investigate before access is granted. It does not replace verifying unexpected requests or keeping recovery settings secure.
+
+## MFA Methods: What the Choices Mean
+
+The best available choice depends on the service, your devices, and what the account controls. CISA recommends using the strongest MFA option that an account supports, while recognizing that any MFA is generally better than none. [Its small-business guidance](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication) describes the common options below.
+
+### Authenticator apps
+
+An authenticator app can generate a short, changing one-time code or sometimes ask you to approve a sign-in. This is widely available and is usually a practical starting point for a small business. Some services offer number matching: you enter or confirm the number shown on the sign-in screen rather than approving a vague prompt.
+
+- **Good fit for:** Most business email, cloud software, accounting, and collaboration accounts.
+- **Set it up well:** Protect the phone with a screen lock, avoid approving prompts you did not initiate, and register a backup authenticator or recovery method before relying on it.
+- **Keep in mind:** A code should never be shared with someone who contacts you unexpectedly. An attacker can try to trick a person into entering a code on a fake page.
+
+### Passkeys and security keys
+
+A passkey is a sign-in credential stored on a device or password manager that can use a device unlock method, such as a PIN or biometric. A security key is a physical device, commonly used through USB, NFC, or another supported connection. When a service supports properly implemented WebAuthn or FIDO-based sign-in, these methods can offer phishing resistance because authentication is tied to the legitimate site’s domain. NIST identifies WebAuthn as an example of verifier-name binding that provides phishing resistance. [See NIST’s authenticator guidance](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/).
+
+- **Good fit for:** Administrators, domain and hosting accounts, financial accounts, executives, and any account with broad business impact.
+- **Set it up well:** Register at least two keys or a supported backup method, label physical keys, and store the spare separately.
+- **Keep in mind:** Confirm that the service supports the method you want before buying hardware. A lost key is manageable only when recovery has been prepared.
+
+### SMS text messages
+
+SMS sends a code by text message. It is familiar and often better than leaving MFA off when no stronger option is offered. But CISA classifies text or email codes as the weakest common option and advises using a stronger method when available.
+
+- **Good fit for:** A temporary or fallback option on accounts that do not support an app, passkey, or security key.
+- **Set it up well:** Protect the mobile-carrier account with its own PIN or security controls, and keep the number current.
+- **Keep in mind:** Do not treat SMS as a reason to skip recovery planning or phishing awareness.
+
+## Which Accounts Should Get MFA First?
+
+Start where one account can affect many others or can move money, change public services, or expose important data. A useful order is:
+
+1. **Business email and email administrators.** Email commonly receives password resets and sensitive business communication.
+2. **Administrators.** Prioritize accounts that manage users, billing, security settings, remote access, domains, hosting, websites, and cloud tenants.
+3. **Financial and payment services.** Include banking, accounting, payroll, payment processors, and purchasing accounts.
+4. **Cloud and SaaS services.** Cover file storage, customer relationship tools, project systems, and any platform that holds customer or business data.
+5. **Critical business accounts.** Add services whose loss would stop operations, such as scheduling, ecommerce, supplier, or communications platforms.
+
+NIST and CISA both specifically emphasize MFA for accounts that access sensitive information and privileged or administrative access. Use your business’s account inventory to decide what counts as critical. The [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) can help you make that inventory.
+
+## Set Up MFA Without Creating a Lockout Problem
+
+MFA improves security only when the business can still recover accounts safely. Do not wait until someone loses a phone, changes jobs, or becomes unavailable to decide who controls recovery.
+
+### Save recovery codes properly
+
+Many services issue recovery codes during MFA setup. They are powerful one-time secrets that can restore access when the normal factor is unavailable.
+
+- Save them in a protected business-controlled location, such as an access-controlled password manager or secure records process.
+- Do not leave them in a download folder, personal inbox, or shared chat.
+- Record which account and administrator they belong to, without exposing the code itself in an inventory.
+
+### Add a backup method before you need it
+
+Where supported, register a second authenticator app device, passkey, security key, or recovery method. For a solo operator, this may mean a spare security key stored separately. For a team, it may mean documented recovery access held by an authorized owner—not a shared personal phone.
+
+Review backup methods when an employee changes roles, a phone number changes, or a provider relationship ends. Remove old factors the same way you remove old user accounts.
+
+### Plan for a lost phone or device
+
+If a device is lost or stolen, use the service’s documented recovery process and remove the old factor after you regain access. If there is reason to suspect the device or account was compromised, change the password, review active sessions and recovery settings, and seek provider or professional support as appropriate. Do not approve surprise prompts or disclose recovery codes to someone who contacts you.
+
+## Common MFA Mistakes to Avoid
+
+- **Using MFA only for one owner account.** Email administrators, financial users, and people with sensitive-data access also matter.
+- **Approving an unexpected prompt.** Only approve a sign-in you started yourself; treat surprise prompts as a reason to pause and investigate.
+- **Treating recovery codes casually.** They can bypass the usual MFA step, so protect them like a high-impact credential.
+- **Using a shared personal device as the only factor.** A business should have a documented way to recover if that person is unavailable.
+- **Leaving former staff or contractors enrolled.** Remove their access and registered factors promptly as part of offboarding.
+- **Assuming SMS is equivalent to every other option.** It may be the only option for some accounts, but use a stronger supported method for higher-impact accounts when possible.
+- **Buying a security key without a backup plan.** Register a spare or a secure recovery path first.
+
+For phishing-specific habits that complement MFA, read [Small Business Phishing Protection](/guides/small-business-phishing-protection).
+
+## A Step-by-Step MFA Rollout Plan
+
+### Step 1: Make a short account inventory
+
+List email, domain, hosting, website, cloud storage, accounting, payroll, banking, payment, customer, and administrator accounts. Note the service owner, current administrators, whether MFA is available, and which recovery method is in use.
+
+### Step 2: Choose the first accounts and methods
+
+Start with email and administrators, then financial and critical cloud services. Use the strongest practical option supported by each service. A small pilot with the owner or a trusted administrator helps reveal device, recovery, and support issues before a wider rollout.
+
+### Step 3: Enroll people and record recovery ownership
+
+Have each person set up MFA through the service’s official settings, while they still have access to their normal device and manager. Verify the sign-in works, store recovery codes safely, and record who is authorized to recover the business account.
+
+### Step 4: Explain the everyday rules
+
+Tell people never to approve an MFA request they did not start, share a code, or follow a sign-in link from an unexpected message. Explain the internal route for reporting suspicious prompts or a lost device. Keep the message short enough that people will remember it.
+
+### Step 5: Review and maintain
+
+Check MFA status when a new account is added, someone changes role, a phone is replaced, or a person leaves. Review administrator accounts and recovery methods on a regular schedule. MFA is a business process, not just a one-time setting.
+
+## Practical MFA Checklist
+
+- [ ] Business email, administrator, financial, domain, hosting, and critical SaaS accounts are identified.
+- [ ] MFA is enabled for every active high-impact account that supports it.
+- [ ] Stronger phishing-resistant options are used for high-impact accounts where supported and practical.
+- [ ] Each person has verified that their MFA method works.
+- [ ] Recovery codes are stored in a protected business-controlled location.
+- [ ] A backup authenticator, key, or recovery method exists for critical accounts.
+- [ ] Mobile devices used for MFA have a screen lock and are reported promptly if lost.
+- [ ] Former staff, contractors, and obsolete devices have been removed from accounts.
+- [ ] Staff know not to approve unexpected prompts or share verification codes.
+- [ ] An owner reviews MFA and recovery settings when business systems or people change.
+
+## Do This Today
+
+If you can complete only a few actions now, enable MFA on business email first, then the primary administrator, banking or payment, domain, and password-manager accounts. Save recovery codes in a business-controlled location and register a backup method for the most critical account. Finally, tell anyone with access to never approve an unexpected MFA prompt.
+
+These steps do not finish your security program, but they establish a strong account-protection baseline. Continue with the broader [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) and the practical sequence on [Start Here](/start-here).
+
+## When Professional or Security Help May Be Appropriate
+
+Ask a qualified IT or security provider for help if you cannot regain access to a critical account, suspect an account has been compromised, manage complex cloud administration, need to meet a contractual or regulatory requirement, or are rolling MFA out to a larger workforce without internal expertise.
+
+Professional help can also be useful when you need to choose and manage security keys, standardize recovery across many services, or respond to repeated suspicious prompts. Keep the request focused: share your critical account list, business needs, and recovery concerns so the provider can help you prioritize rather than add controls indiscriminately.
+
+## Sources and Further Reading
+
+- [NIST: Multi-Factor Authentication for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/multi-factor-authentication)
+- [NIST: Cybersecurity Basics for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/cybersecurity-basics)
+- [NIST SP 800-63B-4: Authenticators and Phishing Resistance](https://pages.nist.gov/800-63-4/sp800-63b/authenticators/)
+- [CISA: Require Multifactor Authentication](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication)
+- [CISA: Small and Medium-Sized Business Resources](https://www.cisa.gov/small-and-medium-sized-business-resources)

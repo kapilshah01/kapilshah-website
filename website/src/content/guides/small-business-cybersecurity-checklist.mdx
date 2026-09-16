@@ -1,169 +1,254 @@
 ## Introduction
 
-Cybersecurity is part of running a business, but many small businesses do not have a security team to own it full time. That does not mean every owner needs to become a security expert. It means the business needs a practical baseline: protect the accounts, email, devices, data, and recovery options it relies on most.
+Cybersecurity is not only an IT problem. It is part of keeping a small business able to take payments, serve customers, protect information, and keep working after a mistake or disruption. You do not need a large security department to make meaningful progress. You do need to protect the accounts, email, devices, data, and recovery options your business relies on.
 
-This checklist is a starting point for reducing avoidable risk. It is not a guarantee that a business will be secure, and it should be adapted to your technology, the data you handle, your contracts, and any legal or regulatory requirements that apply to you. NIST describes cybersecurity as an ongoing risk-management process, not a one-time project. [Its small-business guidance](https://www.nist.gov/itl/smallbusinesscyber/cybersecurity-basics) is a useful companion as your business grows.
+This checklist focuses on practical risk reduction, not perfection. The [NIST Cybersecurity Framework 2.0 Small Business Quick-Start Guide](https://www.nist.gov/publications/nist-cybersecurity-framework-20-small-business-quick-start-guide) is designed for organizations with modest or no formal cybersecurity plan; its core idea is to understand what matters to your business, prioritize it, and improve over time. Use the list below as a working plan, adapting it to your systems, contracts, and any legal or regulatory duties that apply to you.
 
-Start with the highest-impact actions, document what you have done, and return to the list regularly.
+### If you only have 30 minutes today
 
-## 1. Secure Your Most Important Accounts
+- Turn on MFA for your business email and the accounts that control money, your domain, or other administrators.
+- Make sure important accounts do not share a password, and put new unique passwords in a reputable password manager.
+- Tell everyone: verify unexpected payment or account-change requests through a known phone number or separate trusted channel.
+- Check that you have a recent backup of the information you would most need tomorrow.
 
-Your email, banking, accounting, website, cloud storage, payroll, and administrator accounts can affect the whole business. Make a short inventory of them first.
+Write down what you complete. A simple list of account owners, backup locations, and next actions is more useful than relying on memory.
 
-- Turn on multi-factor authentication (MFA) wherever it is available, starting with email and administrator accounts. MFA adds a second check beyond the password; [NIST explains why that extra barrier matters](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/multi-factor-authentication).
-- Use a unique password for every account. A password manager can generate and store them so staff do not need to reuse passwords.
-- Remove accounts that are no longer needed, including former staff, old contractors, trial services, and unused integrations.
-- Give people only the access they need. Keep administrator access limited to people who genuinely require it.
-- Protect account-recovery methods. Review recovery email addresses, phone numbers, backup codes, and who can reset important accounts.
+You do not have to buy every security product or complete every task at once. Focus first on systems that could stop the business, expose sensitive information, or move money. If a provider manages part of your technology, ask who performs each security task; outsourced technology still needs a clear business owner.
 
-For a focused next step, see [MFA for Small Businesses](/guides/mfa-for-small-businesses).
+## Accounts and Access
 
-## 2. Secure Business Email
+### 1. Turn on MFA for important accounts
 
-Email is often where payment requests, password resets, customer messages, and sensitive attachments arrive. Treat it as a business-critical system.
+MFA (multi-factor authentication) adds another verification step beyond a password. It makes a stolen password less useful on its own. Start with business email, financial services, domain registration, cloud storage, website administration, and any account that can reset other accounts. CISA recommends using MFA wherever possible and, where available, choosing phishing-resistant options. [CISA’s MFA guidance](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication) explains the available approaches.
 
-- Require MFA for every business email account.
-- Teach staff to pause before opening unexpected links or attachments, particularly when a message creates urgency.
-- Verify a payment-change or bank-detail request using a known phone number or a separate, trusted contact method. Do not rely on the contact details in the unexpected message.
-- Make sure the people who administer email understand how to recover an account and where recovery details are stored.
-- Review shared mailboxes, forwarding rules, and external access regularly.
+- **What to do:** List these high-impact accounts and enable their strongest practical MFA option. Store backup codes in a protected business-controlled location.
+- **Done looks like:** Every active high-impact account that supports MFA requires it, and the person responsible for recovery is known.
 
-[CISA's Secure Our World guidance](https://www.cisa.gov/secure-our-world) highlights phishing recognition, strong passwords, MFA, and timely software updates as practical protective habits. For more email-specific guidance, read [Small Business Phishing Protection](/guides/small-business-phishing-protection).
+### 2. Use unique, strong passwords
 
-## 3. Secure Computers and Devices
+One reused password can turn a single account problem into several. Unique passwords contain the damage if a service is breached or a password is mistakenly entered somewhere it should not have been.
 
-Laptops, phones, tablets, and shared workstations often hold access to customer data and business systems. A lost or unpatched device can become a larger problem if it also has saved sessions or administrator access.
+- **What to do:** Replace reused passwords on important accounts first. Prefer long, randomly generated passwords when a password manager can store them.
+- **Done looks like:** Each important business account has its own password; no password is shared by email, chat, or an unprotected document.
 
-- Turn on automatic updates for operating systems, browsers, business applications, and security software where practical.
-- Replace or isolate operating systems and applications that no longer receive security updates.
-- Enable device encryption where it is supported and appropriate for the device.
-- Require a screen lock with a reasonable timeout, especially on portable and shared devices.
-- Remove software, browser extensions, and remote-access tools that are no longer needed.
-- Do everyday work with standard accounts where possible; use administrator privileges only when an administrative task requires them.
+### 3. Use a reputable password manager
 
-## 4. Secure Your Website and Online Services
+A password manager reduces the temptation to reuse passwords and gives a small team a safer way to handle account access. It should not become an informal shared vault with no ownership.
 
-Your public website and cloud services are part of the business perimeter, even if someone else manages them.
+- **What to do:** Choose a well-supported password manager, set up individual accounts where practical, enable MFA on it, and decide who can administer the business account.
+- **Done looks like:** The team has an approved place to generate and store passwords, with documented recovery access for the business owner.
 
-- Keep the website platform, themes, plugins, and integrations updated. Remove abandoned or unused plugins rather than leaving them installed.
-- Use HTTPS and check that the site redirects visitors to the secure version.
-- Review administrator accounts for the website, domain registrar, hosting provider, and cloud services.
-- Turn on MFA for services that support it, especially domain, hosting, email, payment, and customer-management accounts.
-- Confirm that the website and important online services have backup or export options appropriate to your needs.
-- Keep a list of important third-party services, their account owners, and how access can be recovered.
+### 4. Remove unused accounts
 
-## 5. Protect Business Data
+Old staff accounts, former contractors, trial services, and abandoned integrations can remain a path into a business long after they stop being useful.
 
-Not every file needs the same protection. Identify the data that would cause the most disruption, privacy harm, contractual concern, or legal issue if it were exposed, changed, or lost.
+- **What to do:** Review users in email, cloud storage, payroll, accounting, website, and key software. Disable or delete access that is no longer needed; do not forget shared mailboxes and API or integration accounts.
+- **Done looks like:** Every active account has a current business reason and an identifiable owner.
 
-- List critical data and where it lives: customer records, financial files, contracts, email, source files, website content, and cloud drives.
-- Limit access to people who need the data for their job.
-- Use approved business storage rather than scattered personal accounts or unmanaged devices.
-- Encrypt appropriate portable devices and sensitive data stores when your tools support it.
-- Dispose of data and accounts you no longer need according to your business, contractual, and regulatory obligations.
+### 5. Review administrator privileges
 
-If you handle regulated information, payment data, health information, or customer data under contractual controls, ask qualified legal, privacy, IT, or security professionals what additional requirements apply.
+Administrator accounts can change users, billing, security settings, or an entire service. They deserve closer attention than ordinary day-to-day accounts.
 
-## 6. Back Up Important Data
+- **What to do:** Identify all administrators. Give admin rights only to people who need them, and use a standard account for routine work when your service supports that separation.
+- **Done looks like:** The administrator list is short, reviewed, and documented; administrators use MFA.
 
-A backup is useful only if you can find it, access it, and restore what the business needs. NIST's [backup and recovery guidance](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final) emphasizes planning, maintaining, and testing backups.
+## Business Email and Phishing
 
-- Identify the data, configurations, and systems that are critical to operating the business.
-- Use a backup method and frequency that reflect how much data you can afford to lose and how quickly you need to recover.
-- Keep at least one backup appropriately separate from the everyday environment, so a problem in the main environment is less likely to affect every copy.
-- Check backup jobs for failures.
-- Test restoring representative files and, where feasible, a business-critical workflow.
-- Write down who can access backups and the first steps for recovery.
+Phishing is a deceptive email, text, call, or message intended to make someone click, sign in, send money, or reveal information. NIST notes that messages may imitate trusted sources and commonly create urgency. [Its small-business phishing guidance](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/phishing) recommends pausing and verifying requests through known contact information.
 
-## 7. Protect Against Phishing and Social Engineering
+### 6. Secure business email with MFA
 
-Social engineering uses a convincing message, call, or request to pressure someone into acting. The goal may be a password, a payment, sensitive information, or access to a device.
+Business email often receives password resets, invoices, customer messages, and access notices. If an email account is taken over, it may also be used to reset other services.
 
-- Treat urgent, unexpected, or secret requests as a reason to slow down.
-- Check the full sender address and the real destination of a link before signing in or sending information.
-- Do not approve an MFA prompt you did not initiate.
-- Use a verification procedure for invoices, payroll changes, gift-card requests, and bank-detail changes.
-- Give staff a simple place to report suspicious messages and make it clear that reporting is encouraged.
+- **What to do:** Require MFA for every mailbox, including administrators and shared-mailbox owners. Review forwarding rules and delegated access as part of the setup.
+- **Done looks like:** Active email users have MFA, recovery details are business-controlled, and unexpected forwarding is investigated.
 
-## 8. Prepare for a Cybersecurity Incident
+### 7. Train people to recognize phishing
 
-Preparation reduces confusion. A short response plan is more useful than trying to invent one during an outage or suspected compromise. NIST recommends defined roles, decision-making strategies, tested backups, and an up-to-date contact list as part of recovery planning.
+People do not need to become investigators. They need a simple habit: pause when a message is unexpected, urgent, or asks them to sign in, open a file, or move money. Examples include a fake invoice, a fake Microsoft or Google sign-in notice, a vendor’s apparent bank-detail change, or an urgent request that appears to come from an executive.
 
-- Name the people who can make business decisions during an incident.
-- Keep contact details for your IT provider, hosting provider, domain registrar, bank/payment provider, insurer, and key vendors in a location available if email is unavailable.
-- Record how important accounts are recovered and where backup information is held.
-- Decide how staff should report a suspected incident and who will communicate with customers or suppliers if needed.
-- Preserve relevant messages, timestamps, and screenshots when safe to do so; avoid deleting evidence in a rush.
-- Seek qualified help promptly for a suspected compromise involving sensitive data, fraud, ransomware, or systems you cannot safely assess.
+- **What to do:** Explain these examples in plain language and give staff a low-friction way to ask before acting. Repeat the reminder when new people join.
+- **Done looks like:** Everyone knows to stop, check, and report suspicious requests without fear of blame.
 
-## 9. The 25-Point Small Business Cybersecurity Checklist
+### 8. Verify unusual payment or account-change requests
 
-Work from the top down. “Done” should mean the action has been completed, checked, and recorded—not simply discussed.
+Invoice and payment-change fraud works when a business treats an email as proof that a supplier or colleague made a request. A separate verification step can interrupt that pressure.
 
-1. [ ] **List your critical accounts.** Include email, banking, accounting, payroll, domain, website, cloud storage, and administrator accounts. **Done means:** an owner and recovery method are recorded for each.
-2. [ ] **Enable MFA on business email.** Prioritize every mailbox and email administrator. **Done means:** each active account requires a second factor.
-3. [ ] **Enable MFA on administrator and financial accounts.** Protect accounts that can change systems or move money. **Done means:** MFA is verified on each account that supports it.
-4. [ ] **Use unique passwords.** Stop password reuse across business services. **Done means:** important accounts have distinct, strong passwords.
-5. [ ] **Adopt a password manager.** Use it to generate and store passwords instead of sharing them in messages or documents. **Done means:** the team has an approved process for secure password storage.
-6. [ ] **Remove unused accounts.** Review former staff, contractors, old tools, and test accounts. **Done means:** unnecessary access is disabled or deleted.
-7. [ ] **Limit administrator privileges.** Use admin access only for people and tasks that need it. **Done means:** the current admin list is reviewed and justified.
-8. [ ] **Secure account recovery.** Review recovery emails, phone numbers, backup codes, and reset permissions. **Done means:** recovery information is current and controlled.
-9. [ ] **Turn on automatic updates.** Cover operating systems, browsers, and core business applications. **Done means:** update settings are checked on supported devices.
-10. [ ] **Retire unsupported software.** Identify systems that no longer receive security fixes. **Done means:** each is replaced, upgraded, or isolated with a documented plan.
-11. [ ] **Encrypt portable devices.** Protect laptops and phones that store or access business data. **Done means:** supported device encryption is enabled and recovery keys are controlled.
-12. [ ] **Require screen locks.** Reduce exposure from unattended devices. **Done means:** devices lock automatically and staff know how to report a lost device.
-13. [ ] **Remove unneeded software and extensions.** Fewer tools mean fewer accounts and update obligations. **Done means:** unused applications, plugins, and browser extensions are removed.
-14. [ ] **Inventory website and online-service access.** Include the registrar, hosting, CMS, payment, and cloud tools. **Done means:** each service has a named owner and current admin list.
-15. [ ] **Update the website and its components.** Apply supported updates to the CMS, themes, plugins, and integrations. **Done means:** a regular update responsibility is assigned.
-16. [ ] **Confirm HTTPS and domain protection.** Keep the public site on encrypted connections and protect domain access. **Done means:** HTTPS is active and domain MFA/recovery is reviewed.
-17. [ ] **Identify critical business data.** Know what must be protected and recovered first. **Done means:** important data locations and owners are documented.
-18. [ ] **Limit access to sensitive data.** Give access based on business need, not convenience. **Done means:** access groups or permissions have been reviewed.
-19. [ ] **Set up backups for critical data.** Include files, cloud data exports where appropriate, and key configurations. **Done means:** backup coverage and frequency are documented.
-20. [ ] **Keep a separate recovery copy.** Avoid relying on a single everyday storage location. **Done means:** at least one backup is appropriately separated from primary systems.
-21. [ ] **Test a restore.** Check that people can retrieve useful data, not just that a backup job says “successful.” **Done means:** a restore test and its result are recorded.
-22. [ ] **Create a phishing verification rule.** Require an independent check for payment changes and unusual requests. **Done means:** staff know the verification method and use known contact details.
-23. [ ] **Create a simple incident contact list.** Include decision makers, IT support, key vendors, and relevant financial contacts. **Done means:** the list is stored somewhere accessible during an email outage.
-24. [ ] **Write a short incident response plan.** Describe reporting, initial containment, communication, recovery, and escalation steps. **Done means:** the responsible people can find and use it.
-25. [ ] **Review the checklist regularly.** Security changes when people, systems, and business needs change. **Done means:** a recurring review date and owner are assigned.
+- **What to do:** Create a rule that bank-detail changes, payment instructions, payroll changes, and unusual purchases must be confirmed using a known phone number or another trusted channel—not details supplied in the message.
+- **Done looks like:** The verification rule is written down and the people who approve payments know how to apply it.
 
-## 10. What Should You Do First?
+### 9. Protect email recovery methods
+
+Recovery email addresses, phone numbers, backup codes, and security questions can be as important as the mailbox password. If they point to a former employee or personal device, recovery may fail when it is most needed.
+
+- **What to do:** Review recovery settings for every administrator and critical mailbox. Move business recovery details under current business control and protect backup codes.
+- **Done looks like:** Recovery methods are current, known to authorized decision-makers, and not dependent on a departed person.
+
+### 10. Report suspicious messages instead of interacting with them
+
+Replying, clicking links, downloading files, or using an unsubscribe link in a suspicious message can make a situation worse. Reporting gives the business a chance to warn others and preserve useful details.
+
+- **What to do:** Tell staff to use their email provider’s reporting feature or send the message to the person who manages email security. Do not ask them to forward credentials or open attachments for proof.
+- **Done looks like:** The team knows one safe reporting path and understands that reporting quickly is encouraged.
+
+For a focused guide, see [Small Business Phishing Protection](/guides/small-business-phishing-protection).
+
+## Computers and Devices
+
+### 11. Keep operating systems updated
+
+Operating-system updates often correct security weaknesses and reliability problems. Delaying every update indefinitely leaves devices without fixes that their maker has already supplied.
+
+- **What to do:** Turn on automatic updates where practical, schedule restarts, and check that updates are actually completing on laptops, desktops, and managed mobile devices.
+- **Done looks like:** Supported devices have a named owner and a working update process rather than a collection of overdue prompts.
+
+### 12. Keep applications and browsers updated
+
+Browsers, office software, remote-access tools, accounting applications, and security software also need updates. A fully updated computer can still have an outdated application exposed to everyday work.
+
+- **What to do:** Enable supported automatic updates for core applications and browser extensions. Remove applications that nobody needs instead of carrying their update burden.
+- **Done looks like:** Essential software is supported, routinely updated, and unused software has been removed.
+
+### 13. Use supported operating systems
+
+When a manufacturer ends security support, new issues may no longer receive fixes. Continuing to use such a system can be a business decision, but it should be visible and managed rather than accidental.
+
+- **What to do:** Identify unsupported devices and software. Replace, upgrade, or isolate them with help from an IT professional if they are needed for a specialist task.
+- **Done looks like:** You have no unknown unsupported systems and a documented plan for any exception.
+
+### 14. Lock devices when unattended
+
+An unlocked laptop or phone can expose email, files, saved browser sessions, and customer information to anyone nearby. This is especially relevant for travel, shared workspaces, and front-desk devices.
+
+- **What to do:** Require a screen lock with a reasonable timeout and a secure sign-in method. Teach staff how to report a lost or stolen device promptly.
+- **Done looks like:** Business devices lock automatically, and people know whom to contact if a device is missing.
+
+### 15. Limit unnecessary administrator access
+
+Administrator access on a device can install software and change security settings. Routine work usually does not need that level of control.
+
+- **What to do:** Use standard user accounts for daily work where possible. Keep a separate administrator account for approved maintenance tasks and remove local admin rights that are not needed.
+- **Done looks like:** People use elevated access deliberately, not as the default for every task.
+
+## Website and Online Services
+
+### 16. Keep the website, CMS, and plugins updated
+
+Your business may use a content-management system, a hosted website builder, or a custom site. In every case, keep the platform and enabled add-ons supported and maintained; unused plugins and integrations are still things to manage.
+
+- **What to do:** Assign someone to check updates for the website, themes or templates, plugins, hosting control panel, and key integrations. Confirm a backup or export exists before major changes.
+- **Done looks like:** Every enabled website component has an owner and a regular update responsibility.
+
+### 17. Protect website administrator accounts with MFA
+
+Website, domain, hosting, and payment administrators can alter public content, change DNS, or disrupt business services. Their protection should match their impact.
+
+- **What to do:** Turn on MFA for these accounts, use separate administrator accounts rather than a shared password where possible, and keep recovery information current.
+- **Done looks like:** Critical online-service administrators use unique accounts, MFA, and business-controlled recovery methods.
+
+If a service does not offer MFA, use a unique password, restrict who can administer it, and consider whether a provider with stronger account protection would better fit the importance of that service.
+
+### 18. Remove unused website and service accounts
+
+Former agencies, developers, staff, test accounts, and old integrations can retain access to online services long after a project ends.
+
+- **What to do:** Review user lists at the domain registrar, hosting provider, website platform, payment service, analytics, cloud storage, and other business applications. Disable anything that is no longer required.
+- **Done looks like:** Current access is limited to current work, with a named owner for each service.
+
+### 19. Review third-party services and integrations
+
+Small businesses often depend on SaaS platforms, cloud storage, booking tools, payment systems, and connected applications. A useful review asks what each service can access and who is responsible for it.
+
+- **What to do:** Keep a simple inventory: service name, purpose, owner, administrator, data it holds, MFA status, and how access is recovered. Remove connections you no longer use.
+- **Done looks like:** You can identify your important services and regain control if a key person is unavailable.
+
+## Business Data and Backups
+
+### 20. Identify your most important business data
+
+Start with the information that would stop work or create the most harm if it were lost, changed, or exposed: customer records, contracts, financial information, email, website content, design files, and essential configurations.
+
+- **What to do:** List the data, where it lives, its owner, and how long the business can operate without it. Include cloud services, local devices, and paper records where relevant.
+- **Done looks like:** The business knows what must be protected and restored first.
+
+### 21. Limit access to sensitive information
+
+Not every employee, contractor, or application needs every file. Limiting access by role reduces accidental exposure and narrows the impact if an account is misused.
+
+- **What to do:** Review shared drives, folders, customer systems, and financial applications. Give access based on job need and remove it when the work ends.
+- **Done looks like:** Sensitive information is not broadly available just because broad access is convenient.
+
+### 22. Back up important data
+
+Backups help recovery from accidental deletion, hardware failure, service problems, and some security incidents. NIST’s [backup and recovery guide](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final) emphasizes planning, maintaining, and testing backup files based on each organization’s needs.
+
+- **What to do:** Confirm coverage for critical files, cloud data exports where appropriate, website content, and important system configurations. Choose a frequency that fits how much recent work you could realistically lose.
+- **Done looks like:** Critical data has a documented backup method, owner, and review process.
+
+### 23. Keep at least one backup separated from the main system
+
+A backup stored only in the same everyday environment can be affected by the same mistake, outage, or account compromise. Separation might involve a different account, storage location, or provider, depending on your setup.
+
+- **What to do:** Discuss your backup design with your provider or IT support. Protect backup access with strong authentication and make sure the recovery copy is not routinely exposed to every user.
+- **Done looks like:** At least one recovery copy is appropriately separated and its access is controlled.
+
+### 24. Test that backups can actually be restored
+
+A successful backup notification does not prove that the needed information can be found, opened, and used. A small restore test reveals missing permissions, incomplete coverage, and unclear instructions before an emergency.
+
+- **What to do:** Restore representative files and, where practical, a critical workflow. Record the date, result, time required, and any issue to fix.
+- **Done looks like:** You have completed a recent restore test and know who can perform recovery.
+
+A restore test can begin small: recover one recent file to a safe location, open it, and confirm it is the version you expected. The point is to verify the whole path—backup, access, instructions, and usable data—not to create disruption during a busy workday.
+
+## Incident Response
+
+### 25. Create a simple cybersecurity incident response plan
+
+An incident plan is a short, practical guide for a stressful day. It does not need to be a large policy document. NIST’s small-business resources and CISA’s [small and medium-sized business resources](https://www.cisa.gov/small-and-medium-sized-business-resources) can help you develop it further.
+
+- **What to do:** Name the people who can make decisions; record contacts for IT support, hosting, domain, email, bank or payment providers, insurer, and key vendors; write where account recovery and backup details are stored. Include how staff should report a problem, which evidence to preserve (such as messages, timestamps, and screenshots), and when to request professional help.
+- **Done looks like:** Responsible people can find the plan without relying on business email, know who will communicate, and can start recovery without guessing.
+
+## What to Do First
+
+Cybersecurity is continuous improvement. Start with the work that most directly protects access and recovery, then build the habits that keep those controls useful.
 
 ### Today
 
-- Turn on MFA for business email, administrator accounts, and financial services.
-- Change any known default or reused password on a critical account.
-- Send the team a simple payment-change and phishing-verification rule.
-- Check that a current backup exists for the data you would miss most tomorrow.
+- Enable MFA for business email, financial services, domain or hosting, and administrator accounts.
+- Change any reused password on a critical account and begin using a password manager.
+- Share the payment-change verification rule with everyone who handles money or supplier details.
+- Confirm that a recent backup exists for the data you would miss most tomorrow.
 
 ### This Week
 
-- Build the critical-account and critical-data inventories.
-- Set up or standardize a password manager.
-- Review administrator access, former-user accounts, and recovery methods.
-- Enable automatic updates and screen locks on supported devices.
-- Perform a small restore test.
+- Create the critical-account, service, and data inventories.
+- Remove unused users, integrations, local administrator rights, and unneeded software.
+- Enable updates and screen locks on supported devices.
+- Perform a small restore test and record the result.
 
 ### This Month
 
-- Document your incident contacts and short response plan.
+- Write and share the incident response plan and offline contact list.
 - Review website, domain, hosting, and third-party service access.
-- Address unsupported software, unnecessary tools, and missing encryption where appropriate.
-- Schedule the first recurring checklist review.
+- Address unsupported devices or software and any gaps found in the backup test.
+- Put a recurring review date on the calendar; revisit the checklist when people, suppliers, or systems change.
 
-## 11. When Should You Get Professional Help?
+## When to Get Professional Help
 
-Professional IT or cybersecurity help can be worthwhile when you suspect a compromise, ransomware, fraud, unauthorized access, or exposure of sensitive data. It can also help when you need to meet contractual, legal, insurance, or industry-specific obligations; manage complex cloud systems; secure a growing workforce; or test whether your backup and recovery approach will meet business needs.
+Get qualified IT or cybersecurity help promptly if you suspect an account compromise, malware or ransomware, fraud, lost access to a critical system, exposure of sensitive data, or a major website compromise. Assistance is also sensible when recovery is failing, important services are complex, or your business lacks the expertise to assess a material risk safely.
 
-The goal is not to buy every possible control. Ask for help defining your highest risks, the responsibilities of your providers, and a realistic improvement plan.
+Preserve what you can without taking risky actions: keep relevant messages, timestamps, screenshots, and provider notices. Contact your bank or payment provider quickly if money or payment details may be involved. A professional can help contain the issue, protect evidence, and plan safe recovery.
 
-## Conclusion
+For the next practical steps, visit [Start Here](/start-here), browse all [Cybersecurity Guides](/guides), or explore [Small Business Security](/small-business). You can also read [MFA for Small Businesses](/guides/mfa-for-small-businesses) for a focused account-security starting point.
 
-The strongest small-business security programs are usually built from consistent basics: protected accounts, safer email habits, updated systems, usable backups, and a plan for trouble. Use this checklist to make progress, then return to it as your people, tools, and obligations change. If you are new to the topic, visit [Start Here](/start-here); for the broader library, see [Cybersecurity Guides](/guides) and [Small Business Security](/small-business).
+## Sources and Further Reading
 
-## Sources and further reading
-
-- [NIST: Cybersecurity Basics for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/cybersecurity-basics)
-- [NIST: Multi-Factor Authentication for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/multi-factor-authentication)
-- [CISA: Secure Our World](https://www.cisa.gov/secure-our-world)
-- [CISA: Small and Medium-Sized Business Resources](https://www.cisa.gov/small-and-medium-sized-business-resources)
+- [NIST Cybersecurity Framework 2.0: Small Business Quick-Start Guide](https://www.nist.gov/publications/nist-cybersecurity-framework-20-small-business-quick-start-guide)
+- [NIST Small Business Cybersecurity: Cybersecurity Basics](https://www.nist.gov/itl/smallbusinesscyber/cybersecurity-basics)
+- [NIST Small Business Cybersecurity: Multi-Factor Authentication](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/multi-factor-authentication)
+- [NIST Small Business Cybersecurity: Phishing](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/phishing)
 - [NIST NCCoE: Protecting Data from Ransomware and Other Data Loss Events](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final)
+- [CISA: Small and Medium-Sized Business Resources](https://www.cisa.gov/small-and-medium-sized-business-resources)
+- [CISA: Require Multifactor Authentication](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication)

@@ -1,7 +1,125 @@
-## Phishing targets everyday work
+## Introduction
 
-Phishing messages use familiar requests to pressure people into sharing information, paying an invoice, or signing in on a fake page.
+Phishing is a deceptive message designed to make someone take an unsafe action: open a link, download a file, share information, approve a sign-in, or send money. The message may arrive by email, text, social media, or another familiar channel. It often appears to come from a bank, supplier, colleague, government service, or a leader inside the business.
 
-## Make reporting easy
+Phishing is not a test of whether people are clever enough. It is a problem of recognizing pressure and having a safe, repeatable response. [NIST’s small-business phishing guidance](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/phishing) recommends treating unexpected links and attachments with caution, slowing down when a message creates urgency, and verifying requests through known contact information.
 
-Give your team a simple way to pause and ask about a suspicious message before acting on it.
+## What Phishing Looks Like in Everyday Work
+
+Many phishing messages use a normal business task as their cover. The goal is usually to obtain a password, redirect a payment, access a device, or collect sensitive information. Common patterns include:
+
+- An invoice or shared document you did not expect.
+- A sign-in notice that appears to be from Microsoft, Google, a bank, or another service you use.
+- A supplier apparently changing bank details or asking for a payment urgently.
+- An executive or owner apparently requesting a confidential purchase, transfer, or document.
+- A delivery, tax, account-suspension, or voicemail notification that demands quick action.
+
+These examples are not proof that a message is fraudulent; context matters. A genuine supplier can send an invoice. The safer habit is to verify an unexpected or high-impact request before acting on it.
+
+## Business Email Compromise and Impersonation
+
+Business email compromise is a form of fraud that relies on impersonation or a compromised mailbox. It may look like a request from an owner, employee, customer, or vendor rather than an obviously suspicious message. The request can be convincing because it uses real names, normal business relationships, or urgency.
+
+Treat payment instructions, bank-detail changes, payroll changes, and requests for sensitive information as actions that need independent verification. Call a known number from your existing records, use a trusted contact method, or confirm in person. Do not use the phone number, link, or reply address supplied in the unexpected message. NIST specifically recommends verifying urgent requests from a boss or vendor using known contact information or a public company website.
+
+## How to Inspect a Suspicious Email
+
+You do not need to perform forensic analysis. Look for cues, then use a safer route to verify the request.
+
+### Check the sender address, not just the display name
+
+Display names can be copied easily. Expand the sender details and look at the full address and domain. Watch for a free-mail address when you expected a company address, a domain with a subtle spelling difference, or an address that does not fit the sender’s usual communication. A familiar address is helpful context, but it is not a guarantee: a legitimate mailbox can also be compromised.
+
+### Treat links as destinations, not labels
+
+Link text and button labels can say one thing while leading somewhere else. Before clicking, inspect the destination in your email application if it provides a safe preview. When possible, use a saved bookmark, type the known website address, or use the official app rather than a link in an unexpected message. Never enter a password or MFA code on a site you reached through an unverified request.
+
+### Be cautious with unexpected attachments
+
+An unexpected attachment can be a lure even when its filename looks like a familiar invoice or document. Do not open or enable anything just to find out what it is. Confirm the request with the sender through a known channel, then use your normal approved tools and process to handle the file.
+
+### Pause when a message creates urgency or secrecy
+
+Urgency is a common pressure technique: an account will be closed, a payment is late, a customer is waiting, or the owner needs help immediately. A request to keep the matter secret or bypass normal approval is another reason to pause. Take a moment, follow your verification rule, and ask a colleague when unsure.
+
+## Phishing Is Not Limited to Email
+
+The same ideas apply outside the inbox. NIST notes that phishing can arrive by text messages, phone calls, social-media messages, and even physical mail.
+
+- **SMS phishing (smishing):** A text may claim there is a delivery issue, payment problem, or account alert. Use the service’s official app or saved website instead of the text link.
+- **Social-media phishing:** An unexpected direct message, friend request, sponsored post, or support message may try to move you to a fake sign-in page. Verify through the platform’s official help path.
+- **QR-code phishing:** A QR code can hide its destination behind a simple scan. Treat an unexpected QR code like an unexpected link: do not scan it just because it is convenient, and use a known website or app when possible.
+
+## Email Authentication Basics: SPF, DKIM, and DMARC
+
+Email authentication helps receiving mail systems evaluate whether a message claiming to come from a domain was sent in an authorized way. It is a useful business email control, but it does not mean every message that reaches an inbox is safe.
+
+- **SPF (Sender Policy Framework):** A domain publishes which mail servers are permitted to send mail for it.
+- **DKIM (DomainKeys Identified Mail):** A sending system adds a digital signature that recipients can verify against the sending domain.
+- **DMARC (Domain-based Message Authentication, Reporting, and Conformance):** A domain publishes how receiving systems should handle messages that do not pass the relevant checks and can receive reports about them.
+
+NIST’s [Trustworthy Email guidance](https://www.nist.gov/publications/trustworthy-email-0) identifies SPF, DKIM, and DMARC as core mechanisms for authenticating a sending domain. For a small business, the practical step is to ask the person who manages your domain or email provider whether these records are configured correctly for the services that send mail on your behalf. Do not publish DNS records by guesswork: an incorrect change can disrupt legitimate email.
+
+## MFA and Password Managers Help Limit the Damage
+
+MFA adds an additional sign-in check beyond a password. It can make a stolen password less useful, especially when a stronger phishing-resistant method is available and supported. It does not make a fake message harmless, so staff should still verify unexpected sign-in prompts and never share one-time codes.
+
+A password manager helps people use a unique password for each service. It also reduces the need to type passwords manually. For a focused setup guide, see [Multi-Factor Authentication (MFA) for Small Businesses](/guides/mfa-for-small-businesses). Together, MFA, unique passwords, and cautious verification provide layers of protection rather than a single point of failure.
+
+## Safe Handling of a Suspicious Email
+
+When something feels wrong, use this calm sequence:
+
+1. **Stop.** Do not click, download, reply, approve an MFA prompt, or provide information.
+2. **Verify independently.** Contact the apparent sender using a known phone number, established vendor record, or another trusted channel.
+3. **Report it.** Use the email provider’s report-phishing function or your business’s designated reporting route.
+4. **Preserve useful details.** Keep the message available for the person investigating it; do not forward it broadly or interact with its contents.
+5. **Warn others when appropriate.** If the message targets a shared vendor or team, the person responsible for security can give a short, safe warning.
+
+NIST advises not engaging with a suspicious sender and not clicking links, including unsubscribe links, in a suspected phish. That is why independent reporting and verification are preferable to replying to the original message.
+
+## What to Do If You Clicked a Link or Opened an Attachment
+
+Act promptly, but do not panic. The right response depends on what happened and the account or device involved.
+
+1. **Disconnect or stop the action if you can do so safely.** Close the suspicious page or document. If you entered a password, do not continue entering information.
+2. **Tell the right person immediately.** Contact your IT provider, security contact, or manager using a known contact method. Fast reporting helps protect other accounts and devices.
+3. **Change an affected password from a known-safe device, if appropriate.** Use a new, unique password and review account recovery settings, active sessions, and forwarding rules. If the password was reused anywhere, change those accounts too.
+4. **Use MFA and account recovery carefully.** Do not approve surprise prompts. If you lose access, use the provider’s official recovery process and your documented recovery information.
+5. **Contact financial providers quickly if money or payment data is involved.** Follow your incident plan and preserve the original message, timestamps, and relevant screenshots.
+
+NIST’s phishing guidance similarly advises changing affected passwords, notifying appropriate people, and contacting a financial institution promptly when a financial account may be involved. The broader [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) includes an incident-response planning step for these situations.
+
+## Employee Habits and Training That Work in Practice
+
+Short, repeatable habits work better than a one-time lecture. Give everyone a simple rule: pause before unexpected requests, verify high-impact changes independently, and report mistakes quickly without blame. Include the people who handle payments, payroll, customer records, and administrator accounts in extra practice because their decisions can have wider effects.
+
+Use brief examples based on ordinary work—an unexpected invoice, a login notice, or a supplier detail change—without sending realistic malicious material. Discuss what the team should do, where to report it, and who can approve an exception. Revisit the habits when people join, systems change, or a real suspicious message is reported.
+
+## Practical Phishing-Prevention Checklist
+
+- [ ] Everyone knows the business route for reporting a suspicious message or unexpected MFA prompt.
+- [ ] Payment, bank-detail, payroll, and sensitive-data changes require independent verification.
+- [ ] Business email and high-impact accounts use MFA.
+- [ ] Important accounts have unique passwords stored through an approved password-manager process.
+- [ ] Staff use saved links, official apps, or known addresses for important services instead of unexpected message links.
+- [ ] The business has a clear owner for email, domain, and sender-authentication settings.
+- [ ] SPF, DKIM, and DMARC are reviewed with the email or domain provider when relevant.
+- [ ] Former staff, old forwarding rules, and unused mail access are removed.
+- [ ] Supported devices, browsers, and security software are updated.
+- [ ] The incident contact list is available if email is unavailable.
+
+## Do This Today
+
+Share one simple instruction with the team: do not act on an unexpected payment, sign-in, attachment, or account-change request until it has been verified through a known contact method. Then turn on MFA for business email and the accounts that control money or administrators. Finally, confirm that everyone knows where to report a suspicious message.
+
+These actions create a workable starting point. Continue through [Start Here](/start-here) and the [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) to strengthen accounts, devices, backups, and incident response over time.
+
+## Sources and Further Reading
+
+- [NIST: Phishing Guidance for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/guidance-topic/phishing)
+- [NIST: Cybersecurity Basics for Small Businesses](https://www.nist.gov/itl/smallbusinesscyber/cybersecurity-basics)
+- [NIST SP 800-177 Rev. 1: Trustworthy Email](https://www.nist.gov/publications/trustworthy-email-0)
+- [NIST Technical Note 1945: DMARC, SPF, and DKIM](https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.1945.pdf)
+- [CISA: Recognize and Report Phishing](https://www.cisa.gov/secure-our-world/recognize-and-report-phishing)
+- [CISA: Small and Medium-Sized Business Resources](https://www.cisa.gov/small-and-medium-sized-business-resources)

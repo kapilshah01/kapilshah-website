@@ -2,7 +2,6 @@ import { getArticleBySlug } from "@/lib/content";
 import { getSupabaseClient } from "@/lib/supabase";
 import type { CommentSubmission, PublicComment } from "@/types/comments";
 
-export const runtime = "edge";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validSubmission(value: unknown): CommentSubmission | null {
