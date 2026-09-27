@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { structuredData, websiteSchema } from "@/lib/seo";
+import { authorSchema, structuredData, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full scroll-smooth">
       <body className="min-h-full flex flex-col">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData(websiteSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData([websiteSchema, authorSchema]) }} />
         <SiteHeader />
         <div className="flex flex-1 flex-col">{children}</div>
         <SiteFooter />
