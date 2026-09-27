@@ -1,2 +1,9 @@
 import Link from "next/link";
-export function Breadcrumbs({ current, category }: { current: string; category?: string }) { return <nav aria-label="Breadcrumb" className="mb-8 text-sm"><ol className="flex flex-wrap items-center gap-2 text-muted-foreground"><li><Link href="/" className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Home</Link></li><li aria-hidden="true">/</li><li><Link href="/guides" className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Guides</Link></li>{category ? <><li aria-hidden="true">/</li><li>{category}</li></> : null}<li aria-hidden="true">/</li><li aria-current="page" className="text-foreground">{current}</li></ol></nav>; }
+import type { Article } from "@/types/content";
+import { guideBreadcrumbs } from "@/lib/seo";
+
+export function Breadcrumbs({ article }: { article: Article }) {
+  const breadcrumbs = guideBreadcrumbs(article);
+
+  return <nav aria-label="Breadcrumb" className="mb-8 text-sm"><ol className="flex flex-wrap items-center gap-2 text-muted-foreground">{breadcrumbs.map((breadcrumb, index) => <li key={`${breadcrumb.name}-${index}`} className="contents">{index > 0 ? <span aria-hidden="true">/</span> : null}{index < breadcrumbs.length - 1 && breadcrumb.href ? <Link href={new URL(breadcrumb.href).pathname} className="hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{breadcrumb.name}</Link> : <span aria-current="page" className="text-foreground">{breadcrumb.name}</span>}</li>)}</ol></nav>;
+}
