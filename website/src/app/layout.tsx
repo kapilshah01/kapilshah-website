@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { authorSchema, structuredData, websiteSchema } from "@/lib/seo";
+import { authorSchema, canonicalUrl, structuredData, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kapilshah.com.np"),
   title: {
-    default: "Kapil Shah",
+    default: "Practical Small Business Cybersecurity",
     template: "%s | Kapil Shah",
   },
   description:
     "Practical cybersecurity guidance for small businesses without a security team.",
   alternates: {
-    canonical: "/",
+    canonical: canonicalUrl("/"),
   },
   openGraph: {
-    title: "Kapil Shah",
+    title: "Practical Small Business Cybersecurity | Kapil Shah",
     description:
       "Practical cybersecurity guidance for small businesses without a security team.",
     url: "https://kapilshah.com.np",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kapil Shah",
+    title: "Practical Small Business Cybersecurity | Kapil Shah",
     description:
       "Practical cybersecurity guidance for small businesses without a security team.",
   },

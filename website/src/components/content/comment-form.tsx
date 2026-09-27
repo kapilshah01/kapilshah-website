@@ -3,7 +3,57 @@
 import { useState, type FormEvent } from "react";
 
 export function CommentForm({ articleSlug, onSubmitted }: { articleSlug: string; onSubmitted: () => void }) {
-  const [message, setMessage] = useState(""); const [error, setError] = useState(""); const [pending, setPending] = useState(false);
-  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setError(""); setMessage(""); try { const form = new FormData(event.currentTarget); const response = await fetch("/api/comments", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ articleSlug, comment: { name: form.get("name"), email: form.get("email"), body: form.get("body") } }) }); const result = await response.json().catch(() => ({})); if (!response.ok) { setError(result.message ?? "We could not submit your comment right now."); return; } event.currentTarget.reset(); setMessage("Your comment has been submitted for review."); onSubmitted(); } catch { setError("We could not submit your comment right now. Please try again later."); } }
-  return <form className="mt-8 space-y-5" onSubmit={async (event) => { setPending(true); await submit(event); setPending(false); }} noValidate><div><label htmlFor="comment-name" className="text-sm font-semibold text-foreground">Name</label><input id="comment-name" name="name" required minLength={2} maxLength={80} className="mt-2 min-h-11 w-full rounded-md border border-input bg-background px-3 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /></div><div><label htmlFor="comment-email" className="text-sm font-semibold text-foreground">Email <span className="font-normal text-muted-foreground">(optional)</span></label><input id="comment-email" name="email" type="email" maxLength={254} className="mt-2 min-h-11 w-full rounded-md border border-input bg-background px-3 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /><p className="mt-2 text-sm text-muted-foreground">Your email will not be displayed publicly.</p></div><div><label htmlFor="comment-body" className="text-sm font-semibold text-foreground">Comment</label><textarea id="comment-body" name="body" required minLength={10} maxLength={2000} rows={6} className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /></div>{error ? <p role="alert" className="text-sm text-destructive">{error}</p> : null}{message ? <p role="status" className="text-sm text-success">{message}</p> : null}<button type="submit" disabled={pending} className="min-h-11 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60">{pending ? "Submitting…" : "Submit comment"}</button></form>;
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [pending, setPending] = useState(false);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formElement = event.currentTarget;
+    setError("");
+    setMessage("");
+
+    try {
+      const form = new FormData(formElement);
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          articleSlug,
+          comment: { name: form.get("name"), email: form.get("email"), body: form.get("body") },
+          companyWebsite: form.get("companyWebsite"),
+        }),
+      });
+      const result = await response.json().catch(() => ({})) as { message?: string };
+      if (!response.ok) {
+        setError(result.message ?? "We could not submit your comment right now.");
+        return;
+      }
+
+      formElement.reset();
+      setMessage(result.message ?? "Your comment has been submitted for review.");
+      onSubmitted();
+    } catch {
+      setError("We could not submit your comment right now. Please try again later.");
+    }
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    setPending(true);
+    try {
+      await submit(event);
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return <form className="mt-8 space-y-5" onSubmit={handleSubmit} noValidate>
+    <div className="absolute -left-[10000px]" aria-hidden="true"><label htmlFor="comment-company-website">Leave this field empty</label><input id="comment-company-website" name="companyWebsite" type="text" tabIndex={-1} autoComplete="new-password" /></div>
+    <div><label htmlFor="comment-name" className="text-sm font-semibold text-foreground">Name</label><input id="comment-name" name="name" required minLength={2} maxLength={80} className="mt-2 min-h-11 w-full rounded-md border border-input bg-background px-3 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /></div>
+    <div><label htmlFor="comment-email" className="text-sm font-semibold text-foreground">Email <span className="font-normal text-muted-foreground">(optional)</span></label><input id="comment-email" name="email" type="email" maxLength={254} className="mt-2 min-h-11 w-full rounded-md border border-input bg-background px-3 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /><p className="mt-2 text-sm text-muted-foreground">Your email will not be displayed publicly.</p></div>
+    <div><label htmlFor="comment-body" className="text-sm font-semibold text-foreground">Comment</label><textarea id="comment-body" name="body" required minLength={10} maxLength={2000} rows={6} className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /></div>
+    {error ? <p role="alert" className="text-sm text-destructive">{error}</p> : null}
+    {message ? <p role="status" className="text-sm text-success">{message}</p> : null}
+    <button type="submit" disabled={pending} className="min-h-11 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60">{pending ? "Submitting…" : "Submit comment"}</button>
+  </form>;
 }

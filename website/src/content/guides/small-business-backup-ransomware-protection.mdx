@@ -1,0 +1,51 @@
+## The short answer
+
+A small business should keep more than one recoverable copy of important data, protect backup accounts with separate access controls and MFA, and test restores before an emergency. Backups reduce the impact of accidental deletion, device failure, and some ransomware incidents, but they do not prevent an attack or replace incident response.
+
+## Decide what must be recoverable
+
+Start with the work the business must resume: accounting and payroll records, customer and order data, shared files, operational documents, website configuration, and the information needed to restore critical services. Note where each item lives, who owns it, and how quickly it would be needed. A cloud sync folder is useful for collaboration, but synchronized deletion or encryption may also affect synced copies.
+
+## Build a practical backup routine
+
+1. **Choose coverage.** List the systems and records that matter, including laptops and cloud services. Check what your provider backs up and what you must export or protect separately.
+2. **Set a schedule.** Match backup frequency to how much recent work you could recreate. Automate routine jobs and assign someone to review failures.
+3. **Keep a separated recovery copy.** Use a backup destination that ordinary day-to-day accounts cannot freely alter or delete. Depending on the service, this may mean immutable retention, offline media, or a separately controlled account. Confirm the design with your provider.
+4. **Protect backup administration.** Use unique credentials and MFA. Limit who can change retention, delete copies, or manage recovery access.
+5. **Test restoration.** Restore representative files to a safe location, open them, and record what worked, how long it took, and who can repeat the process.
+
+## A realistic example
+
+A small design studio might inventory project files, bookkeeping data, email, and its website. It could rely on provider backups for some cloud records, scheduled endpoint backups for local project files, and a separately controlled recovery copy. The owner tests a sample project restore each quarter and records the steps. The exact schedule and storage choices depend on how much data the studio can afford to lose and how quickly work must resume.
+
+## Common mistakes
+
+- Assuming file sync is a complete backup.
+- Keeping every backup writable by the same administrator account used every day.
+- Treating a green dashboard as proof a restore will work.
+- Forgetting cloud email, SaaS data, website configuration, or recovery credentials.
+- Testing restoration by overwriting the only good copy.
+- Promising a recovery time without practicing the steps and checking provider limits.
+
+## If ransomware or suspected compromise occurs
+
+Use your [incident response plan](/guides/small-business-incident-response-plan) and contact qualified IT support. Avoid connecting backup media to a device that may still be compromised. Preserve relevant alerts and records, and have the response lead determine whether systems should be isolated and how to recover safely. Do not assume a backup is clean until the recovery process has been assessed.
+
+The [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) includes backup and recovery actions. For a broader preparation sequence, see [Start Here](/start-here).
+
+## Questions to review with your provider
+
+- Which business data and SaaS services are included?
+- How long are copies retained, and who can delete them?
+- How are backup administration and recovery protected?
+- What is the tested restore process, and what limitations affect recovery time?
+- Can we restore a copy without overwriting current production data?
+
+## Conclusion
+
+Useful backups are defined by coverage, protected access, and successful restoration. Inventory critical data, separate recovery access from everyday accounts, and practice a small restore before relying on the plan.
+
+## Sources and further reading
+
+- [CISA: StopRansomware Guide](https://www.cisa.gov/stopransomware/ransomware-guide)
+- [NIST: Protecting Data from Ransomware and Other Data Loss Events](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final)
