@@ -60,7 +60,12 @@ export async function GET(request: Request) {
       .eq("article_slug", slug)
       .order("created_at", { ascending: false });
     if (error) {
-      console.error("Unable to load approved comments", { code: error.code, message: error.message });
+      console.error("Unable to load approved comments", {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+      });
       return apiError("Comments are temporarily unavailable.", 500);
     }
     return Response.json({ comments: (data ?? []) as PublicComment[] }, { headers: { "Cache-Control": "no-store" } });
