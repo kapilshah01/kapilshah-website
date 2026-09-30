@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" fill="none">
+  <!-- Background Card -->
+  <rect width="1200" height="540" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="538" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="280" height="26" rx="6" fill="#E0F2FE"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0284C7" letter-spacing="0.08em">THREAT VECTOR COMPARISON</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Three Primary Business Email Compromise Techniques</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">BEC attacks extend beyond basic email scams: attackers exploit identity, domains, and supply chain trust.</text>
+
+  <!-- Vector 1: Legitimate Account Takeover -->
+  <g transform="translate(40, 136)">
+    <rect width="354" height="364" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="8" rx="4" fill="#DC2626"/>
+    
+    <rect x="24" y="24" width="44" height="44" rx="10" fill="#FEE2E2"/>
+    <!-- Keyhole/User icon -->
+    <circle cx="46" cy="40" r="7" fill="#DC2626"/>
+    <path d="M37 57C37 50 41 49 46 49C51 49 55 50 55 57" stroke="#DC2626" stroke-width="3" stroke-linecap="round"/>
+
+    <text x="80" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Account Takeover</text>
+    <text x="80" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#DC2626">Compromised Real Mailbox</text>
+
+    <rect x="24" y="84" width="306" height="52" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#64748B">From:</text>
+    <text x="74" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">cfo@yourcompany.com</text>
+    <text x="36" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#059669">✓ Passes SPF, DKIM, &amp; DMARC</text>
+
+    <text x="24" y="162" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#334155">How the attacker operates:</text>
+    <text x="24" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Steals credentials or session tokens via phishing</text>
+    <text x="24" y="206" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Logs into legitimate cloud email tenant</text>
+    <text x="24" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Creates hidden rules to divert incoming finance replies</text>
+    <text x="24" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Sends payment instructions from genuine address</text>
+
+    <rect x="24" y="278" width="306" height="66" rx="8" fill="#FEF2F2"/>
+    <text x="36" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#991B1B">WHY TRADITIONAL FILTERS MISS IT</text>
+    <text x="36" y="318" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#7F1D1D">The message originates from an authorized email server with</text>
+    <text x="36" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#7F1D1D">a valid digital signature. Only verification stops it.</text>
+  </g>
+
+  <!-- Vector 2: Lookalike Domain Impersonation -->
+  <g transform="translate(422, 136)">
+    <rect width="354" height="364" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="8" rx="4" fill="#D97706"/>
+    
+    <rect x="24" y="24" width="44" height="44" rx="10" fill="#FEF3C7"/>
+    <!-- Globe/Domain icon -->
+    <circle cx="46" cy="46" r="14" stroke="#D97706" stroke-width="3"/>
+    <line x1="32" y1="46" x2="60" y2="46" stroke="#D97706" stroke-width="2"/>
+    <ellipse cx="46" cy="46" rx="6" ry="14" stroke="#D97706" stroke-width="2"/>
+
+    <text x="80" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Lookalike Domain</text>
+    <text x="80" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D97706">Typosquatting &amp; Spoofing</text>
+
+    <rect x="24" y="84" width="306" height="52" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#64748B">From:</text>
+    <text x="74" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#B45309">ceo@yourcom-pany.com</text>
+    <text x="36" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#DC2626">✗ Notice altered hyphen / letter swap</text>
+
+    <text x="24" y="162" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#334155">How the attacker operates:</text>
+    <text x="24" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Buys a domain visually similar to the target brand</text>
+    <text x="24" y="206" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Sets up full email authentication on their own domain</text>
+    <text x="24" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Copies executive display name, title, and email signature</text>
+    <text x="24" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Demands urgent confidential wire or gift card purchase</text>
+
+    <rect x="24" y="278" width="306" height="66" rx="8" fill="#FFFBEB"/>
+    <text x="36" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#92400E">WHY BUSY EMPLOYEES FALL FOR IT</text>
+    <text x="36" y="318" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78350F">Mobile email clients often show display names only, hiding</text>
+    <text x="36" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#78350F">the rogue domain address behind the executive's name.</text>
+  </g>
+
+  <!-- Vector 3: Vendor & Invoice Interception -->
+  <g transform="translate(804, 136)">
+    <rect width="354" height="364" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="8" rx="4" fill="#0284C7"/>
+    
+    <rect x="24" y="24" width="44" height="44" rx="10" fill="#E0F2FE"/>
+    <!-- Invoice/File icon -->
+    <path d="M38 34H50L56 40V58H38V34Z" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <line x1="42" y1="44" x2="50" y2="44" stroke="#0284C7" stroke-width="2"/>
+    <line x1="42" y1="50" x2="52" y2="50" stroke="#0284C7" stroke-width="2"/>
+
+    <text x="80" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Vendor Interception</text>
+    <text x="80" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0284C7">Supply Chain / Fake Invoice</text>
+
+    <rect x="24" y="84" width="306" height="52" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#64748B">Subject:</text>
+    <text x="86" y="104" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F172A">Updated Banking Details for Inv #8402</text>
+    <text x="36" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#0284C7">! Intercepted real conversation thread</text>
+
+    <text x="24" y="162" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#334155">How the attacker operates:</text>
+    <text x="24" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Compromises external vendor or supplier's email</text>
+    <text x="24" y="206" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Monitors ongoing deals, invoices, and billing schedules</text>
+    <text x="24" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Injects into active thread with matching PDF invoice</text>
+    <text x="24" y="246" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Swaps bank routing and account number to attacker account</text>
+
+    <rect x="24" y="278" width="306" height="66" rx="8" fill="#F0F9FF"/>
+    <text x="36" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0369A1">WHY IT SUCCEEDS WITHOUT SUSPICION</text>
+    <text x="36" y="318" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">The invoice number, project scope, and timing are 100%</text>
+    <text x="36" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">accurate. Only an out-of-band phone call catches the swap.</text>
+  </g>
+</svg>
