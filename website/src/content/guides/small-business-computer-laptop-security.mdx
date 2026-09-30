@@ -1,0 +1,272 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+A small business work computer does not need expensive enterprise monitoring software to be secure. The vast majority of laptop and workstation security incidents are stopped by five fundamental controls: full-disk encryption (BitLocker on Windows, FileVault on macOS), automated operating system and browser updates, standard user accounts for daily work instead of administrative privileges, a short screen-lock timeout, and multi-factor authentication on every cloud service accessed from the machine. 
+
+If an employee loses a company laptop in a taxi or coffee shop, full-disk encryption ensures that the data on the solid-state drive is cryptographically unreadable. If an employee clicks an accidental malicious download, standard user permissions prevent the payload from making silent system-wide changes or disabling security tools.
+
+This guide provides a practical, step-by-step blueprint for securing Windows PCs and Mac laptops across small teams without dedicated IT staff.
+
+<ArticleFigure
+  src="/images/guides/small-business-laptop-security-baseline.svg"
+  alt="Six essential workstation security controls for small businesses: full-disk encryption, standard user accounts, automated updates, screen locks, endpoint antivirus hygiene, and loss containment plans."
+  width={1200}
+  height={580}
+  caption="A practical workstation security baseline balances hardware encryption, least-privilege user accounts, and rapid incident containment."
+/>
+
+## Understanding the Difference: Device Security vs. Account Security vs. Backups
+
+Small business operators often conflate different security layers, assuming that an antivirus program or a strong password protects everything. In reality, each layer solves a completely distinct threat:
+
+1. **Device Security (The Machine):** Protects the physical hardware, operating system, and local storage. If someone steals a laptop from an employee's car, device encryption prevents them from removing the drive and reading customer records, accounting files, or saved credentials.
+2. **Account Security (The Identity):** Protects access to cloud services, email, banking, and SaaS applications. If an employee's password is leaked in a third-party breach, multi-factor authentication prevents an attacker on the other side of the world from logging into the company mailbox. For an in-depth rollout strategy, review our guide to [multi-factor authentication for small businesses](/guides/mfa-for-small-businesses).
+3. **Data Backups (The Recovery):** Protects business continuity against hardware failure, accidental deletion, and ransomware encryption. If a laptop drive fails or malware corrupts files, isolated backups ensure the business can restore work without paying an extortionist. Follow our guide to [small business backup and ransomware protection](/guides/small-business-backup-ransomware-protection) for backup separation rules.
+
+A secure business laptop requires all three. A strong cloud password does not protect an unencrypted stolen laptop, and full-disk encryption does not stop an attacker who guesses a cloud email password.
+
+---
+
+## The 10-Minute Laptop Security Audit
+
+If you need to verify the security of an employee laptop right now, check these five core settings:
+
+1. **Encryption Status:**
+   - **Windows:** Open the Start Menu, type `Manage BitLocker`, and confirm that BitLocker is turned on for the operating system drive (typically `C:`).
+   - **macOS:** Open *System Settings* > *Privacy & Security* > *FileVault* and confirm that FileVault is active.
+2. **Account Privileges:**
+   - Verify whether the user account logged in for daily work has administrator rights. Daily productivity should run on a standard user profile.
+3. **Pending Updates:**
+   - Check Windows Update or macOS Software Update. Ensure that automatic updates are turned on and that the computer is not pending critical security patches or a required restart.
+4. **Screen Lock Timeout:**
+   - Verify that the screen automatically turns off and locks after no more than 5 minutes of inactivity, requiring a PIN, password, or biometric sign-in to unlock.
+5. **Endpoint Protection Status:**
+   - Open *Windows Security* (Windows) to verify that Virus & threat protection is turned on with green checkmarks. On macOS, ensure that Gatekeeper and system security services are enabled.
+
+Record the results in your company hardware asset log. A written record of which laptops are encrypted and who operates them is foundational to the [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist).
+
+---
+
+## 1. Full-Disk Encryption: BitLocker and FileVault
+
+Full-disk encryption (FDE) scrambles all data on the computer's hard drive or SSD. When the computer is powered off or locked, the files cannot be read without the cryptographic key, which is unlocked automatically by the computer's Trusted Platform Module (TPM on Windows) or Secure Enclave (Apple Silicon/T2 on Mac) when the user enters their sign-in credentials.
+
+Without full-disk encryption, anyone who physically possesses the laptop can remove the storage drive, connect it to another computer, and read every document, email cache, spreadsheet, and browser history file in plain text—completely bypassing the Windows or Mac login password.
+
+### Windows: BitLocker
+- **Operating System Requirement:** BitLocker is included in Windows 10 Pro, Windows 11 Pro, Enterprise, and Education editions. It is **not** fully available in Windows Home edition (which only offers basic device encryption tied exclusively to a personal Microsoft account). For business workstations, always purchase or upgrade to Windows Pro.
+- **Enabling BitLocker:** Search for `BitLocker` in the Start Menu, select **Turn on BitLocker**, and follow the wizard. Choose to encrypt the entire drive.
+- **Safeguarding Recovery Keys:** BitLocker generates a 48-digit recovery key used if the motherboard is repaired or the TPM detects hardware changes. **Never** save this recovery key as an unencrypted text file on the laptop itself or on a loose USB stick in the laptop bag. If your business uses Microsoft 365 Business, the key can back up automatically to your Entra ID tenant. Alternatively, store the recovery key inside your business password vault. Follow our [small business password manager guide](/guides/small-business-password-manager-guide) for structuring administrative vaults.
+
+### macOS: FileVault
+- **Enabling FileVault:** Go to *Apple menu* > *System Settings* > *Privacy & Security* > *FileVault*, and click **Turn On**.
+- **Managing the Recovery Key:** macOS gives you the option to use your iCloud account or generate an institutional/local recovery key. For business-owned hardware, generate a dedicated recovery key and document it in the company's secure administrative repository. Do not allow employees to link company hardware recovery exclusively to their personal Apple IDs.
+
+---
+
+## 2. Standard User Accounts vs. Administrator Privileges
+
+One of the most consequential security mistakes small businesses make is allowing employees, contractors, and owners to use an **Administrator** account for their day-to-day email, browsing, and document editing.
+
+### Why Running as Administrator Is Dangerous
+When an account with local administrative privileges downloads a malicious file, runs a deceptive installer, or visits an infected webpage:
+- The malicious code inherits the user's full administrator rights.
+- It can install rootkits, modify system kernel drivers, disable Windows Defender, create hidden backdoors, and access files belonging to other user profiles.
+- It can silently change system DNS settings or tamper with security certificates.
+
+When an employee runs as a **Standard User**:
+- Any attempt to install software, modify registry keys, or alter core operating system files triggers a User Account Control (UAC) prompt requiring administrative credentials.
+- Accidental drive-by downloads and phishing attachments are stopped in their tracks because they lack the permissions needed to execute system-level alterations.
+
+### How to Implement Least Privilege on Workstations
+1. Create a dedicated local administrator account on the machine named something distinct (such as `WorkstationAdmin` or `CompanyIT`). Give it a strong, unique 20+ character passphrase stored securely in your password manager.
+2. Demote the employee's daily user profile to a **Standard User**.
+3. When the employee needs to install a legitimate piece of business software or update a printer driver, an administrator can either enter the credentials directly or approve the installation remotely.
+
+This simple change eliminates a vast category of workstation malware infections.
+
+---
+
+## 3. Operating System and Application Patching
+
+Cybercriminals rarely invent brand-new zero-day exploits to attack small businesses. Instead, they scan for known vulnerabilities that software manufacturers have already fixed weeks or months earlier. Outdated web browsers, unpatched PDF viewers, and obsolete operating systems provide easy entry points.
+
+### Windows Updates
+- Configure Windows Update to automatically download and install updates.
+- Under *Advanced options*, turn on **Receive updates for other Microsoft products** (ensuring Office apps are patched).
+- Establish a company-wide policy: **Reboot at least once every week**. Windows updates often download in the background but do not take effect until the machine restarts.
+
+### macOS Updates
+- Open *System Settings* > *General* > *Software Update*.
+- Click the info icon next to *Automatic Updates* and ensure all toggles are enabled: *Check for updates*, *Download new updates when available*, *Install macOS updates*, and *Install Security Responses and system files*.
+
+### Third-Party Software and Browsers
+Operating systems update themselves, but third-party applications often require deliberate attention:
+- **Browsers (Chrome, Edge, Firefox):** Modern browsers update automatically when restarted. Encourage staff to close and restart their browsers regularly rather than keeping dozens of tabs open for weeks uninterrupted.
+- **Common Target Applications:** PDF readers (Adobe Acrobat), meeting software (Zoom, Teams), and cloud sync clients frequently release critical security patches. Uninstall software that is no longer needed to reduce your attack surface.
+
+---
+
+## 4. Screen Lock and Local Authentication
+
+A laptop left unattended in an office conference room, an airport lounge, a coworking space, or a client site can be compromised in under thirty seconds if the screen is unlocked. An opportunistic bystander or disgruntled party can insert a malicious USB drive, copy confidential trade secrets, or send an unauthorized email directly from an open executive mailbox.
+
+### Practical Screen Lock Rules
+1. **Inactivity Timeout:** Configure all laptops to lock automatically after **3 to 5 minutes** of inactivity.
+2. **Keyboard Shortcuts:** Train all employees to press the lock shortcut whenever stepping away from their desk:
+   - **Windows:** Press `Windows Key + L`.
+   - **macOS:** Press `Control + Command + Q` (or close the lid).
+3. **Strong Authentication:**
+   - Use Windows Hello (PIN or biometric fingerprint/facial recognition) or Apple Touch ID.
+   - A 6-digit Windows Hello PIN tied to the physical hardware TPM is both faster and more secure against shoulder-surfing than typing a long account password in public.
+   - Never allow blank or trivial passwords on company machines.
+
+---
+
+## 5. Endpoint Protection: Antivirus and Endpoint Detection
+
+Small businesses are frequently pitched expensive enterprise Endpoint Detection and Response (EDR) platforms that cost thousands of dollars annually and require security analysts to interpret alerts. For businesses with fewer than 50 employees and no security staff, complex enterprise tools often go unmonitored or misconfigured.
+
+### Maximizing Built-In Defenses
+For most small businesses, the security tools built directly into modern operating systems provide exceptional baseline protection when left switched on and unmodified:
+
+- **Microsoft Defender Antivirus (Windows):** Built directly into Windows 10 and 11. It consistently scores near the top of independent security benchmarks (such as AV-TEST and AV-Comparatives). It provides real-time scanning, cloud-delivered protection, behavioral monitoring, and automatic definition updates via Windows Update. It is free, unobtrusive, and requires no third-party installation.
+- **macOS Security Architecture (XProtect, Gatekeeper, MRT):** macOS includes built-in signature-based malware detection (XProtect), notarization checking (Gatekeeper) to ensure software comes from identified developers and is free of known malware, and the Malware Removal Tool (MRT).
+
+### When to Consider Managed Endpoint Protection
+Consider upgrading to a managed endpoint security tool (such as Microsoft Defender for Business included in Microsoft 365 Business Premium, or a managed service provider's agent) if:
+- You need centralized visibility to verify that all remote employee laptops have active antivirus definitions.
+- You must comply with customer contracts or cyber insurance policies that mandate centralized endpoint logging.
+- You operate in a regulated industry handling protected health information or sensitive financial records.
+
+Avoid installing multiple conflicting third-party antivirus suites on the same machine. Running two real-time scanners simultaneously degrades performance and often causes software crashes.
+
+---
+
+## 6. Browser Security and Software Hygiene
+
+The web browser is where modern work happens—and where most malware encounters originate. Employees download files, sign into SaaS tools, and interact with web applications daily.
+
+### Essential Browser Hardening
+1. **Block Malicious Downloads and Deceptive Sites:**
+   - In Google Chrome, enable **Enhanced Protection** under *Privacy and security* > *Security*.
+   - In Microsoft Edge, enable **SmartScreen** and set tracking prevention to *Balanced* or *Strict*.
+   - In Safari, ensure **Warn when visiting a fraudulent website** is enabled.
+2. **Audit Browser Extensions:**
+   - Browser extensions have broad permissions: they can read keystrokes, capture authentication cookies, and monitor page contents.
+   - Establish a policy: employees may only install vetted, essential extensions (such as the company's approved password manager extension).
+   - Remove unused extensions immediately.
+3. **Separate Work and Personal Browsing:**
+   - Do not allow family members, children, or friends to use company-owned laptops for personal entertainment, gaming, or file-sharing networks. Shared domestic computers are a frequent vector for credential-stealing malware.
+
+---
+
+## 7. Removable Media and USB Security
+
+USB flash drives, external hard drives, and mobile accessories present two distinct risks: malware infection and data leakage.
+
+### The Risks of Removable Media
+- **Malware Delivery:** Attackers still drop malicious USB drives in office parking lots or mail branded promotional flash drives to businesses. When plugged into a workstation, malicious scripts or keystroke-injection payloads can execute automatically.
+- **Data Exfiltration:** If an employee can freely copy customer lists, financial records, or proprietary designs to an unencrypted personal USB stick, intellectual property protection breaks down.
+
+### Safe USB Rules
+1. **Disable Autorun/Autoplay:** Ensure Windows Autoplay is disabled so that inserted media cannot execute code without user consent.
+2. **Never Insert Unknown Media:** Establish a zero-tolerance policy: staff must never insert a found, gift, or untrusted USB drive into a company machine.
+3. **Encourage Cloud Collaboration:** Use business cloud storage (SharePoint, OneDrive, Google Workspace) rather than physical thumb drives to transfer files between staff.
+
+---
+
+## 8. Remote and Hybrid Work Considerations
+
+When employees take laptops home or travel for business, the corporate network boundary disappears. The laptop itself becomes the primary security perimeter.
+
+### Public Wi-Fi Precautions
+Public Wi-Fi networks in airports, hotels, and cafes cannot be trusted. While modern HTTPS encrypts web traffic between the browser and the website, unencrypted networks allow local eavesdropping and fake hotspot attacks.
+
+- Train remote staff to avoid logging into sensitive banking or administrator portals on unsecured public Wi-Fi without a trusted VPN or cellular hotspot.
+- Use mobile phone tethering (cellular hotspot) for high-impact financial transactions when traveling.
+- Ensure the computer's firewall is set to **Public Network** mode when connecting to outside networks, which blocks unsolicited incoming connection attempts.
+
+### Physical Laptop Security While Traveling
+- Never leave a laptop visible in an unattended vehicle—not even in the trunk. Vehicle break-ins targeting laptops in hotel parking lots are among the most frequent causes of hardware loss.
+- Always carry company laptops in carry-on luggage rather than checked baggage during air travel.
+- Use a privacy screen filter if working on sensitive customer or financial data in crowded trains, planes, or coffee shops.
+
+---
+
+## 9. What to Do When a Company Laptop Is Lost or Stolen
+
+Every business must have a clear procedure when a machine goes missing. Panic and delay increase risk; rapid containment minimizes it.
+
+1. **Step 1: Report Immediately (No Penalties)**
+   - Create a culture where employees report a missing laptop within one hour without fear of disciplinary blame. Delaying reporting because of embarrassment gives an attacker time to attempt access.
+2. **Step 2: Revoke Active Cloud Sessions**
+   - The primary risk of a stolen laptop is often not the physical hardware, but the saved browser sessions granting access to company email, cloud drives, and internal tools.
+   - The company administrator should immediately log into Microsoft 365 or Google Workspace and **Revoke all active sessions** for that user. This forces the laptop to re-authenticate before accessing company data.
+3. **Step 3: Reset Passwords and Rotate MFA**
+   - Change the employee's primary email password and rotate any shared credentials stored in their password manager vault. Follow our [incident response plan](/guides/small-business-incident-response-plan) for coordinating account containment.
+4. **Step 4: Trigger Remote Wipe If Supported**
+   - If the laptop is enrolled in Microsoft Intune, Apple Business Manager, or another Mobile Device Management (MDM) tool, trigger a remote wipe command.
+   - If using built-in tools (such as Windows *Find My Device* or Apple *Find My*), initiate the remote lock and erase sequence.
+5. **Step 5: Document the Incident for Compliance**
+   - Record the machine's serial number, whether full-disk encryption was active, what data resided on the drive, and the exact timestamp when access was revoked. If encryption was verified active, the incident is generally treated as a lost piece of hardware rather than a reportable data breach under most privacy regulations.
+
+---
+
+## "Before Giving a Laptop to an Employee" Checklist
+
+Use this checklist whenever provisioning a new or reassigned laptop for a team member:
+
+- [ ] **Operating System Installed Fresh:** Reinstall a clean, supported version of Windows Pro or macOS. Remove vendor bloatware.
+- [ ] **Full-Disk Encryption Enabled:** Turn on BitLocker or FileVault. Confirm the recovery key is saved in the company's central vault.
+- [ ] **Two User Accounts Configured:** One local administrator account for IT administration; one standard user account for the employee.
+- [ ] **Screen Timeout Configured:** Set sleep and screen lock to 5 minutes of inactivity.
+- [ ] **All System Updates Applied:** Run Windows Update or macOS Software Update until zero updates remain.
+- [ ] **Antivirus & Firewall Active:** Confirm Windows Security or Apple Gatekeeper is operational.
+- [ ] **Approved Tools Installed:** Pre-install the company's approved web browser, business password manager, and cloud collaboration apps.
+- [ ] **Password Manager Vault Assigned:** Guide the employee to set up their individual password vault with MFA.
+- [ ] **Asset Log Updated:** Record the computer make, model, serial number, assigned employee, encryption status, and provisioning date.
+
+---
+
+## Security Tools to Consider
+
+When evaluating tools to assist with workstation security, look for practical solutions that fit a small team's budget and technical capacity:
+
+- **Business Password Managers (Bitwarden, 1Password):** Essential for keeping unique, complex credentials off sticky notes and local spreadsheets.
+- **Hardware Security Keys (YubiKey):** Provides phishing-resistant multi-factor authentication for administrators and finance personnel accessing cloud portals from their laptops.
+- **Cloud Backup Services (Backblaze, IDrive):** Automated, continuous offsite backup for local documents and files, protecting against drive failure and theft.
+- **Centralized Endpoint Management (Microsoft Defender for Business / Intune):** Ideal for businesses already using Microsoft 365 Business Premium that need centralized compliance visibility without a dedicated security operations center.
+
+---
+
+## Common Mistakes Small Businesses Make
+
+- **Buying Windows "Home" Edition to Save $50:** Home editions lack BitLocker drive encryption and cannot be joined to business identity management systems. Upgrading later costs more in time and licensing.
+- **Leaving BitLocker Recovery Keys on the Desktop:** Storing a recovery key in a folder called `BitLocker_Key.txt` on the unencrypted desktop or a loose USB drive in the laptop sleeve defeats the purpose of encryption.
+- **Letting Employees Run as Local Administrators:** Allowing daily admin rights guarantees that accidental downloads can install system-wide spyware or disable security settings.
+- **Ignoring the Reboot Prompt for Months:** Postponing updates indefinitely leaves critical remote code execution vulnerabilities unpatched.
+- **Assuming Cloud Storage Replaces Laptop Backups:** If an employee stores important project files on their local `C:\` drive or Desktop outside of the synchronized cloud folder, a stolen laptop results in permanent data loss.
+
+---
+
+## When to Get Professional IT Help
+
+Seek assistance from a qualified Managed Service Provider (MSP) or IT consultant if:
+- You have more than 15 laptops and lack the time to manually inspect updates, encryption, and backups across all devices.
+- You need to implement Mobile Device Management (MDM) such as Microsoft Intune to enforce encryption, push software, and execute remote wipes automatically.
+- A lost or stolen laptop contained unencrypted customer records, sensitive financial data, or protected health information (PHI), which may trigger legal breach notification obligations.
+- A laptop exhibits signs of active malware infection (unauthorized network traffic, disabled antivirus, unexpected administrative accounts).
+
+For a complete overview of organizational security readiness, review our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) or browse all practical [Cybersecurity Guides](/guides).
+
+---
+
+## Sources and Further Reading
+
+- [NIST SP 800-124 Rev. 2: Guidelines for Managing the Security of Mobile Devices in the Enterprise](https://csrc.nist.gov/pubs/sp/800/124/r2/final)
+- [CISA: Secure Your Business — Protect Your Devices](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business)
+- [Microsoft: Overview of BitLocker Device Encryption in Windows](https://learn.microsoft.com/en-us/windows/security/operating-system-hardware/bitlocker/overview)
+- [Apple: Use FileVault to Encrypt Your Mac Startup Disk](https://support.apple.com/en-us/102638)
+- [FTC: Cybersecurity for Small Business — Physical Security](https://www.ftc.gov/business-guidance/small-businesses/cybersecurity/physical-security)

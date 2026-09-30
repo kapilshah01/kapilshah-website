@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="540" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="538" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="220" height="26" rx="6" fill="#CCFBF1"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="0.08em">ACCESS MANAGEMENT</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Employee Offboarding Security Workflow</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">A systematic 4-phase lifecycle to revoke access, recover hardware, and prevent orphaned credentials when staff leave.</text>
+
+  <!-- Stage 1: Preparation & Inventory -->
+  <g transform="translate(40, 136)">
+    <rect width="260" height="360" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#0F766E"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#CCFBF1"/>
+    <!-- Checklist icon -->
+    <path d="M29 43L35 49L47 37" stroke="#0F766E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Phase 1: Pre-Departure</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0F766E">Inventory &amp; Planning</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Operational Tasks:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Audit all user accounts &amp; SaaS tools</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Identify shared password vault access</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Check for administrator / root roles</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Inventory company laptops &amp; keys</text>
+    <text x="20" y="262" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Check personal recovery phone/email</text>
+
+    <rect x="16" y="292" width="228" height="52" rx="6" fill="#F0FDFA"/>
+    <text x="24" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">TIMELINE</text>
+    <text x="24" y="328" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#134E4A">1–2 weeks prior to departure</text>
+  </g>
+
+  <!-- Stage 2: Final Day Cutover -->
+  <g transform="translate(328, 136)">
+    <rect width="260" height="360" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#0284C7"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#E0F2FE"/>
+    <!-- Lock / Ban icon -->
+    <circle cx="39" cy="43" r="10" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M32 50L46 36" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Phase 2: Final Day</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0284C7">Immediate Access Cutover</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Operational Tasks:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Block sign-in on M365 / Google</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Terminate all active cloud sessions</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Revoke registered MFA devices</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Collect laptop, badges, and keys</text>
+    <text x="20" y="262" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Transfer OneDrive/Drive files to team</text>
+
+    <rect x="16" y="292" width="228" height="52" rx="6" fill="#F0F9FF"/>
+    <text x="24" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0284C7">TIMELINE</text>
+    <text x="24" y="328" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">Exact departure time on last day</text>
+  </g>
+
+  <!-- Stage 3: Post-Departure Audit -->
+  <g transform="translate(616, 136)">
+    <rect width="260" height="360" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#D97706"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#FEF3C7"/>
+    <!-- Search / Audit icon -->
+    <circle cx="37" cy="41" r="7" stroke="#D97706" stroke-width="2" fill="none"/>
+    <path d="M42 46L49 53" stroke="#D97706" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Phase 3: Post-Departure</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D97706">Audit &amp; Secrets Rotation</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Operational Tasks:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Convert mailbox to shared mailbox</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Inspect email auto-forwarding rules</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Revoke OAuth third-party app tokens</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Rotate any shared passwords in vault</text>
+    <text x="20" y="262" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Wipe and inspect returned laptop</text>
+
+    <rect x="16" y="292" width="228" height="52" rx="6" fill="#FFFBEB"/>
+    <text x="24" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#D97706">TIMELINE</text>
+    <text x="24" y="328" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#92400E">Within 24–72 hours after exit</text>
+  </g>
+
+  <!-- Stage 4: Retention & License Management -->
+  <g transform="translate(904, 136)">
+    <rect width="256" height="360" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="256" height="8" rx="4" fill="#6366F1"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#EEF2FF"/>
+    <!-- Archive / Box icon -->
+    <rect x="28" y="33" width="22" height="18" rx="2" stroke="#6366F1" stroke-width="2" fill="none"/>
+    <path d="M26 33H52M35 39H43" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Phase 4: License &amp; Data</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#6366F1">Compliance &amp; Archival</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Operational Tasks:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Remove paid user license</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Preserve required tax/legal files</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Log offboarding completion in records</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Reassign or wipe device for new hire</text>
+    <text x="20" y="262" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Never delete account immediately</text>
+
+    <rect x="16" y="292" width="224" height="52" rx="6" fill="#EEF2FF"/>
+    <text x="24" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#6366F1">TIMELINE</text>
+    <text x="24" y="328" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3730A3">30–90 days following departure</text>
+  </g>
+</svg>

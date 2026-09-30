@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="520" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="518" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="280" height="26" rx="6" fill="#FEE2E2"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#DC2626" letter-spacing="0.08em">EMERGENCY PROTOCOL</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Four-Stage Incident Response Lifecycle</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">A clear sequence of actions prevents panic, preserves evidence, and accelerates recovery during a cyber incident.</text>
+
+  <!-- Stage 1 -->
+  <g transform="translate(40, 136)">
+    <rect width="260" height="344" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#DC2626"/>
+    
+    <circle cx="36" cy="38" r="16" fill="#FEE2E2"/>
+    <text x="36" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#DC2626" text-anchor="middle">1</text>
+    <text x="64" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Detect &amp; Halt</text>
+
+    <rect x="20" y="70" width="220" height="42" rx="6" fill="#FEF2F2"/>
+    <text x="30" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#991B1B">IMMEDIATE ACTION</text>
+    <text x="30" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#7F1D1D">Stop damage before it spreads</text>
+
+    <text x="20" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Key Steps:</text>
+    <text x="20" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Freeze pending wire payments</text>
+    <text x="20" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Disconnect affected PC from Wi-Fi</text>
+    <text x="20" y="204" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Report immediately (no-blame)</text>
+    <text x="20" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Do not delete messages or files</text>
+
+    <rect x="16" y="260" width="228" height="64" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="26" y="282" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#475569">PRIMARY GOAL</text>
+    <text x="26" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">Interrupt the attack kill-chain</text>
+    <text x="26" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">within the first 60 minutes.</text>
+  </g>
+
+  <!-- Arrow 1 to 2 -->
+  <path d="M308 308H326" stroke="#0F766E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M322 302L328 308L322 314" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Stage 2 -->
+  <g transform="translate(334, 136)">
+    <rect width="260" height="344" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#D97706"/>
+    
+    <circle cx="36" cy="38" r="16" fill="#FEF3C7"/>
+    <text x="36" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#D97706" text-anchor="middle">2</text>
+    <text x="64" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Offline Triage</text>
+
+    <rect x="20" y="70" width="220" height="42" rx="6" fill="#FFFBEB"/>
+    <text x="30" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#B45309">DECISION LEAD</text>
+    <text x="30" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400E">Coordinate via safe channels</text>
+
+    <text x="20" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Key Steps:</text>
+    <text x="20" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Open printed offline contact sheet</text>
+    <text x="20" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Assign designated decision lead</text>
+    <text x="20" y="204" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Do not use suspected email</text>
+    <text x="20" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Log timestamps &amp; actions taken</text>
+
+    <rect x="16" y="260" width="228" height="64" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="26" y="282" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#475569">PRIMARY GOAL</text>
+    <text x="26" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">Establish trusted command without</text>
+    <text x="26" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">alerting the attacker.</text>
+  </g>
+
+  <!-- Arrow 2 to 3 -->
+  <path d="M602 308H620" stroke="#0F766E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M616 302L622 308L616 314" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Stage 3 -->
+  <g transform="translate(628, 136)">
+    <rect width="260" height="344" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#0F766E"/>
+    
+    <circle cx="36" cy="38" r="16" fill="#CCFBF1"/>
+    <text x="36" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#0F766E" text-anchor="middle">3</text>
+    <text x="64" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Contain &amp; Restore</text>
+
+    <rect x="20" y="70" width="220" height="42" rx="6" fill="#F0FDFA"/>
+    <text x="30" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F766E">EVICT ATTACKER</text>
+    <text x="30" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">Reset credentials and rebuild</text>
+
+    <text x="20" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Key Steps:</text>
+    <text x="20" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Revoke active tokens &amp; sessions</text>
+    <text x="20" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Reset passwords from clean device</text>
+    <text x="20" y="204" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Audit forwarding / inbox rules</text>
+    <text x="20" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Restore verified clean backup copies</text>
+
+    <rect x="16" y="260" width="228" height="64" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="26" y="282" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#475569">PRIMARY GOAL</text>
+    <text x="26" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">Sever unauthorized access and</text>
+    <text x="26" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">restore verified operational data.</text>
+  </g>
+
+  <!-- Arrow 3 to 4 -->
+  <path d="M896 308H914" stroke="#0F766E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M910 302L916 308L910 314" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Stage 4 -->
+  <g transform="translate(922, 136)">
+    <rect width="238" height="344" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="238" height="8" rx="4" fill="#0284C7"/>
+    
+    <circle cx="36" cy="38" r="16" fill="#E0F2FE"/>
+    <text x="36" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#0284C7" text-anchor="middle">4</text>
+    <text x="64" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Notify &amp; Learn</text>
+
+    <rect x="20" y="70" width="198" height="42" rx="6" fill="#F0F9FF"/>
+    <text x="30" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0284C7">DUTIES &amp; REVIEW</text>
+    <text x="30" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#075985">Notify partners &amp; authorities</text>
+
+    <text x="20" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Key Steps:</text>
+    <text x="20" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Contact bank fraud / wire recall</text>
+    <text x="20" y="182" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Notify cyber insurance provider</text>
+    <text x="20" y="204" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• File IC3 / law enforcement report</text>
+    <text x="20" y="226" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Document lessons learned</text>
+
+    <rect x="16" y="260" width="206" height="64" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="26" y="282" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#475569">PRIMARY GOAL</text>
+    <text x="26" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">Comply with obligations and</text>
+    <text x="26" y="312" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">patch vulnerabilities.</text>
+  </g>
+</svg>

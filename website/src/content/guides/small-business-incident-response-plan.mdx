@@ -1,8 +1,18 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
 ## The short answer
 
 A small business incident response plan should tell people how to report a suspected incident, who can make decisions, which outside providers to contact, what evidence to preserve, and how to restore essential work. Keep the plan short, available when business email is unavailable, and review it when people or services change.
 
 ## Make a one-page plan
+
+<ArticleFigure
+  src="/images/guides/small-business-incident-response-workflow.svg"
+  alt="Four-stage incident response workflow for small businesses: detect and halt, offline coordination, contain and recover, and notify and document."
+  caption="A four-stage incident response workflow for small teams."
+  width={1200}
+  height={520}
+/>
 
 ### 1. Name the response lead and backup
 
@@ -28,7 +38,7 @@ Preserve relevant messages, timestamps, alerts, screenshots, and provider notice
 
 - **Suspected account takeover:** Use a trusted device and the provider's recovery process; review sessions and recovery methods with support. Do not rely on the potentially compromised inbox for coordination.
 - **Lost or stolen device:** Contact the service or device administrator to revoke access where appropriate, and assess what data the device could reach.
-- **Unexpected payment request:** Pause the transfer and verify the request using a known, separate contact method. The phishing guide explains a repeatable verification habit.
+- **Unexpected payment request:** Pause the transfer and verify the request using a known, separate contact method. If an unauthorized transfer has already occurred or an invoice scam is suspected, follow our [business email compromise and payment fraud prevention guide](/guides/business-email-compromise-small-business-payment-fraud) for immediate bank recall and containment steps.
 - **Malware or ransomware warning:** Contact IT support, preserve the alert, and follow the response lead's instructions. Avoid improvising a restore while affected systems may still be compromised. Review the [backup and recovery guide](/guides/small-business-backup-ransomware-protection) during planning so the recovery process is understood before an incident.
 - **Possible data exposure:** Limit further sharing when safe, preserve records, and quickly involve the appropriate provider and professional advisers.
 

@@ -1,0 +1,292 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+Microsoft 365 powers email, document collaboration, and user identity for millions of small businesses. However, a default Microsoft 365 tenant is configured for maximum convenience and compatibility, not maximum security. Out of the box, users may be permitted to connect third-party OAuth applications, share documents via anonymous public web links, and access mailboxes using legacy authentication protocols that bypass multi-factor authentication.
+
+You do not need an enterprise cybersecurity team to harden Microsoft 365. Implementing seven core configurations—turning on Security Defaults or Conditional Access MFA, separating daily user accounts from administrator roles, blocking automatic external email forwarding, disabling user consent for unvetted third-party apps, restricting anonymous SharePoint file sharing, enabling the Unified Audit Log, and establishing an emergency break-glass account—protects small businesses against more than 90% of cloud credential stuffing, business email compromise, and data leakage attacks.
+
+This guide provides practical, administrator-tested instructions based on current Microsoft Entra, Exchange Online, and Defender documentation.
+
+<ArticleFigure
+  src="/images/guides/microsoft-365-security-baseline.svg"
+  alt="Six core Microsoft 365 security baseline stages: Identity & MFA, Mailbox protection, File sharing restrictions, App consent controls, Audit logging, and Emergency break-glass recovery."
+  width={1200}
+  height={560}
+  caption="A comprehensive Microsoft 365 security baseline coordinates cloud identity, email flow, document sharing, and incident logging."
+/>
+
+## Understanding Your Microsoft 365 License Capabilities
+
+Before making configuration changes, it is essential to know what features your current subscription supports. Small businesses typically subscribe to one of four business tiers:
+
+| Subscription Tier | Identity & MFA Features | Email & Threat Defense | Device & Data Management |
+|---|---|---|---|
+| **Microsoft 365 Business Basic** | Security Defaults (MFA for all), Entra ID Free | Standard Exchange Online Protection (anti-spam, anti-malware) | Web/mobile Office apps only; no centralized device management |
+| **Microsoft 365 Business Standard** | Security Defaults, Entra ID Free | Standard Exchange Online Protection | Desktop Office apps included; no centralized device management |
+| **Microsoft 365 Business Premium** | Entra ID Plan 1, granular Conditional Access, Self-Service Password Reset | Microsoft Defender for Office 365 Plan 1 (Safe Links, Safe Attachments, advanced impersonation protection) | Microsoft Intune (MDM/MAM), Microsoft Defender for Business (EDR) |
+| **Microsoft 365 Apps for business** | Client software only | Does not include Exchange Online or cloud security controls | Desktop Office apps only |
+
+> **Note on Licensing:** If your business is on Business Basic or Business Standard, you can still achieve a very strong security posture using **Security Defaults** at no extra cost. If you require granular location-based policies, device compliance rules, or advanced phishing impersonation protection, upgrading key staff to **Business Premium** is the most cost-effective path.
+
+---
+
+## The 15-Minute Microsoft 365 Security Health Check
+
+If you are reviewing your tenant right now, log into the [Microsoft 365 admin center](https://admin.microsoft.com) with global administrator credentials and verify these five items:
+
+1. **Check Security Defaults / MFA:**
+   - In the [Microsoft Entra admin center](https://entra.microsoft.com), navigate to **Identity** > **Overview** > **Properties**. Scroll to the bottom and select **Manage security defaults**. Confirm that Security Defaults is toggled to **Enabled** (or verify that active Conditional Access policies enforce MFA).
+2. **Audit Administrator Accounts:**
+   - In the Microsoft 365 admin center, go to **Users** > **Active users**. Filter by **Global administrators**. Ensure there are no more than 2 to 4 global admins, and confirm that none of them are everyday accounts used for browsing the web or checking routine email.
+3. **Verify External Email Forwarding Is Blocked:**
+   - In the [Microsoft Defender portal](https://security.microsoft.com), navigate to **Email & collaboration** > **Policies & rules** > **Threat policies** > **Anti-spam**. Open the **Anti-spam outbound policy (Default)** and verify that **Automatic forwarding rules** is set to **Off - Forwarding is disabled**.
+4. **Check Third-Party App Consent:**
+   - In Microsoft Entra admin center, go to **Identity** > **Applications** > **Enterprise applications** > **Consent and permissions**. Verify that regular users cannot freely grant third-party applications access to company data without administrator approval.
+5. **Confirm Audit Logging Is Active:**
+   - In the [Microsoft Purview compliance portal](https://purview.microsoft.com), navigate to **Audit** and verify that audit record collection is turned on.
+
+---
+
+## 1. Enforcing Multi-Factor Authentication (MFA)
+
+Stolen passwords from external website breaches and phishing sites represent the primary path into Microsoft 365 tenants. Enforcing MFA ensures that an attacker cannot sign in even if they know an employee's exact password. For foundational concepts, read our practical guide to [MFA for small businesses](/guides/mfa-for-small-businesses).
+
+### Option A: Security Defaults (Included with All Plans)
+For small businesses with Business Basic or Business Standard licenses, **Security Defaults** is Microsoft's one-click baseline. When enabled, it automatically:
+- Requires all users to register for multi-factor authentication (using the Microsoft Authenticator app) within 14 days of their first sign-in.
+- Requires administrators to perform MFA on every sign-in.
+- Prompts standard users for MFA whenever a sign-in appears anomalous or unfamiliar.
+- Completely blocks legacy authentication protocols (such as POP3, IMAP, and SMTP AUTH) that cannot handle modern MFA challenges.
+
+**How to Enable:**
+1. Open the [Microsoft Entra admin center](https://entra.microsoft.com).
+2. Browse to **Identity** > **Overview** > **Properties**.
+3. Select **Manage security defaults** at the bottom of the page.
+4. Set the toggle to **Enabled** and select **Save**.
+
+### Option B: Conditional Access (Requires Business Premium or Entra ID P1)
+If your organization requires customized policies (such as requiring hardware FIDO2 keys for finance staff, exempting trusted office IP addresses, or enforcing device compliance), you must use **Conditional Access**:
+- When using Conditional Access, Security Defaults must be turned off.
+- Create a dedicated baseline policy: *Target:* All users; *Cloud apps:* All cloud apps; *Grant:* Require multifactor authentication.
+- Always configure an exclusion for your emergency break-glass account (see Section 3).
+
+---
+
+## 2. Protecting Administrator Accounts: The Separation Principle
+
+The single greatest administrative risk in small businesses is using a single account for both routine daily work and tenant administration.
+
+### Why Shared or Everyday Admin Accounts Fail
+If "John Doe" uses `john@yourcompany.com` to read everyday supplier emails, browse industry forums, open customer attachments, and simultaneously holds the **Global Administrator** role:
+- A single successful phishing email or malicious link clicked by John grants an attacker immediate, unfettered control over the entire company tenant.
+- The attacker can silently create new administrative users, exfiltrate the CEO's mailbox, export all SharePoint files, and lock the business out of its own domain.
+
+### The Two-Account Rule
+Every person who performs administrative tasks must have **two separate user accounts**:
+
+1. **Daily Work Account (`john@yourcompany.com`):** Standard user privileges only. Licensed for Microsoft 365 apps and Exchange Online. Used for everyday communication, meetings, and file editing.
+2. **Dedicated Admin Account (`admin.john@yourcompany.com`):** Assigned administrator roles. **No Microsoft 365 license assigned** (admin portals do not require a paid mailbox license). Used exclusively when making administrative changes, and signed out immediately upon completion.
+
+### Administrator Hardening Checklist
+- Keep the number of Global Administrators between **two and four**. Having only one creates a catastrophic lockout risk if that person leaves or loses their authenticator; having more than four unnecessarily widens your attack surface.
+- Never assign administrative privileges to shared mailboxes or contractor service accounts.
+- Enforce phishing-resistant MFA (such as a FIDO2 hardware security key or number matching in the Microsoft Authenticator app) on all admin accounts.
+
+---
+
+## 3. Creating an Emergency "Break-Glass" Admin Account
+
+What happens if your company's primary administrator loses their phone, gets locked out by an errant Conditional Access policy, or leaves the company unexpectedly? Without a pre-configured recovery path, regaining access to a locked Microsoft 365 tenant can take days or weeks of manual identity verification with Microsoft support.
+
+### What Is a Break-Glass Account?
+A break-glass account is an emergency-access Global Administrator account that is never used for day-to-day administration and is stored securely for disaster recovery.
+
+### Configuration Rules for Break-Glass Accounts
+1. **Cloud-Only Identity:** Create the user directly in the cloud (e.g., `emergency-admin@yourcompany.onmicrosoft.com`). Never synchronize it from an on-premises Active Directory.
+2. **No License Required:** Administrative access does not require an Exchange Online or Office apps license.
+3. **Exempt from Conditional Access:** If you use Conditional Access policies, explicitly exclude this emergency account from policies that could accidentally lock it out (such as location-based or device-compliance blocks).
+4. **Strong, Complex Passphrase:** Generate a unique passphrase of at least 30 characters using random words. Store this passphrase in the company's physical safe and inside the business password vault. Follow our [small business password policy](/guides/small-business-password-policy) for passphrase construction.
+5. **Dedicated Phishing-Resistant MFA:** Register two physical FIDO2 hardware security keys (such as YubiKeys) directly to this account. Store one key in a fireproof business safe and the second in an offsite executive lockbox.
+6. **Set Up a Sign-In Alert:** Configure an alert rule in the Defender portal or Azure Monitor to send an immediate notification to executive personal phones whenever the break-glass account signs in. Because this account should never be used during normal operations, any sign-in indicates either an emergency or an unauthorized intrusion.
+
+---
+
+## 4. Disabling External Email Auto-Forwarding
+
+One of the first actions cybercriminals take when they gain unauthorized access to a business mailbox is setting up an automatic forwarding rule. This allows them to receive a copy of every incoming and outgoing email silently—including vendor invoices, payment confirmations, and customer correspondence—without the employee ever noticing. This is the cornerstone of invoice fraud and business email compromise. Read our comprehensive guide on [business email compromise and payment fraud prevention](/guides/business-email-compromise-small-business-payment-fraud) to understand how attackers monetize intercepted emails.
+
+By default, Microsoft 365 restricts external forwarding in its default outbound anti-spam policy, but small businesses frequently discover that legacy settings or third-party migrations have left forwarding enabled.
+
+### How to Verify and Block Outbound Forwarding
+1. Open the [Microsoft Defender portal](https://security.microsoft.com).
+2. Go to **Email & collaboration** > **Policies & rules** > **Threat policies** > **Anti-spam** (under *Policies*).
+3. Click on **Anti-spam outbound policy (Default)** and select **Edit protection settings** at the bottom of the flyout.
+4. Locate the **Automatic forwarding rules** section.
+5. Under *Automatic forwarding rules*, select **Off - Forwarding is disabled**.
+6. Select **Save**.
+
+When this setting is active, any attempt by an employee (or an attacker residing in an employee's mailbox) to create an automatic forwarding rule to an external address will be blocked, and the sender will receive a non-delivery report (NDR) indicating that external forwarding is prohibited by organizational policy.
+
+---
+
+## 5. Blocking Legacy Authentication
+
+Legacy authentication refers to older communication protocols that pre-date modern web authentication standards. These include:
+- POP3
+- IMAP4
+- SMTP AUTH
+- MAPI over HTTP
+- Older Office desktop clients (Office 2010 and older)
+
+### The Danger of Legacy Protocols
+Legacy protocols only support simple username-and-password verification. **They cannot prompt for multi-factor authentication.** 
+
+Attackers actively use automated tools to spray compromised password lists against Exchange Online endpoints using legacy protocols. Even if you have configured MFA for your users, an exposed legacy endpoint allows attackers to bypass MFA completely and log directly into the mailbox.
+
+### How to Block Legacy Authentication
+- If your tenant uses **Security Defaults**, legacy authentication is blocked automatically across all users.
+- If your tenant uses **Conditional Access** (Business Premium), create a policy targeting *Client apps* > select **Exchange ActiveSync clients** and **Other clients** (which covers POP, IMAP, and SMTP), and set the access control to **Block access**.
+- To disable legacy protocols per mailbox in the Microsoft 365 admin center: Go to **Users** > **Active users** > select user > **Mail** tab > **Manage email apps** > uncheck **POP** and **IMAP**.
+
+---
+
+## 6. Restricting Third-Party Application and OAuth Consent
+
+A rapidly growing attack vector against Microsoft 365 is **illicit consent grant attacks** (also known as "OAuth phishing"). Instead of stealing an employee's password, attackers send an email containing a link that looks like a legitimate Microsoft sign-in prompt asking the user to grant permissions to a seemingly harmless app (such as "Document Viewer" or "Meeting Scheduler").
+
+When the employee clicks "Accept":
+- The application receives an OAuth token granting it programmatic access to the user's emails, files, and contacts.
+- The attacker does not need the employee's password or MFA code.
+- Resetting the employee's password does **not** revoke the app's access; the OAuth token remains valid until explicitly revoked by an administrator.
+
+### How to Secure App Consent Settings
+1. Open the [Microsoft Entra admin center](https://entra.microsoft.com).
+2. Go to **Identity** > **Applications** > **Enterprise applications** > **Consent and permissions** (under *Security*).
+3. Under **User consent for applications**, select:
+   - **Do not allow user consent:** (Recommended for maximum security) Users cannot grant permissions to any app without administrator approval.
+   - Alternatively: **Allow user consent for apps from verified publishers, for selected permissions (Recommended by Microsoft)**.
+4. Configure the **Admin consent requests** workflow:
+   - Select **Admin consent settings**.
+   - Toggle **Users can request admin consent to apps they are unable to consent to** to **Yes**.
+   - Select your global administrators as designated reviewers so that legitimate business apps can be reviewed and approved quickly.
+
+---
+
+## 7. Hardening SharePoint, OneDrive, and Teams External Sharing
+
+Microsoft 365 is designed to make collaboration effortless, but default sharing settings frequently lead to accidental public disclosure of proprietary customer, HR, and accounting data.
+
+### The Risk of "Anyone with the link" Links
+When an employee shares a file using the **"Anyone"** link setting (often called anonymous links):
+- Anyone on the internet who obtains the URL can view or edit the file without signing in.
+- The link can be forwarded, indexed by search engines, or posted on forums.
+- The business cannot audit who actually accessed the file.
+
+### How to Restrict External Sharing
+1. Open the [SharePoint admin center](https://admin.microsoft.com/sharepoint).
+2. In the left navigation, select **Policies** > **Sharing**.
+3. Under **External sharing**, adjust the sliders for both **SharePoint** and **OneDrive**:
+   - For most small businesses, adjust the slider from *Anyone* down to **"New and existing guests"** (requires recipients to sign in or enter a one-time verification code sent to their email) or **"Existing guests"**.
+4. Under **More external sharing settings**:
+   - Check **Limit external sharing by domain** if you only collaborate with specific partner companies.
+   - Check **Guest access to a site or OneDrive will expire automatically after these many days** and set it to **30 or 60 days**.
+5. Under **File and folder links**, change the default sharing link type from *Anyone with the link* to **"Specific people"** or **"Only people in your organization"**.
+
+---
+
+## 8. Enabling and Verifying the Unified Audit Log
+
+When an incident occurs—such as an employee reporting missing emails or a client receiving a fraudulent payment request—the first question is always: *What happened, when did it happen, and which IP address accessed the mailbox?*
+
+Without audit logs, answering these questions is impossible.
+
+### Verifying Audit Log Status
+In modern Microsoft 365 tenants, audit logging is turned on by default, but tenants created several years ago may have it disabled.
+
+1. Open the [Microsoft Purview compliance portal](https://purview.microsoft.com).
+2. In the navigation, select **Audit**.
+3. If auditing is not turned on, a banner will appear stating: *"Start recording user and admin activity"*. Click **Turn on auditing**.
+4. If auditing is already active, the search form will be ready to query user sign-ins, file deletions, mailbox permission changes, and administrative actions.
+
+> **Log Retention Reminder:** For standard Business Basic and Business Standard subscriptions, audit logs are retained for **180 days**. Ensure your incident response documentation accounts for this window. Follow our [small business incident response plan](/guides/small-business-incident-response-plan) for log preservation protocols during an active investigation.
+
+---
+
+## 9. Employee Offboarding in Microsoft 365: Step-by-Step
+
+Failing to properly de-provision employee accounts when they leave the organization is a frequent cause of data leaks and unauthorized system access. 
+
+Follow this sequence to offboard an employee cleanly without losing critical business records:
+
+1. **Block Sign-In Immediately:**
+   - In the Microsoft 365 admin center, go to **Users** > **Active users** > select the user > click **Block sign-in**. This prevents new authentication attempts.
+2. **Terminate Active Sessions:**
+   - In the user flyout, under the *Account* tab, click **Sign out of all sessions**. (In the Entra admin center, select **Revoke sessions**). It may take up to 60 minutes for all active browser sessions and mobile refresh tokens to expire.
+3. **Convert Mailbox to a Shared Mailbox:**
+   - Go to the user's **Mail** tab > select **Convert to shared mailbox**.
+   - Shared mailboxes with under 50 GB of data **do not require a paid license**. Converting preserves all historical emails and allows a manager or successor to access past correspondence without paying for an idle seat.
+4. **Assign Mailbox Access to a Manager:**
+   - Under *Mailbox permissions*, grant **Read and manage** permissions to the designated team member who needs to monitor incoming customer messages.
+5. **Transfer OneDrive Files:**
+   - Under the user's **OneDrive** tab, select **Create link to files**. Send this link to the manager, giving them 30 days to transfer essential business files to a shared SharePoint team site.
+6. **Remove Registered MFA Methods:**
+   - In Microsoft Entra, view the user's **Authentication methods** and delete registered phone numbers and authenticator apps so the former employee cannot initiate password resets.
+7. **Unassign the Paid License:**
+   - Once files are transferred and the mailbox is converted, remove the Microsoft 365 license under **Licenses and apps** to stop billing. Do not delete the user account entirely until your required retention period has passed.
+
+For an end-to-end offboarding workflow across all SaaS platforms and hardware assets, review our comprehensive [Employee Offboarding Security Checklist](/guides/employee-offboarding-security-checklist).
+
+---
+
+## 10. Practical Anti-Phishing and Mailbox Protection
+
+Microsoft Defender for Office 365 provides automated analysis of incoming emails, attachments, and URLs.
+
+### Essential Anti-Phishing Measures
+1. **Configure SPF, DKIM, and DMARC:**
+   - Authenticate your domain so that scammers cannot spoof your company's email address when emailing your customers or staff. Review our core guide on [small business phishing protection](/guides/small-business-phishing-protection) for domain record syntax.
+2. **User Impersonation Protection (Business Premium):**
+   - In Defender anti-phishing policies, add the names and personal email addresses of key company leaders (CEO, owner, CFO, office manager). If an attacker sends an email from a lookalike domain pretending to be the owner, Defender flags or quarantines the message automatically.
+3. **Train Users to Check Suspicious Inbox Rules:**
+   - Teach staff how to check their Outlook rules (*Settings* > *Mail* > *Rules*). If a rule forwards emails containing terms like "invoice," "wire," or "payment" to an external address or moves them directly to *Archive*, the mailbox is compromised.
+
+---
+
+## Security Tools to Consider for Microsoft 365
+
+- **FIDO2 Hardware Security Keys (YubiKey):** The gold standard for phishing-resistant MFA, particularly for administrators managing cloud tenants.
+- **Third-Party M365 Backup Solutions (Axcient, Veeam for M365, Datto):** Microsoft operates on a shared responsibility model. Microsoft guarantees service uptime, but does not protect against malicious insider deletion or ransomware encryption of OneDrive libraries. A dedicated M365 backup ensures point-in-time recovery.
+- **Business Password Managers (1Password, Bitwarden):** Used to store complex administrative passphrases, break-glass credentials, and tenant recovery codes.
+
+---
+
+## Common Mistakes Small Businesses Make in Microsoft 365
+
+- **Using a Single Licensed Global Admin for Everything:** Checking daily email and browsing the web with a Global Administrator account turns any phishing click into a company-wide crisis.
+- **Relying Exclusively on SMS for Admin MFA:** SMS codes are vulnerable to SIM swapping and interception. Use the Microsoft Authenticator app with number matching or a physical FIDO2 key.
+- **Leaving Inactive Accounts with Active Licenses:** Former employees who retain active logins months after departure represent both a significant security risk and wasted monthly subscription costs.
+- **Assuming Microsoft Backs Up Everything:** Microsoft retains deleted items in the Recycle Bin for a limited window (typically 14 to 93 days). It is not an archival or ransomware-proof backup solution.
+- **Neglecting Third-Party OAuth App Permissions:** Regularly audit enterprise applications in Entra ID to ensure inactive or suspicious web apps do not retain standing permissions to read your mailbox.
+
+---
+
+## When to Get Professional IT Help
+
+Managing a cloud tenant can become complex as a team expands. You should engage a certified Microsoft Cloud Solution Provider (CSP) or Managed Service Provider if:
+- You need to migrate from on-premises servers or another email provider to Microsoft 365 with zero downtime.
+- You want to upgrade to Microsoft 365 Business Premium and need help deploying Intune mobile device management and Defender for Business across all company laptops.
+- You suspect an active tenant compromise (unauthorized global admins created, widespread fraudulent emails sent, or funds diverted).
+- You must comply with formal compliance frameworks such as HIPAA, CMMC, or SOC 2 that require rigorous configuration auditing.
+
+For a broader baseline of organizational security controls, review our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist).
+
+---
+
+## Sources and Further Reading
+
+- [Microsoft Learn: Top 10 Ways to Secure Microsoft 365 for Business Plans](https://learn.microsoft.com/en-us/microsoft-365/admin/security-and-compliance/secure-your-business-data)
+- [Microsoft Learn: What Are Security Defaults in Microsoft Entra ID?](https://learn.microsoft.com/en-us/entra/fundamentals/security-defaults)
+- [Microsoft Learn: Manage Emergency Access Accounts in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access)
+- [Microsoft Learn: Turn on Auditing in Microsoft Purview](https://learn.microsoft.com/en-us/purview/audit-log-enable-auditing)
+- [CISA: Microsoft 365 Security Recommendations for Small and Medium Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses)

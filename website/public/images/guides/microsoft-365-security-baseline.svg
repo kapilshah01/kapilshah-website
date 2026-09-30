@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="560" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="558" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="220" height="26" rx="6" fill="#CCFBF1"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="0.08em">TENANT HARDENING</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Microsoft 365 Small Business Security Baseline</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">Six practical tenant controls to protect cloud email, user identities, and business documents against account takeover.</text>
+
+  <!-- Stage 1: Identity & MFA -->
+  <g transform="translate(40, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#0F766E"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#CCFBF1"/>
+    <!-- Key icon -->
+    <circle cx="34" cy="42" r="6" stroke="#0F766E" stroke-width="2" fill="none"/>
+    <path d="M39 47L45 53M43 51L45 49" stroke="#0F766E" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">1. Identity</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0F766E">MFA &amp; Access</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Security Defaults ON</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Block legacy basic auth</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Separate admin logins</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Cloud-only break-glass</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F0FDFA"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">Stops credential stuffing</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">and password spraying.</text>
+  </g>
+
+  <!-- Stage 2: Email & Mailbox -->
+  <g transform="translate(232, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#0284C7"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#E0F2FE"/>
+    <!-- Mail icon -->
+    <rect x="23" y="33" width="22" height="16" rx="2" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M24 35L34 43L44 35" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">2. Mailbox</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0284C7">Anti-Phishing &amp; BEC</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Disable auto-forwarding</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Audit hidden inbox rules</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Enforce SPF/DKIM/DMARC</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Anti-phishing thresholds</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F0F9FF"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0284C7">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#075985">Prevents silent exfiltration</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#075985">of financial emails.</text>
+  </g>
+
+  <!-- Stage 3: File Sharing -->
+  <g transform="translate(424, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#6366F1"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#EEF2FF"/>
+    <!-- Folder icon -->
+    <path d="M23 34H31L34 38H45V48H23V34Z" stroke="#6366F1" stroke-width="2" fill="none"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">3. Sharing</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#6366F1">OneDrive &amp; Teams</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Disable anonymous links</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Set link expiration dates</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Restrict external guest</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Review sensitive folders</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#EEF2FF"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#6366F1">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#3730A3">Eliminates public search</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#3730A3">exposure of client data.</text>
+  </g>
+
+  <!-- Stage 4: App Consent -->
+  <g transform="translate(616, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#D97706"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#FEF3C7"/>
+    <!-- App grid icon -->
+    <rect x="24" y="32" width="8" height="8" rx="1" fill="#D97706"/>
+    <rect x="36" y="32" width="8" height="8" rx="1" fill="#D97706"/>
+    <rect x="24" y="44" width="8" height="8" rx="1" fill="#D97706"/>
+    <rect x="36" y="44" width="8" height="8" rx="1" fill="#D97706"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">4. Apps &amp; OAuth</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#D97706">Third-Party Grants</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Block user consent</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Admin consent workflow</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Audit registered apps</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Revoke dormant tokens</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#FFFBEB"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#D97706">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400E">Stops malicious OAuth</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400E">token permissions.</text>
+  </g>
+
+  <!-- Stage 5: Logging & Audit -->
+  <g transform="translate(808, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#0D9488"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#CCFBF1"/>
+    <!-- Document list icon -->
+    <rect x="24" y="31" width="20" height="22" rx="2" stroke="#0D9488" stroke-width="2" fill="none"/>
+    <path d="M28 37H36M28 42H40M28 47H36" stroke="#0D9488" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">5. Audit Logs</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0D9488">Visibility &amp; Alerting</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Verify Audit Log is ON</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Alert on admin role added</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Alert on forwarding rule</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Monitor Entra sign-ins</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F0FDFA"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0D9488">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">Enables quick investigation</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">after suspicious activity.</text>
+  </g>
+
+  <!-- Stage 6: Recovery -->
+  <g transform="translate(1000, 136)">
+    <rect width="160" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="160" height="8" rx="4" fill="#E11D48"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#FFE4E6"/>
+    <!-- Lifebuoy / Emergency icon -->
+    <circle cx="34" cy="42" r="10" stroke="#E11D48" stroke-width="2" fill="none"/>
+    <circle cx="34" cy="42" r="4" stroke="#E11D48" stroke-width="2" fill="none"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">6. Recovery</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#E11D48">Break-Glass</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Cloud-only admin</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• FIDO2 / hardware key</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Third-party M365 backup</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Practiced offboarding</text>
+
+    <rect x="12" y="296" width="136" height="72" rx="6" fill="#FFF1F2"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#E11D48">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#9F1239">Guarantees access if</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#9F1239">primary admin locked.</text>
+  </g>
+</svg>

@@ -1,8 +1,18 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
 ## The short answer
 
 A small business should keep more than one recoverable copy of important data, protect backup accounts with separate access controls and MFA, and test restores before an emergency. Backups reduce the impact of accidental deletion, device failure, and some ransomware incidents, but they do not prevent an attack or replace incident response.
 
 ## Decide what must be recoverable
+
+<ArticleFigure
+  src="/images/guides/small-business-cloud-sync-vs-backup.svg"
+  alt="Comparison showing why cloud file synchronization is not a true backup, and how separated, versioned backups protect against ransomware and accidental deletion."
+  caption="Synchronized cloud storage replicates changes and deletions; true backups isolate recovery copies."
+  width={1200}
+  height={540}
+/>
 
 Start with the work the business must resume: accounting and payroll records, customer and order data, shared files, operational documents, website configuration, and the information needed to restore critical services. Note where each item lives, who owns it, and how quickly it would be needed. A cloud sync folder is useful for collaboration, but synchronized deletion or encryption may also affect synced copies.
 
@@ -29,9 +39,9 @@ A small design studio might inventory project files, bookkeeping data, email, an
 
 ## If ransomware or suspected compromise occurs
 
-Use your [incident response plan](/guides/small-business-incident-response-plan) and contact qualified IT support. Avoid connecting backup media to a device that may still be compromised. Preserve relevant alerts and records, and have the response lead determine whether systems should be isolated and how to recover safely. Do not assume a backup is clean until the recovery process has been assessed.
+Activate your [small business incident response plan](/guides/small-business-incident-response-plan) immediately and contact qualified IT support. Avoid connecting backup media to a device that may still be compromised. Preserve relevant alerts and records, and have the response lead determine whether systems should be isolated and how to recover safely. Do not assume a backup is clean until the recovery process has been assessed.
 
-The [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist) includes backup and recovery actions. For a broader preparation sequence, see [Start Here](/start-here).
+For a broader baseline of preventive controls across all business systems, consult our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist). For a broader preparation sequence, see [Start Here](/start-here).
 
 ## Questions to review with your provider
 

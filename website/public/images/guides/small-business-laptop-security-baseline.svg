@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="580" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="578" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="220" height="26" rx="6" fill="#CCFBF1"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="0.08em">ENDPOINT HARDENING</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Small Business Laptop &amp; Workstation Security Baseline</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">Practical protective controls that safeguard company devices and corporate data without requiring enterprise IT teams.</text>
+
+  <!-- Control 1: Full-Disk Encryption -->
+  <g transform="translate(40, 136)">
+    <rect width="354" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="6" rx="3" fill="#0F766E"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#CCFBF1"/>
+    <!-- Lock icon -->
+    <rect x="30" y="36" width="18" height="14" rx="2" stroke="#0F766E" stroke-width="2" fill="none"/>
+    <path d="M34 36V30C34 27.2 36.2 25 39 25C41.8 25 44 27.2 44 30V36" stroke="#0F766E" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">1. Full-Disk Encryption</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0F766E">BitLocker &amp; FileVault</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Renders the internal SSD unreadable if a laptop is lost, stolen, or disassembled.</text>
+    
+    <rect x="16" y="106" width="322" height="66" rx="6" fill="#F0FDFA"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0F766E">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Turn on BitLocker (Windows Pro) or FileVault (macOS)</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Store recovery keys in corporate cloud admin vault, not personal drive</text>
+  </g>
+
+  <!-- Control 2: Standard User Accounts -->
+  <g transform="translate(424, 136)">
+    <rect width="354" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="6" rx="3" fill="#0284C7"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#E0F2FE"/>
+    <!-- User Shield icon -->
+    <circle cx="39" cy="34" r="5" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M30 48C30 43.6 33.6 40 38 40H40C44.4 40 48 43.6 48 48" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">2. Standard User Accounts</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0284C7">Principle of Least Privilege</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Daily work should happen on standard accounts. Malware inherits user rights.</text>
+    
+    <rect x="16" y="106" width="322" height="66" rx="6" fill="#F0F9FF"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0284C7">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Create separate "Admin" login for maintenance/installations</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Ensure daily user accounts cannot install unapproved drivers/software</text>
+  </g>
+
+  <!-- Control 3: Automated OS & App Updates -->
+  <g transform="translate(808, 136)">
+    <rect width="352" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="352" height="6" rx="3" fill="#6366F1"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#EEF2FF"/>
+    <!-- Refresh/Update icon -->
+    <path d="M30 39A9 9 0 1 1 48 39" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+    <path d="M48 35V39H44" stroke="#6366F1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">3. Patching &amp; Updates</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#6366F1">OS, Browsers &amp; Tools</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Exploits routinely target known flaws in outdated browsers, PDF readers, and OS.</text>
+    
+    <rect x="16" y="106" width="320" height="66" rx="6" fill="#EEF2FF"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#6366F1">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Turn on automatic updates for Windows/macOS &amp; web browsers</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Enforce a weekly reboot habit so patches actually apply</text>
+  </g>
+
+  <!-- Control 4: Screen Lock & Physical Security -->
+  <g transform="translate(40, 348)">
+    <rect width="354" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="6" rx="3" fill="#D97706"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#FEF3C7"/>
+    <!-- Timer/Display icon -->
+    <rect x="28" y="28" width="22" height="16" rx="2" stroke="#D97706" stroke-width="2" fill="none"/>
+    <path d="M35 48H43M39 44V48" stroke="#D97706" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">4. Screen Lock &amp; Auth</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D97706">Physical Access Barrier</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Unattended screens expose open email, company drives, and saved passwords.</text>
+    
+    <rect x="16" y="106" width="322" height="66" rx="6" fill="#FFFBEB"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#D97706">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Set maximum 5-minute screen timeout requiring PIN/password</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Train staff to press Win+L (Windows) or Cmd+Ctrl+Q (Mac) when stepping away</text>
+  </g>
+
+  <!-- Control 5: Endpoint & Browser Hygiene -->
+  <g transform="translate(424, 348)">
+    <rect width="354" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="354" height="6" rx="3" fill="#0D9488"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#CCFBF1"/>
+    <!-- Shield/Clean icon -->
+    <path d="M39 25L49 29V36C49 42 45 47 39 49C33 47 29 42 29 36V29L39 25Z" stroke="#0D9488" stroke-width="2" fill="none"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">5. Antivirus &amp; Hygiene</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0D9488">Active Detection &amp; Cleanup</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Modern built-in defenses provide high protection when configured correctly.</text>
+    
+    <rect x="16" y="106" width="322" height="66" rx="6" fill="#F0FDFA"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0D9488">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Keep Microsoft Defender (Windows) / Gatekeeper (macOS) enabled</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Remove unneeded software, obsolete plugins, and shadow apps</text>
+  </g>
+
+  <!-- Control 6: Device Loss & Backup Separation -->
+  <g transform="translate(808, 348)">
+    <rect width="352" height="190" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="352" height="6" rx="3" fill="#E11D48"/>
+    
+    <rect x="20" y="20" width="38" height="38" rx="8" fill="#FFE4E6"/>
+    <!-- Alert/Backup icon -->
+    <circle cx="39" cy="39" r="10" stroke="#E11D48" stroke-width="2" fill="none"/>
+    <path d="M39 34V40M39 44V44.5" stroke="#E11D48" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="70" y="37" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">6. Loss &amp; Recovery Plan</text>
+    <text x="70" y="53" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E11D48">When Laptops Go Missing</text>
+
+    <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#475569">Prepare for hardware failure, lost transit bags, or sudden theft before it happens.</text>
+    
+    <rect x="16" y="106" width="320" height="66" rx="6" fill="#FFF1F2"/>
+    <text x="26" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#E11D48">PRACTICAL ACTION:</text>
+    <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Do not store the only copy of company files on local laptop storage</text>
+    <text x="26" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#334155">• Enable "Find My" / remote wipe, and report loss to revoke sessions immediately</text>
+  </g>
+</svg>

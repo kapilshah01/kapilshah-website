@@ -1,3 +1,5 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
 ## Introduction
 
 Multi-factor authentication (MFA) is one of the most practical ways a small business can improve account security. It asks for more than a password when someone signs in—for example, a code from an authenticator app, approval on a device, or a security key. That extra check can make a password alone insufficient to access an account.
@@ -18,7 +20,13 @@ MFA also supports safer everyday operations. If a staff member accidentally ente
 
 ## MFA Methods: What the Choices Mean
 
-The best available choice depends on the service, your devices, and what the account controls. CISA recommends using the strongest MFA option that an account supports, while recognizing that any MFA is generally better than none. [Its small-business guidance](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication) describes the common options below.
+<ArticleFigure
+  src="/images/guides/small-business-mfa-methods-comparison.svg"
+  alt="Comparison of small business MFA methods: SMS verification versus authenticator apps versus hardware security keys and passkeys."
+  caption="Small business MFA methods compared by security strength, ease of deployment, and phishing resistance."
+  width={1200}
+  height={540}
+/>
 
 ### Authenticator apps
 
@@ -48,7 +56,7 @@ SMS sends a code by text message. It is familiar and often better than leaving M
 
 Start where one account can affect many others or can move money, change public services, or expose important data. A useful order is:
 
-1. **Business email and email administrators.** Email commonly receives password resets and sensitive business communication.
+1. **Business email and email administrators.** Email commonly receives password resets and sensitive business communication. For organizations on Microsoft suites, follow our dedicated guide to [Microsoft 365 security for small businesses](/guides/microsoft-365-security-small-business) to enforce Security Defaults and protect global admin roles.
 2. **Administrators.** Prioritize accounts that manage users, billing, security settings, remote access, domains, hosting, websites, and cloud tenants.
 3. **Financial and payment services.** Include banking, accounting, payroll, payment processors, and purchasing accounts.
 4. **Cloud and SaaS services.** Cover file storage, customer relationship tools, project systems, and any platform that holds customer or business data.

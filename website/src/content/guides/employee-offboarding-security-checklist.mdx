@@ -1,0 +1,232 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+When an employee leaves a small business, revoking their digital access is just as important as collecting their office keys. In small organizations without a dedicated IT department, offboarding is frequently handled informally: someone changes an email password, takes back a laptop, and forgets about the dozens of SaaS tools, cloud storage folders, shared social media accounts, and personal phone authenticators that still provide an open door to company data.
+
+Studies of small business data breaches reveal that a significant percentage of insider incidents involve former employees who retained access weeks or months after leaving—sometimes innocently checking an old project folder, and sometimes intentionally copying client lists or deleting records upon joining a competitor.
+
+A secure offboarding process is structured, non-destructive, and repeatable. The most critical operational rule is: **never delete an account immediately**. Instead, block sign-in, revoke active sessions, reassign file ownership, preserve historical records, and rotate shared passwords.
+
+This guide provides a comprehensive checklist covering preparation, final-day execution, and post-departure auditing across email suites, cloud tools, hardware, and team vaults.
+
+<ArticleFigure
+  src="/images/guides/employee-offboarding-security-workflow.svg"
+  alt="Four-phase employee offboarding security workflow: Pre-departure inventory, final-day access cutover, post-departure auditing and secrets rotation, and archival license management."
+  width={1200}
+  height={540}
+  caption="A structured 4-phase offboarding workflow ensures continuous business operations while systematically closing orphaned access paths."
+/>
+
+## Why Informal Offboarding Fails in Small Businesses
+
+In a five- or twenty-person company, software access is often granted organically over time. An employee starts with a primary email address. Over the next two years, they are added to the accounting portal, invited to shared Dropbox folders, given administrative rights to the corporate LinkedIn page, shared the office Wi-Fi password, and added to the company's password manager vault.
+
+When that person gives two weeks' notice, busy managers often make one of two mistakes:
+
+1. **The Incomplete Cutoff:** The manager changes the employee's email password but forgets that their laptop still syncs local files, their personal smartphone has an active session in Slack, and their personal phone number is still listed as the recovery MFA method for the company's domain registrar.
+2. **The Destructive Wipe:** The manager immediately deletes the user's account in Microsoft 365 or Google Workspace to save on next month's license fee. All customer correspondence, calendar history, and active project files owned by that user are permanently erased, creating an operational disaster.
+
+A secure offboarding process separates **access revocation** from **data retention**. You revoke access instantly, but you preserve business records intentionally.
+
+---
+
+## Phase 1: Before the Employee Leaves (1–2 Weeks Prior)
+
+Preparation prevents panic on the employee's last day. When a departure date is set (or during quiet preparation in the case of an involuntary termination), conduct an access inventory:
+
+### 1. Build the Access Inventory
+Identify every service, platform, and application the departing worker can reach:
+- **Primary Business Identity:** Microsoft 365, Google Workspace, or local domain logins.
+- **Financial & Accounting Systems:** QuickBooks, Xero, Stripe, payroll platforms, or company credit card portals.
+- **Communication & Project Management:** Slack, Microsoft Teams, Asana, Trello, Jira, or Notion.
+- **Cloud File Storage:** SharePoint, OneDrive, Google Drive, Dropbox, or Box.
+- **Customer & Sales Data:** Salesforce, HubSpot, Zendesk, or proprietary client databases.
+- **Marketing & Social Channels:** LinkedIn Company Page, Meta Business Suite, YouTube, Twitter/X, and website CMS portals (WordPress, Webflow, Shopify).
+
+### 2. Identify Administrative and Privileged Roles
+Check if the departing person holds administrator or owner privileges on any platform:
+- Are they listed as an admin in your cloud tenant, domain registrar (GoDaddy, Namecheap), or website hosting panel?
+- Are they a sole administrator on any service? **Always transfer ownership or promote a second administrator before beginning offboarding.** If you remove a sole administrator, you risk locking the entire company out of the service.
+
+### 3. Identify Shared Accounts and Team Vaults
+Small businesses often rely on shared accounts for utility logins, shipping services, or vendor portals:
+- Does the employee have access to shared password vaults in 1Password or Bitwarden?
+- Did they know the master passphrase to any shared service accounts?
+- Make a list of every shared secret that will need rotation after their departure. For vault structuring guidelines, refer to our [small business password manager guide](/guides/small-business-password-manager-guide).
+
+### 4. Inventory Hardware and Physical Tokens
+- Company laptops, desktops, monitors, and tablets.
+- Physical building keys, alarm system alarm codes, and NFC access fobs.
+- Hardware security keys (YubiKeys) or company-owned mobile phones.
+- Company credit cards or fuel cards.
+
+### 5. Check Recovery Email and Phone Configurations
+Verify that the employee did not configure their personal Gmail or personal cell phone number as the password recovery method or secondary MFA contact on any corporate account. If personal recovery details are attached, the ex-employee can trigger an automated password reset even after leaving.
+
+---
+
+## Phase 2: On the Last Day (The Exact Hour of Departure)
+
+The timing of access revocation depends on the nature of the departure:
+- **Friendly / Planned Resignation:** Coordinate the exact time with the employee (usually at the end of their last scheduled working day) so their work is not disrupted prematurely.
+- **Involuntary Termination:** Execute technical revocation immediately prior to or during the termination meeting to prevent retaliatory data deletion, mass customer contact, or intellectual property exfiltration.
+
+Follow this sequential checklist on the day of departure:
+
+### 1. Block Sign-In on the Primary Identity Platform
+- **Microsoft 365:** Navigate to *Active users* > select user > click **Block sign-in**.
+- **Google Workspace:** Navigate to *Users* > select user > click **Suspend user**.
+- *Why:* Blocking or suspending sign-in halts new authentication attempts while keeping the account and all its underlying data completely intact.
+
+### 2. Terminate All Active Cloud Sessions
+Changing a password does not necessarily kick an attacker or departing worker out of active browser sessions or mobile apps that hold long-lived OAuth refresh tokens.
+- **Microsoft 365 / Entra ID:** Select the user > click **Sign out of all sessions** (or **Revoke sessions** in Entra ID).
+- **Google Workspace:** Select the user > click **Security** > **Sign-in cookies** > **Reset**.
+- **Slack / Teams / SaaS:** Terminate active web sessions in each platform's administrative console.
+
+### 3. Revoke Registered MFA Methods
+Remove the employee's personal device from corporate authentication systems:
+- In Microsoft Entra or Google Workspace Admin, delete registered authenticator apps, FIDO2 passkeys, and SMS phone numbers.
+- This ensures the former employee cannot use a cached code or push prompt to re-establish access. Review our foundational guide on [MFA for small businesses](/guides/mfa-for-small-businesses) for identity recovery controls.
+
+### 4. Remove Password Manager Vault Access
+- Log into your business password manager administration console (Bitwarden, 1Password, Dashlane).
+- Remove the user from the organization and revoke access to all shared company vaults.
+- If the employee used a personal vault on the company device, remind them that company secrets may not be exported.
+
+### 5. Transfer Critical Files and Reassign Ownership
+- **Google Drive:** Transfer ownership of the user's Drive documents to their manager or a designated team lead using the Google Admin Drive transfer utility.
+- **OneDrive / SharePoint:** Generate a manager access link to the employee's OneDrive files to review and copy active client projects to a shared team document library.
+
+### 6. Recover Physical Hardware and Company Property
+- Collect company laptops, tablets, external backup drives, and accessories.
+- Verify that the laptop powers on and matches the serial number recorded in your hardware inventory.
+- Collect all physical office keys, keycards, and company credit cards.
+- If the employee used a personal smartphone for business email (BYOD), trigger a selective **Work Account Wipe** (Enterprise Wipe) in Intune or Google Workspace to remove corporate emails and files without wiping their personal family photos. For laptop storage safeguards, see our guide on [small business computer and laptop security](/guides/small-business-computer-laptop-security).
+
+### 7. Document the Actions Taken
+Maintain a simple offboarding log in your administrative records: employee name, departure date, person who executed technical offboarding, timestamp of sign-in blockage, and date hardware was returned. This documentation is invaluable for cyber insurance claims and regulatory compliance.
+
+---
+
+## Phase 3: Post-Departure Auditing (24–72 Hours Later)
+
+Security does not end when the employee walks out the door. The days following a departure are when hidden backdoors and orphaned permissions must be neutralized:
+
+### 1. Audit and Convert the Mailbox
+Do not delete the mailbox. Clients, suppliers, and partners will continue emailing that address for months.
+
+- **Microsoft 365:** Convert the user's mailbox to a **Shared Mailbox** (which requires no paid license for mailboxes under 50 GB). Grant access to the manager or successor who is handling their workload.
+- **Google Workspace:** Configure email routing or an address alias so that incoming mail forwards to a designated active employee, or use Google Workspace Vault for legal retention.
+- **Check for Hidden Inbox Rules:** Inspect the mailbox for unauthorized auto-forwarding rules or forwarding delegates that might redirect correspondence to a personal email address. For threat context, review our guide on [business email compromise](/guides/business-email-compromise-small-business-payment-fraud).
+
+### 2. Revoke OAuth Third-Party App Tokens
+Departing employees often connect third-party productivity tools, calendar integrations, or browser extensions using "Sign in with Microsoft" or "Sign in with Google."
+- In Microsoft Entra ID (*Enterprise applications*) or Google Workspace (*Security* > *API controls*), review and revoke any third-party app tokens authorized by that user.
+
+### 3. Rotate All Shared Passwords
+Any password that the employee knew or had access to must be changed immediately:
+- Team social media accounts (Instagram, LinkedIn, Twitter/X).
+- Shared website CMS logins (WordPress admin, Shopify staff accounts).
+- Shared vendor, distributor, or shipping portal logins.
+- Local office Wi-Fi passwords and building alarm codes (especially after contentious departures).
+- Update the newly rotated passwords inside your team password vault.
+
+### 4. Remove SaaS Seats and License Assignments
+Once files have been transferred and the mailbox converted to a shared mailbox:
+- Unassign the paid Microsoft 365 or Google Workspace license to stop recurring monthly subscription billing.
+- Remove user seats in paid SaaS tools (CRM, project management, accounting) to optimize software spend.
+
+---
+
+## Dedicated System Mini-Checklists
+
+### Microsoft 365 Mini-Checklist
+- [ ] Go to **Users** > **Active users** > select user > click **Block sign-in**.
+- [ ] Under the user's *Account* tab, click **Sign out of all sessions**.
+- [ ] Go to **Mail** tab > select **Convert to shared mailbox**.
+- [ ] Under *Mailbox permissions*, assign **Read and manage** permissions to the supervisor.
+- [ ] Go to **OneDrive** tab > click **Create link to files** and send to supervisor.
+- [ ] Open **Microsoft Entra admin center** > delete registered **Authentication methods** (MFA devices).
+- [ ] Check Exchange Online for external mail forwarding rules.
+- [ ] Under **Licenses and apps**, unassign paid licenses to stop billing.
+- [ ] *For complete tenant hardening, see our guide to [Microsoft 365 Security for Small Businesses](/guides/microsoft-365-security-small-business).*
+
+### Google Workspace Mini-Checklist
+- [ ] Open **Google Admin Console** > **Directory** > **Users** > select user > click **Suspend user**.
+- [ ] Under **Security** > click **Sign-in cookies** > **Reset**.
+- [ ] Under **Security** > **2-step verification** > remove registered security keys and backup codes.
+- [ ] Navigate to **Apps** > **Google Workspace** > **Drive and Docs** > **Transfer ownership** of files to a manager.
+- [ ] Set up an **Email routing rule** or **Default routing rule** to route incoming emails to a successor.
+- [ ] Unassign paid licenses if using Archive User licenses or after transferring data.
+
+### Business Password Manager Mini-Checklist
+- [ ] Open the admin console (Bitwarden / 1Password).
+- [ ] Remove the departing employee from all shared groups and collections.
+- [ ] Revoke the user's organization membership.
+- [ ] Identify every credential stored in collections the employee had access to.
+- [ ] Rotate those credentials across the respective web portals immediately.
+- [ ] Generate new, unique 20+ character passphrases and save the updated entries in the vault.
+
+### Company Laptop & Hardware Mini-Checklist
+- [ ] Boot the returned laptop and verify the operating system starts properly.
+- [ ] Confirm BitLocker (Windows) or FileVault (macOS) is enabled.
+- [ ] If the machine is being reassigned to a new hire, perform a complete **factory reset and drive wipe** rather than just creating a new user profile. Reinstall a clean operating system.
+- [ ] Update your hardware asset log to mark the laptop as "In Stock / Deprovisioned."
+- [ ] Collect all physical keys, badges, and hardware tokens.
+
+---
+
+## Data Deletion vs. Account Suspension vs. Archiving
+
+One of the most consequential decisions an administrator makes during offboarding is how to handle legacy data. It is vital to understand the operational differences:
+
+| Action | What Happens to Data | License Billing | When to Use |
+|---|---|---|---|
+| **Account Suspension / Blocking** | Account is locked; all emails, OneDrive files, and chat history remain intact and accessible to administrators. | License remains assigned until unassigned. | **Immediate first step** on the employee's last day. |
+| **Mailbox Conversion (Shared Mailbox)** | Mailbox is converted to a shared repository; history is preserved; others can send/receive from it. | **Free** in Microsoft 365 (under 50 GB); no license required. | Standard practice for customer-facing or operational staff. |
+| **Data Archiving (Vault / Retention)** | Data is stored in immutable cloud storage for legal, regulatory, or tax compliance. | May require an archival add-on or retention policy. | For financial, legal, or HR personnel subject to compliance audits. |
+| **Account Deletion** | The account and all associated personal data are permanently destroyed after a short grace period (30 days). | Billing stops completely. | **Only after** all required business files and records have been verified and transferred. |
+
+> **Legal and Tax Warning:** In many jurisdictions, businesses are legally required to retain accounting records, tax documents, client invoices, and employment agreements for 5 to 7 years. Permanently deleting an employee's mailbox or cloud drive on their last day can expose your business to severe compliance penalties or compromise your defense in future legal disputes.
+
+---
+
+## Common Mistakes Small Businesses Make
+
+- **Deleting Accounts on Day One:** Deleting the user account to save \$15 on next month's software invoice destroys historical correspondence, breaks shared spreadsheet links, and causes incoming client emails to bounce.
+- **Forgetting Shared Social Media & Marketing Accounts:** Ex-employees frequently retain administrative control over company Facebook pages, Instagram handles, or Google Business profiles because they were added via personal profiles.
+- **Neglecting to Revoke MFA Phone Numbers:** Leaving the ex-employee's personal phone number as a recovery method allows them to click "Forgot Password" and regain access from home.
+- **Relying on Employee Word That Data Was Deleted:** Asking an employee to "please delete company files from your personal laptop" is not a security control. Use mobile device management (MDM) or prohibit company data on unmanaged personal hardware.
+- **Not Changing Shared Passwords in Team Vaults:** Revoking access to the password manager stops the employee from seeing future updates, but they may have already memorized or written down existing shared logins.
+
+---
+
+## Security Tools to Consider for Offboarding
+
+- **Business Password Managers (1Password, Bitwarden):** Provides instant, one-click revocation of shared vaults and logs which users had access to which credentials.
+- **Identity Providers & Cloud Suites (Microsoft Entra ID, Google Workspace):** Centralizes user authentication, allowing administrators to disable single sign-on (SSO) across dozens of connected applications with a single click.
+- **Mobile Device Management (Microsoft Intune, Apple Business Manager):** Enables selective remote wipe of corporate data from laptops and smartphones without touching personal employee files.
+
+---
+
+## When to Get Professional IT Help
+
+Seek guidance from a qualified Managed Service Provider (MSP) or legal counsel if:
+- The termination is hostile or involves executive leadership with high-level access to sensitive proprietary intellectual property.
+- You suspect the departing employee has already exfiltrated confidential client databases, financial records, or trade secrets.
+- You operate under regulatory compliance standards (such as HIPAA, GLBA, or GDPR) requiring formal chain-of-custody logging for data preservation.
+- You lack centralized identity management and need to audit dozens of standalone software accounts manually.
+
+For complete organizational risk management, integrate this offboarding workflow with our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist).
+
+---
+
+## Sources and Further Reading
+
+- [CISA: Identity and Access Management for Small and Medium Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses)
+- [NIST SP 800-53 Rev. 5: Control AC-2 Account Management (Personnel Termination)](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final)
+- [Microsoft Learn: Remove a Former Employee and Secure Data](https://learn.microsoft.com/en-us/microsoft-365/admin/add-users/remove-former-employee)
+- [Google Workspace Admin Help: Manage Employees Who Leave Your Organization](https://support.google.com/a/answer/33314)
+- [FTC: Protecting Personal Information — A Guide for Business](https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business)

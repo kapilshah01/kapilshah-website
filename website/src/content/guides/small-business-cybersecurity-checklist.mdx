@@ -1,3 +1,5 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
 ## Introduction
 
 Cybersecurity is not only an IT problem. It is part of keeping a small business able to take payments, serve customers, protect information, and keep working after a mistake or disruption. You do not need a large security department to make meaningful progress. You do need to protect the accounts, email, devices, data, and recovery options your business relies on.
@@ -15,6 +17,14 @@ Write down what you complete. A simple list of account owners, backup locations,
 
 You do not have to buy every security product or complete every task at once. Focus first on systems that could stop the business, expose sensitive information, or move money. If a provider manages part of your technology, ask who performs each security task; outsourced technology still needs a clear business owner.
 
+<ArticleFigure
+  src="/images/guides/small-business-cybersecurity-baseline-layers.svg"
+  alt="The five essential defense layers for small businesses: accounts and passwords, email security, device protection, backups and recovery, and incident response readiness."
+  caption="A balanced small-business security program addresses five operational layers."
+  width={1200}
+  height={560}
+/>
+
 ## Accounts and Access
 
 ### 1. Turn on MFA for important accounts
@@ -28,19 +38,19 @@ MFA (multi-factor authentication) adds another verification step beyond a passwo
 
 One reused password can turn a single account problem into several. Unique passwords contain the damage if a service is breached or a password is mistakenly entered somewhere it should not have been.
 
-- **What to do:** Replace reused passwords on important accounts first. Prefer long, randomly generated passwords when a password manager can store them.
+- **What to do:** Replace reused passwords on important accounts first. Prefer long, randomly generated passwords when a password manager can store them. Establish a modern, NIST-aligned [small-business password policy](/guides/small-business-password-policy) that focuses on length and eliminates arbitrary periodic rotation rules.
 - **Done looks like:** Each important business account has its own password; no password is shared by email, chat, or an unprotected document.
 
 ### 3. Use a reputable password manager
 
 A password manager reduces the temptation to reuse passwords and gives a small team a safer way to handle account access. It should not become an informal shared vault with no ownership.
 
-- **What to do:** Choose a well-supported password manager, set up individual accounts where practical, enable MFA on it, and decide who can administer the business account.
+- **What to do:** Choose a well-supported password manager, set up individual accounts where practical, enable MFA on it, and decide who can administer the business account. For detailed setup steps and team sharing controls, follow our [small business password manager guide](/guides/small-business-password-manager-guide).
 - **Done looks like:** The team has an approved place to generate and store passwords, with documented recovery access for the business owner.
 
 ### 4. Remove unused accounts
 
-Old staff accounts, former contractors, trial services, and abandoned integrations can remain a path into a business long after they stop being useful.
+Old staff accounts, former contractors, trial services, and abandoned integrations can remain a path into a business long after they stop being useful. Use our structured [employee offboarding security checklist](/guides/employee-offboarding-security-checklist) to systematically revoke access, recover hardware, and rotate shared credentials when team members leave.
 
 - **What to do:** Review users in email, cloud storage, payroll, accounting, website, and key software. Disable or delete access that is no longer needed; do not forget shared mailboxes and API or integration accounts.
 - **Done looks like:** Every active account has a current business reason and an identifiable owner.
@@ -58,7 +68,7 @@ Phishing is a deceptive email, text, call, or message intended to make someone c
 
 ### 6. Secure business email with MFA
 
-Business email often receives password resets, invoices, customer messages, and access notices. If an email account is taken over, it may also be used to reset other services.
+Business email often receives password resets, invoices, customer messages, and access notices. If an email account is taken over, it may also be used to reset other services. For teams using Microsoft cloud services, follow our dedicated guide on [Microsoft 365 security for small businesses](/guides/microsoft-365-security-small-business) to enforce Security Defaults and protect global admin roles.
 
 - **What to do:** Require MFA for every mailbox, including administrators and shared-mailbox owners. Review forwarding rules and delegated access as part of the setup.
 - **Done looks like:** Active email users have MFA, recovery details are business-controlled, and unexpected forwarding is investigated.
@@ -74,7 +84,7 @@ People do not need to become investigators. They need a simple habit: pause when
 
 Invoice and payment-change fraud works when a business treats an email as proof that a supplier or colleague made a request. A separate verification step can interrupt that pressure.
 
-- **What to do:** Create a rule that bank-detail changes, payment instructions, payroll changes, and unusual purchases must be confirmed using a known phone number or another trusted channel—not details supplied in the message.
+- **What to do:** Create a rule that bank-detail changes, payment instructions, payroll changes, and unusual purchases must be confirmed using a known phone number or another trusted channel—not details supplied in the message. Learn more about how attackers impersonate executives and intercept vendor invoices in our guide to [business email compromise and payment fraud prevention](/guides/business-email-compromise-small-business-payment-fraud).
 - **Done looks like:** The verification rule is written down and the people who approve payments know how to apply it.
 
 ### 9. Protect email recovery methods
@@ -94,6 +104,8 @@ Replying, clicking links, downloading files, or using an unsubscribe link in a s
 For a focused guide, see [Small Business Phishing Protection](/guides/small-business-phishing-protection).
 
 ## Computers and Devices
+
+For a comprehensive workstation hardening blueprint covering BitLocker, FileVault, and remote work, review our guide to [small business work computer and laptop security](/guides/small-business-computer-laptop-security).
 
 ### 11. Keep operating systems updated
 
@@ -180,7 +192,7 @@ Not every employee, contractor, or application needs every file. Limiting access
 
 ### 22. Back up important data
 
-Backups help recovery from accidental deletion, hardware failure, service problems, and some security incidents. NIST’s [backup and recovery guide](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final) emphasizes planning, maintaining, and testing backup files based on each organization’s needs.
+Backups help recovery from accidental deletion, hardware failure, service problems, and some security incidents. NIST’s [backup and recovery guide](https://csrc.nist.gov/pubs/other/2020/04/24/protecting-data-from-ransomware-and-other-data-los/final) emphasizes planning, maintaining, and testing backup files based on each organization’s needs. For a structured resilience plan, review our guide to [small business backup and ransomware protection](/guides/small-business-backup-ransomware-protection).
 
 - **What to do:** Confirm coverage for critical files, cloud data exports where appropriate, website content, and important system configurations. Choose a frequency that fits how much recent work you could realistically lose.
 - **Done looks like:** Critical data has a documented backup method, owner, and review process.
@@ -205,7 +217,7 @@ A restore test can begin small: recover one recent file to a safe location, open
 
 ### 25. Create a simple cybersecurity incident response plan
 
-An incident plan is a short, practical guide for a stressful day. It does not need to be a large policy document. NIST’s small-business resources and CISA’s [small and medium-sized business resources](https://www.cisa.gov/small-and-medium-sized-business-resources) can help you develop it further.
+An incident plan is a short, practical guide for a stressful day. It does not need to be a large policy document. Use our step-by-step [small business incident response plan](/guides/small-business-incident-response-plan) to structure roles, offline contacts, and first actions. NIST’s small-business resources and CISA’s [small and medium-sized business resources](https://www.cisa.gov/small-and-medium-sized-business-resources) can help you develop it further.
 
 - **What to do:** Name the people who can make decisions; record contacts for IT support, hosting, domain, email, bank or payment providers, insurer, and key vendors; write where account recovery and backup details are stored. Include how staff should report a problem, which evidence to preserve (such as messages, timestamps, and screenshots), and when to request professional help.
 - **Done looks like:** Responsible people can find the plan without relying on business email, know who will communicate, and can start recovery without guessing.
