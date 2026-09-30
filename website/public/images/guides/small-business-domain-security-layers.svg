@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="560" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="558" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="220" height="26" rx="6" fill="#CCFBF1"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="0.08em">DOMAIN HARDENING</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Small Business Domain &amp; DNS Security Defense Layers</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">Four essential protective perimeters that prevent domain theft, unauthorized DNS record redirection, and brand hijacking.</text>
+
+  <!-- Layer 1: Registrar Account Protection -->
+  <g transform="translate(40, 136)">
+    <rect width="260" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#0F766E"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#CCFBF1"/>
+    <!-- Key icon -->
+    <circle cx="39" cy="43" r="6" stroke="#0F766E" stroke-width="2" fill="none"/>
+    <path d="M44 48L50 54M48 52L50 50" stroke="#0F766E" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">1. Account Security</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0F766E">Registrar Sign-In</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Critical Controls:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Phishing-resistant MFA enforced</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Dedicated company admin email</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• No shared or personal logins</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• 25+ character vault passphrase</text>
+
+    <rect x="16" y="280" width="228" height="88" rx="6" fill="#F0FDFA"/>
+    <text x="24" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">WHY IT MATTERS</text>
+    <text x="24" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#134E4A">If an attacker breaches the</text>
+    <text x="24" y="336" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#134E4A">registrar, they control all</text>
+    <text x="24" y="352" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#134E4A">corporate email and web traffic.</text>
+  </g>
+
+  <!-- Layer 2: Transfer Locks & Auto-Renew -->
+  <g transform="translate(328, 136)">
+    <rect width="260" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#0284C7"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#E0F2FE"/>
+    <!-- Padlock icon -->
+    <rect x="30" y="40" width="18" height="14" rx="2" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M34 40V34C34 31.2 36.2 29 39 29C41.8 29 44 31.2 44 34V40" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">2. Transfer Locks</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#0284C7">Theft &amp; Expiration Guard</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Critical Controls:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Registrar Lock enabled</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Auto-Renew toggled ON</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Primary &amp; secondary billing card</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Multi-year registration buffer</text>
+
+    <rect x="16" y="280" width="228" height="88" rx="6" fill="#F0F9FF"/>
+    <text x="24" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0284C7">WHY IT MATTERS</text>
+    <text x="24" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">Prevents unauthorized</text>
+    <text x="24" y="336" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">transfers to offshore hosts</text>
+    <text x="24" y="352" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#075985">and accidental lapse theft.</text>
+  </g>
+
+  <!-- Layer 3: DNS Record Integrity & DNSSEC -->
+  <g transform="translate(616, 136)">
+    <rect width="260" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="260" height="8" rx="4" fill="#D97706"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#FEF3C7"/>
+    <!-- Network Globe icon -->
+    <circle cx="39" cy="43" r="10" stroke="#D97706" stroke-width="2" fill="none"/>
+    <path d="M29 43H49M39 33C41.5 36.5 42.5 40 42.5 43C42.5 46 41.5 49.5 39 53C36.5 49.5 35.5 46 35.5 43C35.5 40 36.5 36.5 39 33Z" stroke="#D97706" stroke-width="1.5"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">3. DNS Integrity</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#D97706">Traffic &amp; Mail Routing</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Critical Controls:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• DNSSEC enabled on nameservers</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Lock MX, SPF &amp; DKIM records</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Remove dangling CNAMEs</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Authoritative enterprise DNS</text>
+
+    <rect x="16" y="280" width="228" height="88" rx="6" fill="#FFFBEB"/>
+    <text x="24" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#D97706">WHY IT MATTERS</text>
+    <text x="24" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#92400E">Stops DNS poisoning,</text>
+    <text x="24" y="336" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#92400E">subdomain takeovers, and</text>
+    <text x="24" y="352" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#92400E">silent MX rerouting.</text>
+  </g>
+
+  <!-- Layer 4: Governance & Legal Ownership -->
+  <g transform="translate(904, 136)">
+    <rect width="256" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="256" height="8" rx="4" fill="#6366F1"/>
+    
+    <rect x="20" y="24" width="38" height="38" rx="8" fill="#EEF2FF"/>
+    <!-- Legal Certificate icon -->
+    <rect x="30" y="33" width="18" height="22" rx="2" stroke="#6366F1" stroke-width="2" fill="none"/>
+    <path d="M34 39H44M34 44H41" stroke="#6366F1" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="20" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#0F172A">4. Legal Ownership</text>
+    <text x="20" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#6366F1">Identity &amp; Continuity</text>
+
+    <text x="20" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#334155">Critical Controls:</text>
+    <text x="20" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Registered to company entity</text>
+    <text x="20" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• No agency-held primary contact</text>
+    <text x="20" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• Audit during employee exit</text>
+    <text x="20" y="238" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748B">• WHOIS privacy enabled</text>
+
+    <rect x="16" y="280" width="224" height="88" rx="6" fill="#EEF2FF"/>
+    <text x="24" y="302" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#6366F1">WHY IT MATTERS</text>
+    <text x="24" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3730A3">Prevents disputes when</text>
+    <text x="24" y="336" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3730A3">web designers leave or</text>
+    <text x="24" y="352" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3730A3">vendors dissolve.</text>
+  </g>
+</svg>

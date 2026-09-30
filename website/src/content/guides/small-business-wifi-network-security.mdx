@@ -1,0 +1,236 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+Most small businesses run on wireless networks configured with consumer defaults: an all-in-one Wi-Fi router supplied by an Internet Service Provider (ISP) where employee laptops, point-of-sale terminals, personal visitor smartphones, wireless printers, and smart office TVs all share the exact same unsegmented network. 
+
+On a flat, unsegmented network, any compromised visitor phone or insecure smart device (such as an unpatched office security camera) can silently scan the local subnet, eavesdrop on unencrypted network traffic, and attempt lateral attacks against company workstations and file shares.
+
+Securing small business Wi-Fi does not require expensive commercial networking contracts. By implementing five essential controls—creating an isolated guest network with client isolation, changing default router administrator credentials, enabling WPA3 or WPA2-AES encryption, disabling risky legacy protocols like WPS and UPnP, and separating IoT smart hardware—a small business can eliminate the overwhelming majority of wireless network threats.
+
+<ArticleFigure
+  src="/images/guides/small-business-wifi-network-segmentation.svg"
+  alt="Small business office Wi-Fi network segmentation diagram showing separation between primary corporate workstations, isolated guest devices, and untrusted IoT hardware."
+  width={1200}
+  height={560}
+  caption="Network segmentation isolates high-value company workstations from visitor mobile devices and smart office hardware."
+/>
+
+## Why Default Office Wi-Fi Is a Serious Small Business Risk
+
+When an ISP installs internet service in a small office, clinic, retail store, or consultancy, the technician typically plugs in a modem-router combination unit, hands over a default network name (SSID) and a pre-printed Wi-Fi password, and confirms that the internet works.
+
+In a busy commercial environment, this default setup quickly creates three major security hazards:
+
+1. **The "Flat Network" Problem:** When all devices share a single wireless subnet, every device can communicate directly with every other device. If a client brings a malware-infected laptop to a meeting and connects to your Wi-Fi, that malware can immediately scan your office for open Windows file shares (SMB), network-attached storage (NAS) backup drives, and unpatched desktop machines.
+2. **Insecure Smart Hardware (IoT):** Modern offices are filled with internet-connected equipment: wireless printers, digital signage, smart thermostats, streaming TVs in conference rooms, and security cameras. Many of these devices run stripped-down Linux operating systems that rarely receive security firmware updates and frequently contain hardcoded administrative credentials. If a smart TV on your primary network is compromised, an attacker can use it as a persistent foothold inside your corporate perimeter.
+3. **Exposed Router Administration:** Most ISP routers ship with default administrative passwords (such as `admin`, `password`, or a predictable pattern printed on the router sticker). If an unauthorized visitor or rogue script accesses the router's web interface, they can alter DNS server settings to silently redirect employees from legitimate banking websites to spoofed credential-harvesting pages.
+
+Securing your Wi-Fi establishes a secure physical foundation for the rest of your technology. While cloud encryption and endpoint security protect devices individually, network hardening prevents intruders from moving between machines. For device-level controls, see our companion guide on [small business computer and laptop security](/guides/small-business-computer-laptop-security).
+
+---
+
+## The 10-Minute Office Wi-Fi Security Audit
+
+Before changing settings, inspect your current wireless environment by checking these five foundational checkpoints:
+
+- [ ] **Router Admin Password:** Is the router's web management console protected by a unique, strong passphrase rather than the factory default `admin`?
+- [ ] **Guest Network Status:** Is there a dedicated "Guest" Wi-Fi network active for visitors, clients, and employees' personal phones?
+- [ ] **Client Isolation Active:** On the guest network, is "AP Isolation" or "Client Isolation" turned on so visitors cannot see or communicate with other connected devices?
+- [ ] **Encryption Protocol:** Is your primary network encrypted with WPA3-Personal or WPA2-AES, with legacy WEP and WPA-TKIP completely disabled?
+- [ ] **WPS Disabled:** Is Wi-Fi Protected Setup (WPS)—the push-button or PIN pairing feature—permanently switched off in the router firmware?
+
+If any of these items fail, follow the step-by-step implementation procedures below to harden your office wireless setup.
+
+---
+
+## 1. Changing the Router Administrator Password and Disabling Remote Management
+
+Every wireless router and access point has two completely different passwords:
+- **The Wi-Fi Network Password:** Used by laptops and phones to connect to the wireless network.
+- **The Router Administrator Password:** Used to log into the router's web configuration interface (usually accessed via a browser at `192.168.1.1` or `192.168.0.1`) to modify security settings, DNS records, and firewall rules.
+
+Leaving the router administrator password at its factory default—or keeping the default password printed on the router label—allows anyone with network access (including guests) to reconfigure your entire network.
+
+### How to Secure the Router Management Console
+1. Log into your router's administrative dashboard using an ethernet cable or trusted administrative laptop.
+2. Locate **Administration**, **System Settings**, or **Management**.
+3. Change the administrator password to a strong, unique passphrase of at least 20 characters. Store this credential inside your company's administrative password vault. Follow our [small business password manager guide](/guides/small-business-password-manager-guide) for structuring team credentials.
+4. **Disable Remote Management (WAN Access):** Ensure that administrative access from the public internet (often labeled *Remote Web Management*, *Access from WAN*, or *Remote Access*) is toggled **Off**. Administrative access should only ever be permitted from a physically connected device on the local network.
+5. **Change the Default LAN IP Subnet (Optional but Recommended):** Most consumer routers default to `192.168.1.1` or `192.168.0.1`. Changing your local gateway address to an alternate private range (such as `10.14.20.1` or `192.168.55.1`) provides defense-in-depth against automated browser-based Cross-Site Request Forgery (CSRF) scripts designed to reconfigure common default router IPs.
+
+---
+
+## 2. Wireless Encryption Standards: WPA3 vs. WPA2-AES
+
+Wireless encryption scrambles radio signals traveling between employee laptops and the Wi-Fi access point, preventing anyone with an antenna nearby from eavesdropping on confidential communications.
+
+### Understanding Wireless Encryption Protocols
+- **WPA3-Personal (SAE):** The modern gold standard for small businesses. Introduced in 2018, WPA3 replaces older handshake mechanisms with Simultaneous Authentication of Equals (SAE). SAE is mathematically immune to offline dictionary attacks, meaning that even if an attacker captures the initial connection handshake, they cannot crack a simple password by guessing words offline. It also provides forward secrecy, ensuring that past traffic cannot be decrypted even if the password is discovered later. Furthermore, WPA3 mandates **Protected Management Frames (PMF / 802.11w)**, which prevents attackers from sending spoofed deauthentication or disassociation frames to kick devices off your Wi-Fi network and force re-connections.
+- **WPA3-Personal vs. WPA3-Enterprise:** Most small businesses without dedicated IT staff should use **WPA3-Personal** (which uses a single strong pre-shared passphrase). Larger corporate environments use **WPA3-Enterprise**, which eliminates shared passphrases by requiring each employee to sign in with individual credentials or client certificates validated against an 802.1X RADIUS server or identity provider (such as Microsoft Entra ID). WPA3-Enterprise offers superior user tracking and instant single-user credential revocation, but it requires capable business-grade access points, directory integration, and ongoing network administration.
+- **WPA2-AES (CCMP):** The minimum acceptable standard for older hardware. It provides robust data encryption, but its four-way handshake can be captured by nearby eavesdroppers and subjected to offline password cracking if the Wi-Fi passphrase is short or predictable. In WPA2, Protected Management Frames (PMF) were optional and rarely supported by legacy client devices.
+- **WPA2/WPA3 Mixed Mode (Transition Mode):** Allows newer devices to connect using WPA3 while maintaining compatibility with older legacy laptops or printers that only support WPA2. This is the most practical configuration for most small businesses with diverse hardware.
+- **Deprecated Protocols (Never Use):** **WEP (Wired Equivalent Privacy)** and **WPA-TKIP** are obsolete and can be cracked in minutes using automated software. If your router has an option for WEP or TKIP, ensure it is completely disabled.
+
+### Setting a Strong Wi-Fi Passphrase
+For WPA2 and WPA3 networks, the length of the Wi-Fi passphrase directly dictates its resilience against dictionary and brute-force attacks:
+- Avoid short words, predictable business names, or street addresses (e.g., `OakStreetCafe2026`).
+- Use a passphrase constructed of four or five random words separated by hyphens (e.g., `harbor-crimson-velvet-pancake-orbit`). A long passphrase is easy for employees to type once when onboarding a laptop, but virtually impossible for an external attacker to guess.
+- For guidelines on passphrase construction across your organization, review our [small business password policy](/guides/small-business-password-policy).
+
+---
+
+## 3. Implementing a Network Segmentation Strategy
+
+Network segmentation is the practice of dividing a single physical network into multiple isolated subnets so that devices with different trust levels cannot communicate with one another.
+
+### Distinguishing Basic vs. Advanced Network Capabilities
+Not all small-business routers support complex enterprise networking. When planning your network structure, distinguish between what is universally achievable and what requires business-grade hardware:
+
+- **Universally Available (Any Standard ISP or Consumer Router):** Nearly every modern consumer and ISP-supplied router includes a basic **Guest Network** toggle. Enabling this creates a 2-tier environment: a primary Wi-Fi network for corporate laptops and an isolated guest network for visitors and personal smartphones.
+- **Advanced Controls (VLAN-Capable Business Equipment):** Achieving a true 3-tier architecture with an isolated IoT subnet requires business-grade routers or managed access points (such as Ubiquiti UniFi, TP-Link Omada, Cisco Business, or DrayTek) that support **802.1Q Virtual Local Area Networks (VLANs)** and custom firewall rules between subnets.
+
+### The Recommended 3-Tier Segmentation Model
+
+If your networking equipment supports multiple SSIDs or VLANs, implement this 3-tier structure:
+
+#### Tier 1: Primary Corporate Wi-Fi (Trusted)
+- **Purpose:** Exclusively for company-owned workstations, business laptops, and local servers.
+- **Access Level:** Full access to the internet and internal company file shares.
+- **Access Policy:** The Wi-Fi passphrase is never shared with visitors, clients, or employees' personal smartphones.
+
+#### Tier 2: Isolated Guest Wi-Fi (Untrusted)
+- **Purpose:** For clients, visiting vendors, and employees' personal mobile devices (BYOD).
+- **Access Level:** Direct outbound internet access only.
+- **Access Policy:** **Client Isolation (AP Isolation) must be enabled.** Client isolation blocks connected guest devices from communicating with, pinging, or scanning each other. A visitor cannot see other guests on the network, nor can they access any internal office computer or printer.
+- **Maintenance:** Change the guest network password quarterly or print a rotating QR code in the reception area.
+
+#### Tier 3: IoT and Smart Hardware Subnet (Restricted)
+- **Purpose:** For wireless printers, security cameras, smart thermostats, digital conference room displays, and voice assistants.
+- **Access Level:** Internet access only (or restricted local printing ports).
+- **Access Policy:** Isolated from primary workstations. If an unpatched wireless security camera is infected with Mirai-style botnet malware, it remains isolated on its own subnet and cannot pivot into payroll laptops or file storage.
+
+> **Illustrative VLAN Tag Example:** If you configure VLANs on capable business equipment, you might assign IDs such as *VLAN 10 for Corporate*, *VLAN 20 for Guests*, and *VLAN 30 for IoT*. Note that these numbers are purely illustrative examples rather than fixed standards. Any numbering scheme supported by your router is valid; what matters is the firewall rules restricting traffic between the subnets.
+
+### Handling Printers, Cameras, and VoIP in a Segmented Network
+A frequent challenge for small businesses is how to handle shared office equipment across isolated networks:
+
+- **Wireless Printers:** If a wireless printer is placed on an isolated guest or IoT network, corporate workstations will not be able to discover or send print jobs to it by default.
+  - *On basic consumer routers:* Keep the printer on the primary corporate network, but change its default web administration password, disable its remote cloud printing features, and update its firmware regularly. Alternatively, connect the printer directly to a computer via USB.
+  - *On VLAN-capable business routers:* Place the printer on the IoT/hardware VLAN and create a unidirectional firewall rule that allows traffic from the corporate subnet to the printer on printing ports (such as TCP port 9100 for RAW printing or TCP port 631 for IPP), while blocking the printer from initiating any new connections back into corporate workstations.
+- **Security Cameras & Smart TVs:** These devices should never reside on the primary corporate network. Keep them on the isolated IoT network with UPnP disabled and ensure default administrative passwords are changed immediately upon installation.
+- **VoIP Desk Phones:** On advanced networks, VoIP hardware is typically assigned to a dedicated Voice VLAN with Quality of Service (QoS) prioritization enabled on the router to maintain call quality while keeping voice traffic separated from workstation subnets.
+
+---
+
+## 4. Disabling Risky Legacy Features: WPS and UPnP
+
+Consumer routers frequently enable convenience features that introduce severe security vulnerabilities into an office environment.
+
+### Disable Wi-Fi Protected Setup (WPS)
+WPS was designed to let users connect devices to a network by pressing a physical button on the router or entering an 8-digit PIN printed on the device.
+- **The Vulnerability:** The 8-digit PIN design has a fundamental architectural flaw. The router verifies the first four digits and the last three digits separately (the eighth digit is a checksum). This reduces the number of possible combinations from 100 million to just 11,000, allowing an attacker parked outside your office to brute-force the PIN in less than two hours using automated tools like Reaver.
+- **Action:** Open your router's wireless settings, locate **WPS (Wi-Fi Protected Setup)**, and set it to **Disabled**. Always connect devices by entering the full WPA2/WPA3 passphrase manually.
+
+### Disable Universal Plug and Play (UPnP)
+UPnP allows programs on connected devices (such as gaming consoles, peer-to-peer software, or smart cameras) to automatically open ports in the router's firewall without requiring administrator intervention.
+- **The Vulnerability:** If an employee's computer or a smart device is infected with malware, UPnP allows that malware to open an incoming listening port on your router's public firewall, creating a direct backdoor into your internal network from the internet without your knowledge.
+- **Action:** Open the router's **Firewall**, **NAT**, or **Advanced Network** settings, locate **UPnP**, and toggle it to **Disabled**.
+
+---
+
+## 5. Router Firmware Updates and Lifecycle Management
+
+A wireless router is not just a passive radio; it is a full-fledged computer running an operating system (usually embedded Linux). Like any computer, routers contain software bugs and security vulnerabilities that require ongoing patches.
+
+### The Threat of Outdated Routers
+Cybercriminals actively scan the internet for known router vulnerabilities to hijack small-business bandwidth, inject malicious advertisements into unencrypted web sessions, or enslave routers into criminal botnets. 
+
+The Cybersecurity and Infrastructure Security Agency (CISA) routinely warns that unpatched edge routers are primary targets for foreign threat actors and ransomware affiliates seeking an initial foothold.
+
+### Router Maintenance Best Practices
+1. **Enable Automatic Firmware Updates:** If your router supports automatic firmware updates, turn the feature on and schedule installation during non-business hours (e.g., Sunday at 3:00 AM).
+2. **Manual Quarterly Checks:** If automatic updates are not supported, set a recurring calendar reminder to log into the router dashboard once every quarter, check for available firmware updates, and apply them promptly.
+3. **Retire End-of-Life (EOL) Hardware:** When a router manufacturer stops releasing security updates for an older hardware model, that device becomes permanently vulnerable. Never operate an end-of-life router in a business environment. If a device has not received a firmware update in more than two years, replace it with a modern supported model.
+4. **Reboot Periodically:** Schedule a monthly reboot. Many non-persistent memory-resident malware strains are purged upon a reboot, though re-infection can occur if firmware remains unpatched.
+
+---
+
+## 6. DNS-Level Threat and Content Filtering on the Router
+
+The Domain Name System (DNS) converts human-friendly web addresses (like `bank.com`) into computer-readable IP addresses. By default, routers use whichever DNS servers are assigned by your internet service provider.
+
+By changing the router's upstream DNS servers to a security-focused DNS service, you can automatically block malware domains, phishing sites, and deceptive web traffic across **every device connected to your office Wi-Fi**—without installing software on individual machines.
+
+### Recommended Free Security DNS Resolvers for Small Business
+Configure these IP addresses in your router's **WAN / Internet / DNS Settings**:
+
+1. **Cloudflare 1.1.1.2 / 1.0.0.2 (Malware Blocking):**
+   - Automatically blocks resolution for known malicious, phishing, and malware-hosting domains.
+   - High speed and global infrastructure with strict privacy protections.
+   - For family/child protection (blocking malware and adult content), use `1.1.1.3` and `1.0.0.3`.
+2. **Quad9 (`9.9.9.9` / `149.112.112.112`):**
+   - Non-profit, security-focused recursive DNS service operated in Switzerland.
+   - Aggregates threat intelligence from dozens of cybersecurity organizations and CERTs worldwide to block malicious domains in real time.
+3. **NextDNS:**
+   - Provides customizable cloud-based DNS filtering with analytics, ad-blocking, and threat logging for small teams.
+
+When configured on your main router, any laptop, smartphone, or smart device that attempts to resolve a known malicious phishing link or ransomware command-and-control server will receive a blocked response immediately. For broader email threat defense, see our guide to [small business phishing protection](/guides/small-business-phishing-protection).
+
+---
+
+## 7. Physical Security of Network Equipment
+
+Technical settings are useless if an unauthorized individual can physically access your networking hardware.
+
+### Physical Equipment Risks
+- **The Hardware Reset Button:** Almost all routers have a recessed physical reset pinhole. Anyone with physical access can press this button for ten seconds with a paperclip, wiping all your security configurations, restoring factory default settings, and opening the network.
+- **Physical Ethernet Cable Insertion:** An opportunistic contractor, delivery person, or cleaning crew member could plug an unauthorized miniature computer (such as a Raspberry Pi configured as a remote backdoor) directly into an empty LAN port behind your reception desk.
+
+### Practical Physical Safeguards
+- House your primary modem, router, switches, and backup drives in a locked telecom cabinet, utility closet, or restricted office room.
+- Never place networking equipment in public waiting rooms, reception hallways, or under unattended front desks.
+- Disable unused physical ethernet jacks in open office areas or conference rooms using your managed switch interface or physical port locks.
+
+---
+
+## Common Wi-Fi Security Mistakes Small Businesses Make
+
+- **Hiding the SSID Instead of Using Strong Encryption:** Disabling "SSID Broadcast" (making the network "hidden") does **not** hide your network from attackers. Any free Wi-Fi scanner software detects hidden networks immediately when authorized devices connect. Hiding the SSID creates operational headaches for staff while providing zero cryptographic protection. Focus on WPA3/WPA2-AES encryption with a long passphrase instead.
+- **Relying on MAC Address Filtering:** MAC address filtering (whitelisting approved hardware addresses) is easily defeated. Hardware MAC addresses are transmitted unencrypted over the air; an attacker with a free wireless card can sniff an authorized MAC address in thirty seconds and spoof it on their own laptop.
+- **Posting the Corporate Wi-Fi Password on a Whiteboard:** If your conference room or breakroom whiteboard displays the password to your primary corporate network, visiting vendors and guests will inevitably connect their personal, unmanaged phones to your corporate subnet. Only post credentials for the isolated Guest network.
+- **Using Weak Consumer Mesh Systems with No Guest Isolation:** Some basic consumer mesh extenders repeat the main network without extending guest network policies, inadvertently leaking internal network access across remote parts of the office.
+- **Failing to Rotate Passwords After Staff Departures:** If a departing employee with administrative access knows the primary office Wi-Fi key, rotate the network passphrase. Follow our [employee offboarding security checklist](/guides/employee-offboarding-security-checklist) for coordinating password rotation across office systems.
+
+---
+
+## Security Tools and Hardware to Consider
+
+When upgrading or replacing an office Wi-Fi setup, consider small-business hardware designed specifically for secure segmentation:
+
+- **Small Business Wi-Fi Systems (Ubiquiti UniFi, TP-Link Omada, Asus ExpertWiFi):** Dedicated business routers that provide clean web and cloud dashboards for creating isolated VLANs, setting up bandwidth-throttled guest portals, and managing multiple access points without complex command-line configuration.
+- **Secure Recursive DNS Resolvers (Cloudflare 1.1.1.2, Quad9, NextDNS):** Free or low-cost DNS filtering services that block malicious domains at the gateway level.
+- **Business Password Managers (1Password, Bitwarden):** Essential for storing 25+ character router administrative passphrases and long WPA3 network security keys securely.
+- **Hardware Security Keys (YubiKey):** Provides phishing-resistant multi-factor authentication for administrators logging into cloud-managed networking portals. Follow our [MFA for small businesses guide](/guides/mfa-for-small-businesses) for hardware token rollout steps.
+
+---
+
+## When to Get Professional IT Help
+
+While basic router configuration can be completed in an afternoon, you should engage a qualified Managed Service Provider (MSP) or network consultant if:
+- Your office spans multiple floors, exceeds 5,000 square feet, or requires multiple wired access points with seamless roaming.
+- You process payment cards on your office network and must demonstrate formal **PCI-DSS Compliance** (which legally mandates strict firewall segmentation between payment terminals and all other traffic).
+- You need to configure 802.1X (WPA3-Enterprise) authentication integrated with Microsoft Entra ID or Google Workspace credentials.
+- You suspect an unauthorized device is currently connected to your network and sniffing internal business data. Review our [small business incident response plan](/guides/small-business-incident-response-plan) for containment steps.
+
+For a comprehensive overview of small-business operational security, consult our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist).
+
+---
+
+## Sources and Further Reading
+
+- [NIST SP 800-153: Guidelines for Securing Wireless Local Area Networks (WLANs)](https://csrc.nist.gov/publications/detail/sp/800-153/final)
+- [CISA: Secure Your Business — Protect Your Wireless Networks](https://www.cisa.gov/audiences/small-and-medium-businesses)
+- [FTC: Cybersecurity for Small Business — Physical and Network Security](https://www.ftc.gov/business-guidance/small-businesses/cybersecurity)
+- [Wi-Fi Alliance: WPA3 Security Features and Specifications](https://www.wi-fi.org/discover-wi-fi/security)
+- [Cloudflare: 1.1.1.1 for Families (Malware and Threat Blocking)](https://developers.cloudflare.com/1.1.1.1/setup/)

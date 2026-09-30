@@ -1,0 +1,216 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+A domain name (such as `yourcompany.com`) is the single most critical asset in a small business's digital infrastructure. It controls corporate email delivery, website traffic, cloud tenant authentication, and customer trust. Yet in many small companies, domain security is treated as an afterthought: registered through a personal account by a long-departed web designer, protected by a simple password without multi-factor authentication, tied to an expiring credit card, and left unlocked against unauthorized transfers.
+
+If an attacker gains access to your domain registrar account or hijacks your Domain Name System (DNS) records, every other layer of cybersecurity is compromised simultaneously. The attacker can redirect your website to a malicious storefront, re-point your MX records to intercept incoming customer emails, issue legitimate SSL/TLS certificates in your name, and trigger password reset requests across your cloud accounting, banking, and Microsoft 365 services.
+
+Securing a business domain requires four straightforward, non-technical controls: locking the domain against transfers (ClientTransferProhibited), enforcing phishing-resistant multi-factor authentication on the registrar account, enabling automatic renewals backed by redundant payment cards, and verifying that the domain is legally registered to the corporate business entity rather than an individual contractor.
+
+<ArticleFigure
+  src="/images/guides/small-business-domain-security-layers.svg"
+  alt="Four defensive layers of small business domain security: Registrar account protection, transfer locks and auto-renewal, DNS record integrity and DNSSEC, and legal corporate ownership governance."
+  width={1200}
+  height={560}
+  caption="A comprehensive domain security program protects registrar access, enforces transfer locks, safeguards DNS records, and guarantees legal ownership."
+/>
+
+## Why the Domain Name Is Your Most Fragile Digital Perimeter
+
+Most cybersecurity guides focus on protecting end-user laptops and cloud mailboxes. While those controls are vital, they all rely on the foundational assumption that **your domain name points to your systems**.
+
+If an adversary compromises your domain registrar account (at providers like GoDaddy, Namecheap, Cloudflare, or Network Solutions), they gain control over your DNS zone file. With that access, an attacker can:
+
+1. **Reroute Corporate Email:** By altering your DNS Mail Exchanger (MX) records, the attacker can silently route all incoming company email to their own server. They can inspect sensitive customer inquiries, read contracts, and execute devastating invoice redirection scams. To understand the financial consequences of hijacked communications, read our guide on [business email compromise and payment fraud prevention](/guides/business-email-compromise-small-business-payment-fraud).
+2. **Bypass Password Resets:** Most cloud applications (including payroll, banking, CRM, and cloud storage) rely on email for password recovery. Once an attacker controls your incoming mail routing, they can initiate password resets on your administrative accounts and click the verification links directly.
+3. **Issue Fraudulent SSL/TLS Certificates:** Certificate Authorities verify domain ownership by checking DNS records or sending validation emails to the domain administrator. With DNS control, attackers can generate valid cryptographic certificates for your domain, allowing them to host indistinguishable fake portals that show a secure padlock in visitor browsers.
+4. **Steal Your Brand Permanently:** If an attacker transfers the domain out of your registrar to an uncooperative offshore hosting service, recovering the domain name can take months of expensive international arbitration or legal litigation through ICANN dispute mechanisms.
+
+Domain security is the root of your identity. Protecting it requires defense-in-depth across the registrar, DNS records, and corporate governance.
+
+---
+
+## The 10-Minute Domain Security Health Check
+
+You can evaluate the security of your business domain right now by checking these five essential safeguards:
+
+- [ ] **Transfer Lock Active:** Perform a free WHOIS or RDAP lookup on your domain (via ICANN's lookup tool at `lookup.icann.org`). Verify that the domain status shows `clientTransferProhibited` (Registrar Lock enabled).
+- [ ] **Registrar Multi-Factor Authentication:** Log into your domain registrar dashboard. Is multi-factor authentication (MFA) enabled using an authenticator app or hardware security key rather than SMS?
+- [ ] **Corporate Registration Email:** Is the account email on file an active, company-controlled administrative address rather than a personal Gmail/Yahoo address or a freelance contractor's account?
+- [ ] **Auto-Renewal & Redundant Payment:** Is Auto-Renew turned on, and does the registrar have a primary and secondary backup payment card on file?
+- [ ] **DNS Record Audit:** Are your MX, SPF, DKIM, and DMARC records locked and pointing strictly to your verified email providers?
+
+If any of these items are unverified or missing, follow the hardening steps below immediately.
+
+---
+
+## 1. Securing the Domain Registrar Account
+
+Your domain registrar (the company where you purchased and pay annual registration fees for your domain) holds the keys to your digital identity. Breaching a registrar account requires only an email address and a password unless modern safeguards are active.
+
+### Enforce Phishing-Resistant Multi-Factor Authentication
+A stolen or breached password must never be sufficient to access your domain dashboard.
+- Enable multi-factor authentication immediately across every registrar login.
+- Avoid SMS verification if the registrar supports stronger methods. SMS codes are susceptible to SIM swapping, where an attacker tricks a mobile carrier into porting an executive's phone number to their own device.
+- Use an authenticator app (such as Microsoft Authenticator or Google Authenticator) or, ideally, a physical FIDO2 hardware security key (such as a YubiKey). For rollout guidance, review our practical guide on [MFA for small businesses](/guides/mfa-for-small-businesses).
+- Store registrar backup recovery codes in an access-controlled company password vault, not in an unencrypted document on an employee laptop.
+
+### Use a Dedicated, Non-Personal Administrative Email
+Never register a corporate domain using a personal email address (such as `john.smith@gmail.com`) or an address tied to a freelance web designer.
+- **The Chicken-and-Egg Recovery Problem:** If you register `yourcompany.com` using the administrative address `admin@yourcompany.com`, what happens if your domain expires or your DNS is disrupted? Because the domain is offline, `admin@yourcompany.com` cannot receive incoming emails—meaning you cannot receive the registrar's password reset or verification codes to fix the problem.
+- **The Safe Practice:** Use a dedicated, highly secure administrative mailbox on a secondary trusted domain, or an enterprise email account with robust secondary recovery contacts managed by business owners.
+- Ensure that the administrative email address is known to at least two senior leaders in the business to avoid single-person lockout risks.
+
+### Use a Complex 25+ Character Passphrase
+Registrar accounts are infrequent touchpoints; employees might only log in once or twice a year. Because human memory fades, people often assign memorable, weak passwords to domain dashboards.
+- Generate a unique, random 25+ character passphrase using your business password manager.
+- Store the credentials inside a restricted administrative collection. Follow our [small business password manager guide](/guides/small-business-password-manager-guide) for vault access controls.
+
+---
+
+## 2. Domain Transfer Locks and Auto-Renewal Safeguards
+
+Domain theft often occurs silently through unauthorized domain transfers or opportunistic poaching after accidental expiration.
+
+### Enable the Registrar Transfer Lock
+The **Registrar Lock** (technically known in the EPP status protocol as `clientTransferProhibited`) is a free security feature provided by all ICANN-accredited domain registrars.
+- When the lock is enabled, the registrar will reject any request from another registrar to transfer the domain.
+- The domain cannot be transferred away until an authorized administrator logs into the dashboard, authenticates via MFA, and deliberately toggles the lock off.
+- **EPP / Authorization Codes:** To complete any transfer between registrars, two distinct requirements must be met: the domain must be unlocked, and the recipient registrar must be provided with the domain's unique **EPP Code** (also called an Auth-Code or Transfer Secret). Never share this code with outside marketing contractors or website designers. If an agency asks for the EPP code to "redesign your website," decline—web design only requires DNS record updates, never the transfer secret.
+- **Action:** Open your domain settings, locate **Transfer Lock** or **Registrar Lock**, and confirm it is toggled **ON**. If you ever need to transfer the domain to a new provider, turn the lock off temporarily and re-engage it immediately after the transfer completes.
+
+### Consider Registry Lock for High-Value Domains
+For high-profile organizations or domains critical to core operations, some registrars offer an enterprise safeguard called **Registry Lock**:
+- While a standard Registrar Lock (`clientTransferProhibited`) operates within your registrar account, Registry Lock is enforced directly at the authoritative top-level domain (TLD) registry operator (such as Verisign for `.com` and `.net`, or Nominet for `.uk`).
+- **Availability & Cost Constraints:** Registry Lock is not universally available for every domain extension or from every retail registrar. Its availability depends entirely on whether the specific TLD registry supports it and whether your chosen registrar offers the service. Where available, it is typically sold as an enterprise-tier security feature with significant annual fees (often $100 to $500+ per year) and requires multi-contact out-of-band manual phone and passphrase verification before any changes to nameservers or transfer status can occur.
+- For most small businesses, a properly secured registrar account with phishing-resistant MFA, an active standard Registrar Lock, and auto-renew provides robust protection without enterprise registry overhead.
+
+### Safeguarding Against Accidental Expiration
+One of the most common ways small businesses lose their domain is not through hacking, but through accidental billing expiration:
+1. The company credit card on file expires or is replaced after a fraud alert.
+2. The registrar's automated renewal notices are sent to an unmonitored inbox or flagged as spam.
+3. The domain enters the grace period, expires, and is purchased within seconds by automated domain drop-catchers who ransom the domain back to the business for thousands of dollars or convert it into a malware-distributing spam site.
+
+**Practical Renewal Defenses:**
+- **Turn On Auto-Renew:** Ensure the automatic renewal toggle is active for all production domains.
+- **Maintain Redundant Payment Methods:** Add a primary credit card and a secondary backup credit card to your registrar billing profile.
+- **Multi-Year Registration Buffer:** Do not register business-critical domains for only one year at a time. Register production domains for **5 to 10 years** in advance. The annual cost of a domain ($10 to $30) is negligible compared to the operational disruption of an accidental lapse.
+
+---
+
+## 3. DNS Record Integrity and DNSSEC
+
+The Domain Name System translates your domain into the server addresses that run your business. Protecting the integrity of your DNS zone file ensures that traffic reaches your legitimate servers.
+
+### Understanding DNS Record Types and Risks
+Every small business domain contains critical resource records:
+- **A and CNAME Records:** Point your website (`www.yourcompany.com`) to your web hosting provider or e-commerce platform.
+- **MX Records:** Point your email traffic to your cloud email provider (such as Microsoft 365 or Google Workspace). If an unauthorized change alters your MX records, your email is diverted instantly. For tenant integration guidelines, review our [Microsoft 365 security guide](/guides/microsoft-365-security-small-business).
+- **TXT Records (SPF, DKIM, DMARC):** Prove to outside mail servers that your domain legitimately sent an email. If an attacker deletes or weakens these records, they can send spoofed emails impersonating your executives with high deliverability.
+
+### Guard Against Subdomain Takeovers ("Dangling CNAMEs")
+Small businesses frequently experiment with third-party cloud tools: creating a subdomain like `help.yourcompany.com` pointing to Zendesk, or `shop.yourcompany.com` pointing to Shopify.
+- If you cancel the subscription with the third-party service but **forget to delete the CNAME record** in your DNS dashboard, that record becomes "dangling."
+- An external attacker can sign up for a new account on that same service, claim your abandoned subdomain name, and host fraudulent content under your trusted corporate domain name.
+- **Action:** Regularly audit your DNS zone file and delete CNAME or A records pointing to decommissioned services, retired marketing landing pages, or legacy servers.
+
+### Enable DNSSEC (Domain Name System Security Extensions)
+Under standard DNS, lookup requests and responses are transmitted in unencrypted plain text without cryptographic verification. An attacker on the local network (such as a compromised Wi-Fi router) or an upstream network path can perform **DNS cache poisoning** or spoofing, tricking an employee's computer or client device into believing that `yourcompany.com` lives at an attacker-controlled IP address.
+- **What DNSSEC Does:** DNSSEC provides cryptographic authentication and data integrity for signed DNS data. When an authoritative DNS server responds to a query, it attaches a cryptographic digital signature (RRSIG). Validating recursive DNS resolvers trace this signature back through the trust chain to the root DNS zone, verifying that the DNS response originates from the legitimate authoritative server and has not been altered, forged, or intercepted in transit.
+- **What DNSSEC Does NOT Do (Critical Boundary):** DNSSEC does **not** make your DNS records permanently immutable, nor does it prevent an attacker who has compromised your registrar or DNS management account from making authorized changes. If an attacker obtains your registrar login credentials, they can log into the control panel, modify your DNS records, or disable DNSSEC entirely. DNSSEC protects the validation path between DNS resolvers and your authoritative records; strong registrar account security (MFA and transfer locks) protects the records themselves.
+- **How to Enable:** Most modern authoritative DNS providers (including Cloudflare, AWS Route 53, and major registrars) offer straightforward DNSSEC activation. Turn it on in your DNS control panel and publish the corresponding Delegation Signer (DS) record at your registrar.
+
+---
+
+## 4. Legal Ownership, Agency Governance, and Offboarding
+
+A surprising number of small business domain disputes originate not from malicious cybercriminals, but from internal contractual breakdowns between businesses, freelance web designers, and former employees.
+
+### The "Freelancer Hostage" Scenario
+A typical small business hires an external web agency or freelance designer to build their first website. To make things easy, the freelancer registers the domain under their own personal GoDaddy or Namecheap account using their personal credit card, invoicing the business as part of the project fee.
+
+Three years later:
+- The business decides to switch marketing agencies or the freelancer stops responding to emails.
+- The business needs to update DNS records for Microsoft 365 or renew the domain.
+- The freelancer claims they "own" the domain, demands thousands of dollars to release it, or has simply disappeared, leaving the business with no legal or technical control over its primary brand.
+
+### Ensuring Legal Corporate Ownership
+1. **The Registrant Must Be the Business Entity:** Look up your domain's WHOIS data. The **Registrant Organization** must explicitly list the legal name of your business (e.g., `Acme Consulting LLC`), not an individual person or external marketing agency. Under ICANN rules, the Registrant Organization holds ultimate legal authority over the domain.
+2. **Dedicated Corporate Registrar Account:** Always create the registrar account directly in your company's name. If an outside agency needs to manage DNS records, invite them as a **Delegated User** or **Technical Contact** with restricted permissions; never hand them the master login credentials.
+3. **Audit Domain Access During Employee Offboarding:** When an IT lead, office manager, or web administrator leaves the company, verify that they did not register domains using their personal email and remove their delegated access from your registrar dashboard immediately. Follow our structured [employee offboarding security checklist](/guides/employee-offboarding-security-checklist) to coordinate access revocation.
+
+---
+
+## 5. WHOIS Privacy and Protection
+
+When a domain is registered, ICANN historically required registrars to publish the registrant's name, physical address, phone number, and email address in a publicly accessible database called WHOIS.
+
+While global privacy regulations (such as GDPR) have restricted the display of personal data in many jurisdictions, unmasked WHOIS records remain a frequent source of intelligence gathering for attackers:
+- Attackers query WHOIS records to identify who administers the domain, what phone carrier they use, and which email address to target with sophisticated spear-phishing campaigns.
+- Spammers scrape public registration records to flood corporate phone numbers and inboxes with deceptive "domain expiration notices" designed to trick owners into transferring their domain to fraudulent registrars.
+
+**Action:** Ensure that **WHOIS Privacy Protection** (often called Domain Privacy, PrivacyGuard, or WhoisGuard) is enabled on all corporate domains. Most reputable modern registrars provide WHOIS privacy for free.
+
+---
+
+## What to Do If Your Domain Name Is Hijacked
+
+If you discover that your domain has been transferred without authorization or your DNS records have been maliciously re-pointed, every minute counts:
+
+1. **Step 1: Contact Your Registrar's Emergency Fraud Team**
+   - Call your registrar's emergency support line immediately and request transfer to the **Fraud and Abuse Department**.
+   - Report an unauthorized transfer or account takeover. Request that they immediately lock the domain at the registry level to prevent further hops between foreign registrars.
+2. **Step 2: Provide Proof of Corporate Identity**
+   - ICANN-accredited registrars have emergency verification procedures to restore hijacked domains. Be prepared to provide corporate registration documents, tax identification records, notarized proof of identity, and historical billing receipts showing proof of original purchase.
+3. **Step 3: Secure Your Email and Cloud Accounts**
+   - If an attacker has changed your MX records, assume that all incoming email is currently compromised.
+   - Do not send sensitive incident response communications or recovery requests through your primary domain email. Use a secure offline communication channel. Follow our [small business incident response plan](/guides/small-business-incident-response-plan) for out-of-band crisis protocols.
+4. **Step 4: Revoke and Reissue SSL/TLS Certificates**
+   - If the attacker controlled your DNS even temporarily, they may have issued cryptographic certificates for your domain. Work with your hosting or certificate provider to revoke existing certificates and issue fresh keys once domain control is restored.
+5. **Step 5: File ICANN and Law Enforcement Reports**
+   - If the registrar is uncooperative or the domain was moved to an offshore host, file an **Unauthorized Transfer Complaint** under ICANN's Registrar Transfer Dispute Resolution Policy (TDRP).
+   - In the United States, file an incident report with the FBI's Internet Crime Complaint Center at [ic3.gov](https://www.ic3.gov) and notify local law enforcement.
+
+---
+
+## Common Domain Security Mistakes Small Businesses Make
+
+- **Using the Same Password for the Registrar and Email:** If your email password is the same as your domain registrar password, a single credential leak compromises both systems simultaneously.
+- **Ignoring Registrar Emails as Spam:** Registrars send mandatory annual ICANN contact verification emails. If these emails bounce or are ignored for extended periods, registrars are legally required to suspend the domain.
+- **Registering Domains Under Personal Free-Mail Accounts:** Storing a six-figure business asset in a personal Gmail account protected only by an easily guessable password creates catastrophic business vulnerability.
+- **Allowing Marketing Agencies Full Account Ownership:** Permitting an outside vendor to register your core domain in their own account gives them complete leverage over your business during contractual disagreements.
+- **Forgetting Secondary Domains and Brand TLDs:** If your primary domain is `mycompany.com`, but you also own `mycompany.net` or `mycompany.org`, ensure those secondary domains have the exact same transfer locks and auto-renewal safeguards. Neglected secondary domains are prime targets for lookalike phishing domains. Review our [phishing protection guide](/guides/small-business-phishing-protection) for domain impersonation risks.
+
+---
+
+## Security Tools and Registrars to Consider
+
+When evaluating where to register and manage corporate domain assets, prioritize providers that treat domain security as enterprise infrastructure:
+
+- **Enterprise-Grade Registrars (Cloudflare Registrar, Namecheap, Google Domains / Squarespace, GoDaddy Business Protection):** Look for registrars that provide free WHOIS privacy, mandatory two-factor authentication with hardware key support, free DNSSEC, and dedicated account locking.
+- **Hardware Security Keys (YubiKey):** The ultimate defense against registrar phishing. Enforcing a physical hardware key on registrar administrator logins renders stolen passwords completely useless.
+- **Business Password Managers (1Password, Bitwarden):** Essential for generating 25+ character random passphrases for registrar portals and securely sharing access among business partners.
+- **DNSSEC-Capable DNS Hosting (Cloudflare, AWS Route 53):** Provides fast, global, cryptographically signed DNS resolution that protects customers and employees from cache poisoning attacks.
+
+---
+
+## When to Get Professional IT or Legal Help
+
+Engage qualified cybersecurity specialists or intellectual property legal counsel if:
+- Your domain was transferred to a foreign registrar without your authorization and standard support tickets have failed to halt the transfer.
+- An ex-partner, former employee, or terminated agency refuses to transfer ownership of your corporate domain.
+- A competitor or malicious actor has registered confusingly similar typo-squatting domains (`your-cornpany.com`) to intercept client payments, requiring a formal **Uniform Domain-Name Dispute-Resolution Policy (UDRP)** complaint.
+- You operate in a heavily regulated sector requiring formal DNSSEC compliance and high-availability Anycast DNS architecture.
+
+To verify how domain protection fits into your broader organizational defense strategy, consult our foundational [Small Business Cybersecurity Checklist](/guides/small-business-cybersecurity-checklist).
+
+---
+
+## Sources and Further Reading
+
+- [ICANN: Beginner's Guide to Domain Names and Transfer Policies](https://www.icann.org/resources/pages/beginners-guides-2012-03-06-en)
+- [NIST SP 800-81-2: Secure Domain Name System (DNS) Deployment Guide](https://csrc.nist.gov/publications/detail/sp/800-81/2/final)
+- [CISA: Understanding and Securing the Domain Name System](https://www.cisa.gov/resources-tools/resources/domain-name-system-dns-security)
+- [ICANN: Know Your Rights with Domain Name Transfers (TDRP)](https://www.icann.org/resources/pages/dispute-resolution-2012-02-25-en)
+- [Cloudflare: What Is DNSSEC and How Does It Protect Web Traffic?](https://www.cloudflare.com/learning/dns/dnssec/how-dnssec-works/)

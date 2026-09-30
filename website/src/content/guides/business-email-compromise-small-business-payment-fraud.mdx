@@ -173,7 +173,7 @@ Verify that email recovery phone numbers, secondary email addresses, and backup 
 
 ## Make Your Domain Harder to Spoof
 
-Email was originally designed without built-in mechanisms to verify the sender's identity. To prevent attackers from sending emails that display your exact domain name in the sender field, your domain administrator should configure three standard email authentication protocols in DNS:
+Email was originally designed without built-in mechanisms to verify the sender's identity. To prevent attackers from sending emails that display your exact domain name in the sender field, your domain administrator should configure three standard email authentication protocols in DNS (for complete guidance on securing registrar accounts and authoritative nameservers, review our guide on [small business domain name and DNS security](/guides/small-business-domain-name-security)):
 
 - **SPF (Sender Policy Framework):** A public DNS TXT record that lists the specific IP addresses and mail servers authorized to send email on behalf of your domain. Receiving mail servers check this list to verify that inbound messages come from an approved server.
 - **DKIM (DomainKeys Identified Mail):** A cryptographic signature attached to the header of outbound emails. Your mail server signs the message with a private key, and the recipient server verifies the signature using a public key published in your DNS. This proves the email was not altered or forged during transit.
