@@ -51,7 +51,7 @@ export default function ChecklistPage() {
           {/* Header row */}
           <header className="space-y-4">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge>Interactive Tool</Badge>
+              <Badge variant="primary">Interactive Tool</Badge>
               <span className="text-xs text-muted-foreground print:hidden">
                 Saved privately in your browser
               </span>
@@ -75,7 +75,7 @@ export default function ChecklistPage() {
                 >
                   Small Business Cybersecurity Checklist Guide
                 </Link>{" "}
-                for full explanations of each defense layer, background context, and official primary standards.
+                for full explanations of each defense layer, background context, and established security frameworks.
               </p>
             </div>
           </header>

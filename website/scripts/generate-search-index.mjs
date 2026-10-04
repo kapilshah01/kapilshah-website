@@ -198,14 +198,31 @@ function cleanMdxText(raw) {
     .trim();
 }
 
+function extractHeadings(raw) {
+  const lines = raw.split("\n");
+  const headings = [];
+  let idx = 1;
+  for (const line of lines) {
+    if (line.startsWith("## ")) {
+      const text = line.replace("## ", "").replace(/[#*`_\[\]()]/g, "").trim();
+      const id = `section-${idx}`;
+      headings.push({ id, text });
+      idx++;
+    }
+  }
+  return headings;
+}
+
 const searchItems = [];
 
 for (const g of guidesMetadata) {
   const filePath = path.join(guidesDir, g.file);
   let cleaned = "";
+  let headings = [];
   if (fs.existsSync(filePath)) {
     const raw = fs.readFileSync(filePath, "utf8");
     cleaned = cleanMdxText(raw);
+    headings = extractHeadings(raw);
   }
   searchItems.push({
     id: `guide-${g.slug}`,
@@ -221,6 +238,7 @@ for (const g of guidesMetadata) {
     type: "guide",
     href: `/guides/${g.slug}`,
     content: cleaned,
+    headings,
   });
 }
 
@@ -251,6 +269,11 @@ searchItems.push({
   type: "tool",
   href: "/checklist",
   content: checklistContent,
+  headings: [
+    { id: "section-1", text: "Baseline Progress Dashboard" },
+    { id: "section-2", text: "Filter Controls by Timeframe & Category" },
+    { id: "section-3", text: "Verification Checklist Controls" },
+  ],
 });
 
 // Add Small Business Hub
@@ -290,6 +313,11 @@ searchItems.push({
 const tsOutput = `// Auto-generated static search index for kapilshah.com.np
 // Zero runtime API calls, zero database, privacy-preserving client search.
 
+export interface TocHeading {
+  id: string;
+  text: string;
+}
+
 export interface SearchItem {
   id: string;
   slug: string;
@@ -304,6 +332,7 @@ export interface SearchItem {
   type: "guide" | "tool" | "page";
   href: string;
   content: string;
+  headings?: TocHeading[];
 }
 
 export const searchIndex: SearchItem[] = ${JSON.stringify(searchItems, null, 2)};
