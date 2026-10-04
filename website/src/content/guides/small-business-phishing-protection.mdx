@@ -68,13 +68,13 @@ Email authentication helps receiving mail systems evaluate whether a message cla
 - **DKIM (DomainKeys Identified Mail):** A sending system adds a digital signature that recipients can verify against the sending domain.
 - **DMARC (Domain-based Message Authentication, Reporting, and Conformance):** A domain publishes how receiving systems should handle messages that do not pass the relevant checks and can receive reports about them.
 
-NIST’s [Trustworthy Email guidance](https://www.nist.gov/publications/trustworthy-email-0) identifies SPF, DKIM, and DMARC as core mechanisms for authenticating a sending domain. For a small business, the practical step is to ask the person who manages your domain or email provider whether these records are configured correctly for the services that send mail on your behalf. Do not publish DNS records by guesswork: an incorrect change can disrupt legitimate email.
+NIST’s [Trustworthy Email guidance](https://www.nist.gov/publications/trustworthy-email-0) identifies SPF, DKIM, and DMARC as core mechanisms for authenticating a sending domain. For a small business, the practical step is to ask the person who manages your [domain name and DNS records](/guides/small-business-domain-name-security) or email provider whether these records are configured correctly for the services that send mail on your behalf. Do not publish DNS records by guesswork: an incorrect change can disrupt legitimate email.
 
 ## MFA and Password Managers Help Limit the Damage
 
 MFA adds an additional sign-in check beyond a password. It can make a stolen password less useful, especially when a stronger phishing-resistant method is available and supported. It does not make a fake message harmless, so staff should still verify unexpected sign-in prompts and never share one-time codes.
 
-A password manager helps people use a unique password for each service. It also reduces the need to type passwords manually. For a focused setup guide, see [Multi-Factor Authentication (MFA) for Small Businesses](/guides/mfa-for-small-businesses). Together, MFA, unique passwords, and cautious verification provide layers of protection rather than a single point of failure.
+A [business password manager](/guides/small-business-password-manager-guide) helps people use a unique password for each service. It also reduces the need to type passwords manually. For a focused setup guide, see [Multi-Factor Authentication (MFA) for Small Businesses](/guides/mfa-for-small-businesses). Together, MFA, unique passwords, and cautious verification provide layers of protection rather than a single point of failure.
 
 ## Safe Handling of a Suspicious Email
 

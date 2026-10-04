@@ -175,7 +175,7 @@ Configure these IP addresses in your router's **WAN / Internet / DNS Settings**:
 3. **NextDNS:**
    - Provides customizable cloud-based DNS filtering with analytics, ad-blocking, and threat logging for small teams.
 
-When configured on your main router, devices using your network's default DNS settings that attempt to resolve a known malicious phishing link or ransomware command-and-control server will receive a blocked response. Note that protective DNS does not block every malicious site, and devices or browsers using hardcoded DNS or encrypted DNS (such as DNS-over-HTTPS) can bypass router DNS unless outbound port 53 and known DoH endpoints are filtered at the router firewall. For broader email threat defense, see our guide to [small business phishing protection](/guides/small-business-phishing-protection).
+When configured on your main router, devices using your network's default DNS settings that attempt to resolve a known malicious phishing link or ransomware command-and-control server will receive a blocked response. Note that protective DNS does not block every malicious site, and devices or browsers using hardcoded DNS or encrypted DNS (such as DNS-over-HTTPS) can bypass router DNS unless outbound port 53 and known DoH endpoints are filtered at the router firewall. While protective DNS filters outbound web requests from office workstations, protecting your company's own public DNS records against hijacking requires domain-level controls. Review our guide to [small business domain name and DNS security](/guides/small-business-domain-name-security) for registrar locks and DNSSEC configuration. For broader email threat defense, see our guide to [small business phishing protection](/guides/small-business-phishing-protection).
 
 ---
 
