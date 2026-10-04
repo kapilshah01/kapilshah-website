@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SearchDialog } from "@/components/search/search-dialog";
+import { CookieNotice } from "@/components/privacy/cookie-notice";
 import { authorSchema, canonicalUrl, structuredData, websiteSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
@@ -48,6 +50,8 @@ export default function RootLayout({
         <SiteHeader />
         <div className="flex flex-1 flex-col">{children}</div>
         <SiteFooter />
+        <SearchDialog />
+        <CookieNotice />
       </body>
     </html>
   );
