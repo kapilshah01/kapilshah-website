@@ -169,7 +169,7 @@ If you discover that your domain has been transferred without authorization or y
 4. **Step 4: Revoke and Reissue SSL/TLS Certificates**
    - If the attacker controlled your DNS even temporarily, they may have issued cryptographic certificates for your domain. Work with your hosting or certificate provider to revoke existing certificates and issue fresh keys once domain control is restored.
 5. **Step 5: File ICANN and Law Enforcement Reports**
-   - If the registrar is uncooperative or the domain was moved to an offshore host, file an **Unauthorized Transfer Complaint** under ICANN's Registrar Transfer Dispute Resolution Policy (TDRP).
+   - If the registrar is uncooperative or the domain was moved without authorization, file an **ICANN Transfer Complaint** at [icann.org/compliance](https://www.icann.org/compliance). Request that your original registrar initiate a dispute under ICANN's **Transfer Dispute Resolution Policy (TDRP)** (which is an inter-registrar procedure). While filing initiates a formal investigation, it does not guarantee immediate restoration, making rapid registrar-level fraud escalation essential.
    - In the United States, file an incident report with the FBI's Internet Crime Complaint Center at [ic3.gov](https://www.ic3.gov) and notify local law enforcement.
 
 ---
@@ -188,8 +188,8 @@ If you discover that your domain has been transferred without authorization or y
 
 When evaluating where to register and manage corporate domain assets, prioritize providers that treat domain security as enterprise infrastructure:
 
-- **Enterprise-Grade Registrars (Cloudflare Registrar, Namecheap, Google Domains / Squarespace, GoDaddy Business Protection):** Look for registrars that provide free WHOIS privacy, mandatory two-factor authentication with hardware key support, free DNSSEC, and dedicated account locking.
-- **Hardware Security Keys (YubiKey):** The ultimate defense against registrar phishing. Enforcing a physical hardware key on registrar administrator logins renders stolen passwords completely useless.
+- **Enterprise-Grade Registrars (Cloudflare Registrar, Namecheap, Squarespace Domains, GoDaddy Business Protection):** Look for registrars that provide free WHOIS privacy, mandatory two-factor authentication with hardware key support, free DNSSEC, and dedicated account locking.
+- **Hardware Security Keys (YubiKey):** The ultimate defense against registrar phishing. Enforcing a physical hardware key on registrar administrator logins renders stolen passwords alone insufficient to access the account, protecting against remote credential stuffing and adversary-in-the-middle phishing.
 - **Business Password Managers (1Password, Bitwarden):** Essential for generating 25+ character random passphrases for registrar portals and securely sharing access among business partners.
 - **DNSSEC-Capable DNS Hosting (Cloudflare, AWS Route 53):** Provides fast, global, cryptographically signed DNS resolution that protects customers and employees from cache poisoning attacks.
 

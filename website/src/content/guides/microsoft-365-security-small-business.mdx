@@ -4,7 +4,7 @@ import { ArticleFigure } from "@/components/content/article-figure";
 
 Microsoft 365 powers email, document collaboration, and user identity for millions of small businesses. However, a default Microsoft 365 tenant is configured for maximum convenience and compatibility, not maximum security. Out of the box, users may be permitted to connect third-party OAuth applications, share documents via anonymous public web links, and access mailboxes using legacy authentication protocols that bypass multi-factor authentication.
 
-You do not need an enterprise cybersecurity team to harden Microsoft 365. Implementing seven core configurations—turning on Security Defaults or Conditional Access MFA, separating daily user accounts from administrator roles, blocking automatic external email forwarding, disabling user consent for unvetted third-party apps, restricting anonymous SharePoint file sharing, enabling the Unified Audit Log, and establishing an emergency break-glass account—protects small businesses against more than 90% of cloud credential stuffing, business email compromise, and data leakage attacks.
+You do not need an enterprise cybersecurity team to harden Microsoft 365. Implementing seven core configurations—turning on Security Defaults or Conditional Access MFA, separating daily user accounts from administrator roles, blocking automatic external email forwarding, disabling user consent for unvetted third-party apps, restricting anonymous SharePoint file sharing, enabling the Unified Audit Log, and establishing an emergency break-glass account—protects small businesses against the vast majority of cloud credential stuffing, business email compromise, and data leakage attacks (Microsoft security research consistently indicates that basic identity hygiene, led by MFA, mitigates over 99% of automated identity attacks).
 
 This guide provides practical, administrator-tested instructions based on current Microsoft Entra, Exchange Online, and Defender documentation.
 
@@ -256,7 +256,7 @@ Microsoft Defender for Office 365 provides automated analysis of incoming emails
 ## Security Tools to Consider for Microsoft 365
 
 - **FIDO2 Hardware Security Keys (YubiKey):** The gold standard for phishing-resistant MFA, particularly for administrators managing cloud tenants.
-- **Third-Party M365 Backup Solutions (Axcient, Veeam for M365, Datto):** Microsoft operates on a shared responsibility model. Microsoft guarantees service uptime, but does not protect against malicious insider deletion or ransomware encryption of OneDrive libraries. A dedicated M365 backup ensures point-in-time recovery.
+- **Independent M365 Backup Solutions (Axcient, Veeam for M365, Datto):** Microsoft 365 includes useful native recovery capabilities—including version history, multi-stage recycle bins, and the "Restore your OneDrive" feature that lets subscribers roll back file libraries within the previous 30 days. However, native recovery relies on the same tenant credentials and identity boundary. An independent backup provides isolated protection against tenant-wide administrator compromise, safeguards against malicious insider deletion, and satisfies longer retention requirements beyond Microsoft's built-in restore window. Microsoft 365 includes useful native recovery capabilities, but organizations with stronger retention, isolation, or disaster-recovery requirements should consider an independent backup strategy.
 - **Business Password Managers (1Password, Bitwarden):** Used to store complex administrative passphrases, break-glass credentials, and tenant recovery codes.
 
 ---
@@ -266,7 +266,7 @@ Microsoft Defender for Office 365 provides automated analysis of incoming emails
 - **Using a Single Licensed Global Admin for Everything:** Checking daily email and browsing the web with a Global Administrator account turns any phishing click into a company-wide crisis.
 - **Relying Exclusively on SMS for Admin MFA:** SMS codes are vulnerable to SIM swapping and interception. Use the Microsoft Authenticator app with number matching or a physical FIDO2 key.
 - **Leaving Inactive Accounts with Active Licenses:** Former employees who retain active logins months after departure represent both a significant security risk and wasted monthly subscription costs.
-- **Assuming Microsoft Backs Up Everything:** Microsoft retains deleted items in the Recycle Bin for a limited window (typically 14 to 93 days). It is not an archival or ransomware-proof backup solution.
+- **Assuming Microsoft Replaces an Archival Backup Strategy:** While Microsoft 365 provides native version history and built-in 30-day ransomware rollback through "Restore your OneDrive," deleted items leave the Recycle Bin after 14 to 93 days. It is not an isolated, long-term archival repository for organizations requiring strict historical retention or air-gapped recovery outside the cloud tenant.
 - **Neglecting Third-Party OAuth App Permissions:** Regularly audit enterprise applications in Entra ID to ensure inactive or suspicious web apps do not retain standing permissions to read your mailbox.
 
 ---
@@ -289,4 +289,6 @@ For a broader baseline of organizational security controls, review our foundatio
 - [Microsoft Learn: What Are Security Defaults in Microsoft Entra ID?](https://learn.microsoft.com/en-us/entra/fundamentals/security-defaults)
 - [Microsoft Learn: Manage Emergency Access Accounts in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access)
 - [Microsoft Learn: Turn on Auditing in Microsoft Purview](https://learn.microsoft.com/en-us/purview/audit-log-enable-auditing)
+- [Microsoft Learn: Restore your OneDrive](https://support.microsoft.com/en-us/office/restore-your-onedrive-fa231222-759d-4952-acef-7e4242a9ac8b)
+- [Microsoft: Microsoft Digital Defense Report](https://www.microsoft.com/en-us/security/security-insider/microsoft-digital-defense-report)
 - [CISA: Microsoft 365 Security Recommendations for Small and Medium Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses)
