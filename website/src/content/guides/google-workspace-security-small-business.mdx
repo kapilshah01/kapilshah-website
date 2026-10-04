@@ -1,0 +1,424 @@
+import { ArticleFigure } from "@/components/content/article-figure";
+
+## Quick Summary
+
+Google Workspace powers cloud email (Gmail), document collaboration (Google Drive, Docs, Sheets), and user identity for millions of small businesses, startups, and distributed teams. However, an out-of-the-box Google Workspace environment is designed for frictionless onboarding and rapid collaboration rather than strict boundary defense. By default, employees can authorize third-party OAuth web applications, generate public web links to sensitive Drive folders, and configure automatic email forwarding to external accounts without administrative oversight.
+
+You do not need a dedicated cybersecurity team or an expensive enterprise tier to secure Google Workspace. By implementing core native administrative controls—enforcing company-wide 2-Step Verification, isolating super administrator duties with free dedicated accounts, turning off automatic external Gmail forwarding, restricting unvetted third-party OAuth applications, limiting external Google Drive sharing, and setting up an emergency break-glass account—small businesses can neutralize the vast majority of credential stuffing, phishing, and payment diversion attacks. Primary security research from CISA and NIST consistently confirms that basic identity hygiene, anchored by multi-factor authentication, stops over 99% of automated account takeover attempts.
+
+This guide provides practical, administrator-tested instructions based directly on official Google Workspace Admin console documentation.
+
+<ArticleFigure
+  src="/images/guides/google-workspace-security-baseline.svg"
+  alt="Six core Google Workspace security baseline stages: Identity & 2SV, Gmail hardening, Drive sharing boundaries, Application OAuth controls, Endpoint hygiene, and Audit monitoring with offboarding."
+  width={1200}
+  height={560}
+  caption="A comprehensive Google Workspace security baseline coordinates cloud identity, mailbox hygiene, document sharing boundaries, and audit visibility."
+/>
+
+## Understanding Your Google Workspace License Capabilities
+
+Before making configuration changes, it is essential to understand which security controls your current Google Workspace subscription includes. Small businesses typically operate on one of three business editions:
+
+| Subscription Tier | Identity & 2SV Controls | Email & Collaboration Security | Device & Data Governance |
+|---|---|---|---|
+| **Google Workspace Business Starter** | Mandatory 2-Step Verification, Cloud Identity Free admin accounts, passkeys/security keys | Gmail spam/phishing filters, disable user auto-forwarding, domain-level Drive sharing boundaries (individual My Drive only; no Shared Drives), App access control | Basic Mobile Management (screen locks, selective remote account wipe); 30 GB storage/user |
+| **Google Workspace Business Standard** | Mandatory 2-Step Verification, Cloud Identity Free admin accounts | Same security baseline as Starter | Shared Drives (centralized organizational document ownership); 2 TB pooled storage/user |
+| **Google Workspace Business Plus** | Mandatory 2-Step Verification, session length controls | Same security baseline as Standard | **Google Vault** (retention, eDiscovery, legal holds); **Advanced Endpoint Management**; 5 TB pooled storage/user |
+| **Enterprise Editions (Enterprise Standard / Plus)** | Context-Aware Access (IP/location/device boundaries) | Secure/Multipurpose Internet Mail Extensions (S/MIME) | Security Investigation Tool (log query builder); Data Loss Prevention (DLP) rules |
+
+> **Note on Licensing:** If your business is on **Business Starter** or **Business Standard**, you can establish an exceptionally strong foundational security posture using the native controls included in your tier at zero extra licensing cost. However, security capabilities reflect edition boundaries: Business Starter does not include Shared Drives or centralized document ownership, and neither tier includes Google Vault compliance retention or automated Data Loss Prevention (DLP). You do not need an Enterprise subscription to protect passwords, stop payment diversion, isolate administrator access, or restrict external file sharing, but organizations with compliance mandates or complex data governance requirements will eventually need Business Plus or Enterprise.
+
+---
+
+## The 15-Minute Google Workspace Security Health Check
+
+If you are auditing your Google Workspace tenant right now, log into the [Google Admin console](https://admin.google.com) with Super Administrator credentials and verify these five core settings:
+
+1. **Verify 2-Step Verification Enforcement:**
+   - Go to **Menu** > **Security** > **Authentication** > **2-step verification**. Verify that **Enforcement** is set to **On** (or set to turn on following an active enrollment window).
+2. **Audit Super Administrator Accounts:**
+   - Go to **Menu** > **Directory** > **Users**. Click **Add a filter** > **Admin roles** > select **Super Admin**. Confirm that there are no more than 2 to 4 super administrators, and verify that none of them are everyday accounts used for routine web browsing or reading general email.
+3. **Verify External Email Forwarding Is Disabled:**
+   - Go to **Menu** > **Apps** > **Google Workspace** > **Gmail** > **End User Access**. Open **Automatic forwarding** and confirm that **Allow users to automatically forward email to another address** is unchecked.
+4. **Inspect Third-Party OAuth App Permissions:**
+   - Go to **Menu** > **Security** > **Access and data control** > **API controls**. Under **App access control**, click **Manage Third-Party App Access**. Confirm that unconfigured third-party applications are set to **Blocked** or **Limited**.
+5. **Check External Google Drive Sharing Defaults:**
+   - Go to **Menu** > **Apps** > **Google Workspace** > **Drive and Docs** > **Sharing settings**. Under **Sharing options**, verify that external sharing is restricted or that warnings are enabled when files are shared outside the organization.
+
+---
+
+## 1. Enforcing 2-Step Verification (2SV)
+
+Compromised passwords from credential dumps and deceptive sign-in pages represent the single largest entry point into small-business cloud accounts. Enforcing 2-Step Verification (2SV) ensures that an attacker cannot sign into an employee's mailbox or Drive even if they know the exact password. For foundational identity concepts, read our comprehensive guide on [MFA for small businesses](/guides/mfa-for-small-businesses).
+
+### What to Do
+Configure Google Workspace to mandate 2-Step Verification across all user accounts in the organization, establishing a reasonable enrollment grace period for new employees.
+
+### Why It Matters
+Phishing attacks designed for small businesses trick employees into entering credentials on fake login portals. With 2SV enforced, stolen credentials alone are useless to an attacker.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Security** > **Authentication** > **2-step verification**
+
+### Step-by-Step Configuration
+1. Select your top-level organizational unit (your company name) on the left panel so the policy applies to all accounts.
+2. Under **Enforcement**, check **Allow users to turn on 2-Step Verification**.
+3. Under **Enforcement date**, choose a realistic date (e.g., 7 to 14 days in the future) to give existing employees time to register their authenticator apps or security keys without being locked out.
+4. Under **New user enrollment period**, select **1 week** or **2 weeks**. This allows newly hired staff to sign in with their initial temporary password and register their 2SV method before enforcement takes effect.
+5. Under **Frequency**, consider selecting **Don't allow users to trust device** for administrative roles to require secondary verification on unfamiliar sessions.
+6. Under **Allowed methods**, configure authentication requirements based on method security:
+   - **Phishing-Resistant Methods:** Passkeys and physical FIDO2 hardware security keys (such as YubiKeys). These use origin-bound public-key cryptography that cannot be intercepted by adversary-in-the-middle (AiTM) reverse-proxy phishing attacks.
+   - **Verification-Code / App-Based Methods:** Google Authenticator (time-based one-time passwords / TOTP) and Google prompt on a registered mobile device. These protect against automated credential stuffing and avoid the SIM-swapping risks of SMS, but as verification-code methods, they do not provide cryptographic phishing resistance if a user is tricked into typing the code into an active proxy.
+   - **Policy Recommendation:** Choose **Any except verification codes via text or phone call** to eliminate vulnerable SMS/voice verification while allowing Google Authenticator and Google prompt. For privileged administrator accounts, Google Workspace also allows restricting allowed methods strictly to **Only security key**.
+7. Click **Save**.
+
+### What "Done" Looks Like
+Every active account in the organization has registered a verified secondary verification factor, and newly created accounts are required to register during onboarding before accessing corporate documents.
+
+### How to Verify It
+Go to **Directory** > **Users**. Click **Add a filter** > **2-Step Verification** > **Enrolled**. Confirm that all active team members display a green checkmark or enrolled status.
+
+### Common Mistake
+Enabling immediate enforcement on day one without an enrollment window. This immediately locks out existing staff who have not yet added a phone or authenticator app, forcing administrators into a cycle of manually generating backup codes.
+
+---
+
+## 2. Protecting Administrator Accounts: The Separation Principle & Cloud Identity Free
+
+The most frequent administrative risk in small businesses is using a single Google account for both routine daily communication and company-wide domain administration.
+
+### Why Everyday Admin Accounts Create Catastrophic Risk
+If the business founder uses `founder@company.com` to receive supplier invoices, open customer email attachments, sign into external web services, and simultaneously holds the **Super Admin** role:
+- A single successful phishing email or malicious link clicked during routine daily tasks gives an attacker immediate control over the entire Google Workspace environment.
+- The attacker can silently create new administrative users, exfiltrate company emails, download every file in Google Drive, alter DNS records, and lock the real owners out of their own domain.
+
+### The Two-Account Rule
+Every person who performs administrative duties must maintain **two distinct accounts**:
+1. **Daily Work Account (`john@company.com`):** Standard user account without administrator privileges. Used for sending everyday emails, scheduling meetings, and editing documents.
+2. **Dedicated Administrator Account (`admin.john@company.com`):** Assigned Super Admin or delegated administrator roles. Used exclusively for administrative configuration in `admin.google.com`, and signed out immediately upon completion.
+
+### How to Add Dedicated Admin Accounts for Free (Cloud Identity Free)
+Many small businesses avoid creating separate admin accounts because they assume they must purchase an extra Google Workspace subscription seat for each administrator.
+
+**This assumption is incorrect.** Google provides a **Cloud Identity Free** edition that can be added to your domain:
+
+- **What It Provides:** Directory identity management, 2-Step Verification policy enforcement, and administrative access to the Google Admin console (`admin.google.com`).
+- **What It Does NOT Provide:** Cloud Identity Free accounts **do not include Gmail, Google Calendar, Google Meet, or Google Drive cloud storage**. They provide directory authentication only—which is precisely what a dedicated administrator account needs.
+- **Quota & Licensing Boundaries:** Google typically allocates a starting pool of 50 free Cloud Identity licenses upon activation for eligible domains. This 50-user pool represents Google's current standard allocation, not an unconditional permanent entitlement or guarantee of unlimited free identities. If a domain ever requires more than its allocated quota, additional identity seats must be requested through Google Support.
+
+To set up dedicated admin accounts with Cloud Identity Free:
+1. In the Google Admin console, navigate to **Billing** > **Get more services** (or **Subscriptions**).
+2. Locate **Cloud Identity** and enable the **Cloud Identity Free** subscription.
+3. Under **Billing** > **License settings**, turn **Off** automatic Google Workspace license assignment for newly created users so new accounts do not unintentionally consume paid seats.
+4. Go to **Directory** > **Users** and create `admin.john@company.com`. Assign this user a **Cloud Identity Free** license (ensuring no paid Google Workspace license is assigned).
+5. Open the user profile, select **Admin roles and privileges**, and assign the **Super Admin** role.
+
+The administrator can now sign into `admin.google.com` to manage the domain securely without consuming a paid Gmail or Drive license. (Note: Because Cloud Identity Free accounts do not include a Gmail inbox, ensure that essential system notifications and security alerts configured in the Admin console are directed to an actively monitored mailbox or distribution group).
+
+### Administrator Hardening Best Practices
+- Maintain between **two and four Super Admins**. Having only one creates a catastrophic lockout risk if that person loses their phone; having more than four unnecessarily widens your attack surface.
+- Never assign Super Admin privileges to shared role accounts like `info@`, `support@`, or `hello@`.
+- Enforce the strongest practical MFA (such as a FIDO2 hardware key or passkey) on all administrator accounts.
+
+---
+
+## 3. Creating an Emergency "Break-Glass" Super Administrator
+
+What happens if your primary administrator loses their smartphone, leaves the company unexpectedly, or an administrative configuration error prevents standard sign-in? Without a pre-configured recovery path, regaining control of a locked Google Workspace domain requires submitting notarized business ownership documents to Google support—a process that can take days or weeks.
+
+A **break-glass account** is an emergency-access Super Admin account kept in reserve, strictly isolated from everyday operations.
+
+### Configuration Rules for the Emergency Account
+1. **Dedicated Cloud Identity:** Create a dedicated user (e.g., `emergency-admin@company.com`) using a Cloud Identity Free license (providing secure Admin console access without assigning a paid Google Workspace seat or Gmail inbox).
+2. **Never Used for Daily Operations:** This account must never be used for reading emails, calendar invites, or routine administration.
+3. **Long, High-Entropy Passphrase:** Generate a unique passphrase of at least 30 characters using random words. Follow our [small business password policy](/guides/small-business-password-policy) for construction guidelines.
+4. **Independent Phishing-Resistant MFA:** Register two physical FIDO2 hardware security keys (such as YubiKeys) directly to this emergency account. Store the primary key in a secure company physical safe and the backup key in an offsite executive lockbox.
+5. **No Personal Phone or Email Recovery:** Do not link the emergency account's recovery options to a personal Gmail account that could be deleted, hacked, or tied to a departed employee.
+6. **Sign-In Alert Monitoring:** Configure an automated alert so that any sign-in by this emergency account immediately dispatches a notification to company leadership. Since the account is never used during normal operations, any login indicates either a genuine crisis or an unauthorized intrusion.
+
+---
+
+## 4. Disabling Automatic Gmail External Forwarding
+
+One of the first actions cybercriminals take when they gain unauthorized access to a business mailbox is configuring an automatic email forwarding rule. This allows them to receive silent copies of every incoming and outgoing message—including customer invoices, wire transfer instructions, and password reset notices—without the employee ever noticing. This tactic is the foundation of business email compromise (BEC). Read our detailed guide on [business email compromise and payment fraud prevention](/guides/business-email-compromise-small-business-payment-fraud) to understand how attackers exploit forwarded messages.
+
+### What to Do
+Disable user-configured automatic email forwarding within mailbox settings across your entire Google Workspace domain, while retaining administrative mail-routing capabilities.
+
+### Why It Matters
+Allowing employees to configure automatic forwarding in their personal Gmail settings (such as sending copies to personal `@gmail.com` or `@yahoo.com` accounts) creates significant data leakage risks without administrative oversight. More dangerously, when a mailbox is compromised via phishing or stolen credentials, attackers frequently create mailbox-level forwarding rules to receive silent copies of invoices, wire notices, and customer communications.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Apps** > **Google Workspace** > **Gmail** > **End User Access**
+
+### Step-by-Step Configuration
+1. Select your top-level organizational unit on the left.
+2. Scroll to the **Automatic forwarding** card.
+3. Uncheck **Allow users to automatically forward email to another address**.
+4. Click **Save**.
+
+> **Scope of This Setting:** Disabling **Automatic forwarding** under *End User Access* specifically prevents individual users (or an attacker with mailbox access) from creating forwarding rules in their personal Gmail settings (**Settings** > **Forwarding and POP/IMAP**). It does **not** disable or restrict organization-level mail routing, compliance rules, or split-delivery configurations managed by administrators in the Admin console (**Menu** > **Apps** > **Google Workspace** > **Gmail** > **Routing**). Conversely, disabling user forwarding does not eliminate all mail-routing paths across the tenant—an administrator can still establish authorized routing, and if a Super Admin account is compromised, tenant-level routing rules must be audited separately.
+
+### What "Done" Looks Like
+The "Forwarding and POP/IMAP" tab in individual user Gmail settings no longer allows employees to add external forwarding destinations. Any existing user-configured auto-forwarding rules cease functioning immediately. Organization-level routing rules configured by administrators in the Admin console continue operating normally.
+
+### How to Verify It
+Sign into an ordinary staff mailbox, open **Settings** (gear icon) > **See all settings** > **Forwarding and POP/IMAP**. Verify that the option to add a forwarding address is disabled or displays a notice that forwarding is managed by your organization.
+
+### Common Mistake
+Assuming that disabling user auto-forwarding eliminates every possible mail-diversion vector. While this control effectively neutralizes mailbox-level forwarding created by compromised users or curious employees, it does not manage or prevent tenant-level transport rules. Administrators must still periodically audit organizational routing settings (**Gmail** > **Routing**) and content compliance rules to ensure unauthorized domain-level forwarding or dual-delivery rules have not been created.
+
+---
+
+## 5. Restricting Third-Party Application and OAuth Access
+
+A rapidly escalating threat against Google Workspace users is **OAuth consent phishing** (illicit consent grant attacks). Instead of stealing passwords, attackers send deceptive emails or web links asking employees to "Authorize" a seemingly harmless web application (such as a "PDF Converter", "AI Meeting Assistant", or "Doc Viewer").
+
+When an employee clicks "Allow":
+- The application receives an OAuth token granting it direct programmatic access to the employee's Gmail, Drive files, and contacts.
+- The attacker does not need the employee's password or 2SV code.
+- Resetting the employee's password does **not** revoke the app's access; the OAuth token remains active until an administrator explicitly revokes it.
+
+### What to Do
+Restrict third-party API access so that unvetted applications cannot access sensitive company data without administrator approval.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Security** > **Access and data control** > **API controls** > **App access control**
+
+### Step-by-Step Configuration
+1. Click **Manage Third-Party App Access**.
+2. Click **Settings** in the top-right corner.
+3. Under **Unconfigured third-party apps**, change the setting from *Allow users to access any third-party app* to:
+   - **Don't allow users to access any third-party app** (Most secure: blocks all unapproved apps), OR
+   - **Allow users to access only apps that request basic info** (Permits basic Sign-in with Google, but blocks access to Gmail, Drive, Contacts, and Calendar).
+4. Return to the **App access control** page and review the **Accessed apps** list. Identify apps currently connected across your domain.
+5. For recognized, business-essential applications (such as Slack, Zoom, or your CRM), set their status to **Trusted** or **Limited**. For unrecognized or suspicious tools, set their status to **Blocked**.
+6. Under **Apps pending review**, configure notification settings so administrators are alerted when an employee requests access to a legitimate business tool.
+
+### What "Done" Looks Like
+Employees attempting to connect unvetted web applications that request access to company files or mailboxes see an administrative prompt: *"Approval required: Contact your administrator to request access."*
+
+### How to Verify It
+Attempt to sign into an unvetted third-party tool using your Google Workspace account; verify that the connection is blocked unless explicitly approved in the Admin console.
+
+### Common Mistake
+Ignoring the "Accessed apps" list for months. Many small businesses find dozens of forgotten games, personal productivity tools, and browser extensions retaining active read-and-write permissions to corporate Google Drive documents.
+
+---
+
+## 6. Hardening Google Drive and Docs External Sharing
+
+Google Drive is built for seamless collaboration, but its default sharing settings make it dangerously easy for employees to share sensitive spreadsheets, payroll files, and customer lists publicly across the open internet.
+
+### Edition Boundaries: My Drive vs. Shared Drives
+Sharing controls and data-loss protections depend fundamentally on your Google Workspace license tier:
+- **Google Workspace Business Starter:** Does **not** include Shared Drives. Users store files strictly within individual "My Drive" workspaces. Administrators can configure domain-wide external sharing policies and link sharing defaults, but granular Shared Drive governance, centralized team-level file ownership, and per-drive access restrictions are unavailable.
+- **Google Workspace Business Standard & Business Plus:** Include **Shared Drives**, where documents are owned by the organization rather than individuals. This prevents document loss when staff depart and enables administrators to enforce dedicated sharing boundaries per Shared Drive (e.g., restricting managers from sharing files externally or preventing viewers from downloading, printing, or copying).
+- **Enterprise Editions:** Add automated **Data Loss Prevention (DLP)** scanning (which automatically detects, warns, or blocks external sharing of files containing credit cards, tax numbers, or custom compliance patterns) and **Trust Rules**.
+
+### The Risk of Public "Anyone with the link" Links
+When a document is shared using the **"Anyone with the link"** setting:
+- Anyone who obtains the web address can view, download, or copy the file without signing in.
+- The link can be forwarded, indexed by web scrapers, or exposed via browser extensions.
+- Your business cannot audit which individual person accessed or downloaded the proprietary data.
+
+### What to Do
+Set boundaries on external file sharing, disable anonymous public web links for sensitive organizational units, enforce sharing warning banners, and configure Shared Drive creation policies if your plan supports them.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Apps** > **Google Workspace** > **Drive and Docs** > **Sharing settings**
+
+### Step-by-Step Configuration
+1. Under **Sharing options**, select **Sharing outside of [Your Organization]**:
+   - For businesses collaborating only with trusted partner vendors, choose **Whitelisted domains** (allowing sharing only with specified client domains).
+   - For businesses needing broader client sharing, select **ON**, but ensure the following sub-settings are configured:
+     - Check **Warn users when sharing files outside of [Your Organization]**. This displays an alert prompt whenever an employee shares a document with an external email.
+     - Under *Access Checker*, select **Recipients only** or **Allowlisted domains**.
+2. Under **Link sharing**, change the default link behavior from *Anyone with the link* to **"Target audience"** (your organization) or **"Restricted"** (only specifically invited email addresses can open the file).
+3. Under **Shared Drive creation** *(Business Standard, Business Plus, and Enterprise only)*:
+   - If your plan supports Shared Drives, ensure that junior staff or contractors cannot create unmanaged Shared Drives that bypass organizational retention and sharing rules.
+   - For sensitive Shared Drives, open drive settings in Google Drive and uncheck *Allow people outside this organization to access files* and *Allow content managers to share folders*.
+4. Click **Save**.
+
+### What "Done" Looks Like
+Employees must explicitly invite specific external email addresses to collaborate on documents rather than creating anonymous public URLs. When sharing outside the company, users receive a clear visual confirmation warning. In organizations on Business Standard or higher, team files are secured in centralized Shared Drives with restricted external membership.
+
+---
+
+## 7. Gmail Safety Settings & Domain Authentication
+
+Email spoofing and executive impersonation remain the primary techniques used in wire fraud and vendor payment diversion scams. Google Workspace provides built-in safety filters that analyze incoming messages for deceptive tactics.
+
+### What to Do
+Enable Google's advanced anti-spoofing safety protections in Gmail and configure domain authentication records (SPF, DKIM, DMARC) at your domain registrar.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Apps** > **Google Workspace** > **Gmail** > **Safety**
+
+### Step-by-Step Configuration
+1. Open the **Spoofing and authentication** section:
+   - Check **Protect against domain spoofing based on similar domain names** (detects lookalike domains such as `c0mpany.com` vs `company.com`).
+   - Check **Protect against employee name spoofing** (detects when an outside email uses the CEO's display name with an external email address).
+   - Check **Protect against inbound emails spoofing your domain** (flags emails claiming to originate from your company that fail cryptographic domain verification).
+   - Check **Protect against unauthenticated emails** (flags messages lacking basic sender authentication).
+   - Choose whether flagged messages are placed in **Spam** or routed to an administrative **Quarantine** for inspection.
+2. Under **External recipients**, enable the warning setting so that Gmail displays a banner when employees compose or reply to emails containing external participants.
+3. **Enforce SPF, DKIM, and DMARC in DNS:**
+   - Configure SPF TXT records at your domain registrar (`v=spf1 include:_spf.google.com ~all`).
+   - Generate a 2048-bit DKIM key in **Apps** > **Google Workspace** > **Gmail** > **Authenticate email**, publish the TXT record in your DNS host, and click **Start authentication**.
+   - Publish a DMARC policy record (`_dmarc.yourdomain.com`).
+   - For complete DNS security, registrar lock protocols, and DNSSEC implementation, follow our detailed guide on [small business domain name and DNS security](/guides/small-business-domain-name-security) and review our foundational guide to [small business phishing protection](/guides/small-business-phishing-protection).
+
+### What "Done" Looks Like
+Emails attempting to impersonate company leadership or send unauthenticated messages using your brand name are flagged with clear warning banners or quarantined before reaching employee inboxes.
+
+---
+
+## 8. Device and Mobile Management (Basic Endpoint Hygiene)
+
+Employees routinely access business Gmail, Google Drive documents, and Google Chat on personal smartphones, tablets, and laptops. If a device is lost, stolen, or sold without being wiped, company data remains exposed to anyone with physical access.
+
+### What to Do
+Enable **Basic Mobile Management** across the organization to mandate screen locks and establish the capability to perform selective remote account wipes.
+
+### Why Basic Management Fits Small Businesses
+Unlike complex Mobile Device Management (MDM) platforms that require installing specialized management profiles and monitoring employee personal activities, Google Workspace **Basic Mobile Management**:
+- Requires **zero agent software** to be installed on employee phones.
+- Enforces a mandatory screen lock (PIN, password, or biometric).
+- Allows administrators to wipe **only corporate data** (Google account and synced work files) if a phone is lost, leaving the employee's personal photos, texts, and personal apps untouched.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Devices** > **Mobile and endpoints** > **Settings** > **Universal settings**
+
+### Step-by-Step Configuration
+1. Under **General** > **Mobile management**, verify that **Basic** is selected.
+2. Under **Password requirements**, check **Require users to set a password**. Specify minimum length (e.g., 6 digits or alphanumeric) and enable device screen lock timeouts.
+3. If an employee reports a lost phone or leaves the company:
+   - Navigate to **Devices** > **Mobile and endpoints** > **Devices**.
+   - Locate the user's device.
+   - Click **More** (three dots) > select **Wipe Account**.
+   - **Do not select "Wipe Device" on employee personal phones**, as that triggers a complete factory reset. Selecting **Wipe Account** cleanly removes corporate emails and Drive files while preserving personal data.
+
+For laptop hardening instructions covering Windows BitLocker and macOS FileVault encryption, review our dedicated guide on [small business work computer and laptop security](/guides/small-business-computer-laptop-security).
+
+---
+
+## 9. Employee Offboarding in Google Workspace: Step-by-Step
+
+Failing to de-provision departing employees cleanly is one of the most common causes of data exfiltration and orphaned account access in small businesses.
+
+Follow this operational sequence when an employee departs:
+
+1. **Change the Password and Suspend the Account:**
+   - Go to **Directory** > **Users** > select the user > click **Suspend user**. This immediately halts active email sync and prevents new logins.
+2. **Reset Sign-In Cookies:**
+   - On the user's profile page, select **Security** > **Sign-in cookies** > click **Reset**. This terminates active web browser sessions and mobile authorization tokens across all devices.
+3. **Revoke Connected Applications:**
+   - Under **Security** > **Connected applications**, revoke all third-party app access tokens.
+4. **Remove Recovery Details:**
+   - Delete any personal recovery phone numbers or recovery email addresses associated with the account so the departed individual cannot initiate an account recovery workflow.
+5. **Transfer Google Drive and Calendar Ownership:**
+   - Go to **Apps** > **Google Workspace** > **Drive and Docs** > **Transfer ownership**.
+   - Enter the departed employee's address in the *From* field and the manager or successor's address in the *To* field.
+   - Click **Transfer files**. All personal Drive files and upcoming calendar events are transferred cleanly to the new owner (this transfer is critical on Business Starter, where files are stored in individual My Drive accounts; on Business Standard and higher, files already maintained in Shared Drives remain with the organization automatically).
+6. **Preserve Email Communications Without Paying for an Idle License:**
+   - Rather than keeping a paid Google Workspace seat active for months, small businesses can preserve email continuity using one of two cost-effective approaches:
+     - **Option A (Google Groups / Collaborative Inbox):** Delete the user after data transfer, then create a Google Group using the former employee's email address (e.g., `sales.rep@company.com`). Add the manager as a member. Incoming messages reach the manager without requiring a paid user license.
+     - **Option B (Google Vault Archive):** If your domain utilizes **Business Plus**, license the user with an Inactive/Archived User license to retain full mailbox searchability at reduced cost.
+7. **Unassign the Paid License:**
+   - Once all files and mailbox routings are verified, remove the paid Google Workspace license under **Billing** > **Licenses** to eliminate ongoing subscription charges.
+
+For an organization-wide offboarding blueprint covering hardware recovery and secrets rotation, follow our structured [Employee Offboarding Security Checklist](/guides/employee-offboarding-security-checklist).
+
+---
+
+## 10. Security Monitoring & the Alert Center
+
+Small-business administrators do not have time to review raw sign-in logs every day. The Google Workspace **Alert Center** provides an automated dashboard that flags anomalous security events requiring immediate attention.
+
+### Where to Find It
+In the [Google Admin console](https://admin.google.com):
+**Menu** > **Security** > **Alert Center**
+
+### Critical Alerts to Monitor
+1. **Compromised Password:** Triggered when Google detects an employee's password in a public data breach dump. The user should be prompted to reset their credentials immediately.
+2. **Suspicious Login Activity:** Triggered when a sign-in attempt occurs from an unfamiliar geographical location, unrecognized device, or unusual IP address.
+3. **User-Reported Phishing:** Alerts administrators when an internal user marks an incoming message as phishing, allowing the team to inspect the message and warn colleagues.
+4. **Super Admin Role Assigned:** Alerts leadership whenever a user account is granted administrative privileges, helping catch unauthorized privilege escalation.
+5. **Google Workspace Outage or Service Disruptions:** Provides official service health status updates directly from Google engineering.
+
+### How to Configure Alert Notifications
+1. Within the Alert Center, click the **Settings** (gear icon).
+2. Ensure that critical and high-severity alert notifications are forwarded to a monitored administrator distribution list or the dedicated break-glass alert inbox rather than an unmonitored personal mailbox.
+
+---
+
+## The Small-Business Google Workspace Security Baseline Checklist
+
+Use this summary table to verify that your Google Workspace environment satisfies all essential foundational controls:
+
+| Security Control | Admin Console Navigation Path | Recommended Setting | Est. Effort | Difficulty |
+|---|---|---|---|---|
+| **2-Step Verification** | `Security > Authentication > 2-step verification` | Enforced company-wide; 7-day grace period; app/key methods | 15 min | Beginner |
+| **Admin Privilege Separation** | `Billing > Subscriptions` + `Directory > Users` | Dedicated `admin.` accounts using Cloud Identity Free | 20 min | Beginner |
+| **Emergency Break-Glass** | `Directory > Users` + Hardware FIDO2 keys | 1 Cloud Identity Free admin; 30-char passphrase; physical keys | 25 min | Intermediate |
+| **Disable User Auto-Forwarding** | `Apps > Google Workspace > Gmail > End User Access` | Uncheck "Allow users to automatically forward email" (mailbox level) | 5 min | Beginner |
+| **Restrict Third-Party Apps** | `Security > Access and data control > API controls` | Block unconfigured apps; require admin review | 20 min | Intermediate |
+| **Google Drive Sharing Boundaries** | `Apps > Google Workspace > Drive and Docs > Sharing` | Restrict public links; warn on external share; govern Shared Drives (Standard+) | 10 min | Beginner |
+| **Gmail Spoofing Protections** | `Apps > Google Workspace > Gmail > Safety` | Protect against employee name and domain spoofing | 15 min | Beginner |
+| **Domain DNS Authentication** | Domain Registrar DNS + Gmail Admin | Configure SPF record, 2048-bit DKIM key, DMARC policy | 30 min | Intermediate |
+| **Basic Mobile Management** | `Devices > Mobile and endpoints > Settings` | Basic management enabled; screen lock mandated | 10 min | Beginner |
+| **Structured User Offboarding** | `Directory > Users` + Drive Transfer | Suspend user, reset sign-in cookies, transfer Drive files | 15 min | Beginner |
+
+To track your progress across your entire technology stack and generate a printable executive summary sheet for your records, use our [Interactive Small Business Cybersecurity Checklist](/checklist).
+
+---
+
+## When to Add Additional Security Tooling
+
+Native Google Workspace controls provide comprehensive defense against commodity phishing, credential reuse, and unauthorized data sharing. However, as an organization expands beyond 20–50 employees or enters regulated industries, specific security limitations may justify supplementary tools:
+
+### 1. Cloud-to-Cloud Independent Backups
+- **The Native Limitation:** Google Drive provides version history and a 30-day Trash bin, but Google Workspace is **not an independent immutable backup**. If a ransomware actor or rogue administrator deletes files or wipes a tenant, synced files can be permanently destroyed.
+- **When to Invest:** Businesses handling irreplaceable customer records, financial documents, or legal files should consider an independent cloud backup solution (such as Backblaze B2, AFI.ai, or SysCloud) that stores snapshot copies in an isolated cloud tenant with separate access credentials. Read our guide on [small business backup and ransomware protection](/guides/small-business-backup-ransomware-protection) for backup architecture rules.
+
+### 2. Phishing-Resistant FIDO2 Hardware Keys
+- **The Native Limitation:** Mobile phone prompts and authenticator apps are significantly safer than SMS, but sophisticated adversary-in-the-middle (AiTM) phishing reverse-proxies can still intercept real-time session tokens.
+- **When to Invest:** High-risk personnel—specifically business owners, finance controllers, and Super Admins—should use physical FIDO2 hardware keys (such as Yubico YubiKeys) for all administrative and banking sign-ins.
+
+### 3. Upgrading to Business Plus for Legal Retention
+- **The Native Limitation:** Business Starter and Standard plans do not include native litigation hold capabilities. If an employee deletes an email thread, it is permanently purged after 30 days.
+- **When to Invest:** If your business is subject to regulatory compliance (HIPAA, FINRA, legal discovery mandates), upgrade key accounts to **Business Plus** to activate **Google Vault** for immutable, search-indexed email retention.
+
+---
+
+## Related Guides & Resources
+
+- [Microsoft 365 Security for Small Businesses: Tenant Hardening](/guides/microsoft-365-security-small-business) — Complete hardening guide for organizations utilizing Microsoft cloud services.
+- [Multi-Factor Authentication (MFA) for Small Businesses](/guides/mfa-for-small-businesses) — Choosing, rolling out, and recovering secondary authentication methods.
+- [Business Email Compromise and Payment Fraud Prevention](/guides/business-email-compromise-small-business-payment-fraud) — Stopping altered invoice scams and wire fraud.
+- [Small Business Domain Name and DNS Security](/guides/small-business-domain-name-security) — Protecting registrar accounts, transfer locks, and DNSSEC.
+- [Employee Offboarding Security Checklist](/guides/employee-offboarding-security-checklist) — Step-by-step procedures to revoke access and protect company data when staff leave.
+- [Small Business Work Computer and Laptop Security](/guides/small-business-computer-laptop-security) — Full-disk encryption, least privilege, and endpoint patching.
+- [Interactive Small Business Cybersecurity Checklist](/checklist) — Track your baseline progress across 25 operational controls directly in your browser.
+
+---
+
+## Sources and Further Reading
+
+- [Google Workspace Admin Help: Deploy 2-Step Verification](https://support.google.com/a/answer/175197)
+- [Google Workspace Admin Help: Control which third-party & internal apps access Google Workspace data](https://support.google.com/a/answer/7281227)
+- [Google Workspace Admin Help: Manage external sharing for your organization](https://support.google.com/a/answer/60781)
+- [Google Workspace Admin Help: Disable automatic forwarding](https://support.google.com/a/answer/2368132)
+- [Google Workspace Admin Help: Set up Cloud Identity Free for administrator accounts](https://support.google.com/a/answer/7311601)
+- [Google Workspace Admin Help: Delete or remove a user from your organization](https://support.google.com/a/answer/1110339)
+- [CISA: Small and Medium-Sized Business Security Resources](https://www.cisa.gov/small-and-medium-sized-business-resources)
+- [CISA: Multi-Factor Authentication for Small Businesses](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication)
+- [NIST Special Publication 800-63B: Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html)

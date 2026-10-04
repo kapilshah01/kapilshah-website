@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" fill="none">
+  <!-- Card Background -->
+  <rect width="1200" height="560" rx="20" fill="#F8FAFC"/>
+  <rect x="1" y="1" width="1198" height="558" rx="19" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Header Section -->
+  <rect x="40" y="32" width="220" height="26" rx="6" fill="#CCFBF1"/>
+  <text x="50" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0F766E" letter-spacing="0.08em">TENANT HARDENING</text>
+  <text x="40" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#0F172A">Google Workspace Small Business Security Baseline</text>
+  <text x="40" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#64748B">Six practical tenant controls to protect cloud email, user identities, drive sharing, and business data against account takeover.</text>
+
+  <!-- Stage 1: Identity & 2SV -->
+  <g transform="translate(40, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#0F766E"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#CCFBF1"/>
+    <!-- Key icon -->
+    <circle cx="34" cy="42" r="6" stroke="#0F766E" stroke-width="2" fill="none"/>
+    <path d="M39 47L45 53M43 51L45 49" stroke="#0F766E" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">1. Identity</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0F766E">2-Step Verification</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Enforce 2SV company-wide</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Cloud Identity Free admins</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Separate daily vs admin</text>
+    <text x="214" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B"></text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Cloud-only break-glass</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F0FDFA"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0F766E">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">Neutralizes stolen</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#134E4A">employee passwords.</text>
+  </g>
+
+  <!-- Stage 2: Gmail & Mailbox Protection -->
+  <g transform="translate(232, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#0284C7"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#E0F2FE"/>
+    <!-- Mail icon -->
+    <rect x="23" y="33" width="22" height="16" rx="2" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M24 35L34 43L44 35" stroke="#0284C7" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">2. Mailbox</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0284C7">Gmail Hardening</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Disable auto-forwarding</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Name spoofing safety</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Enforce SPF/DKIM/DMARC</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• External recipient warning</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F0F9FF"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#0284C7">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#075985">Blocks BEC exfiltration</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#075985">and payment diversion.</text>
+  </g>
+
+  <!-- Stage 3: Drive & Collaboration -->
+  <g transform="translate(424, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#059669"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#D1FAE5"/>
+    <!-- Folder icon -->
+    <path d="M22 34C22 32.8954 22.8954 32 24 32H30L34 36H44C45.1046 36 46 36.8954 46 38V48C46 49.1046 45.1046 50 44 50H24C22.8954 50 22 49.1046 22 48V34Z" stroke="#059669" stroke-width="2" fill="none"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">3. Files &amp; Docs</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#059669">Drive Sharing Boundaries</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Restrict public links</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Allowlist partner domains</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Warn on external share</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Shared Drives for teams</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#ECFDF5"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#059669">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#065F46">Prevents accidental</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#065F46">public data exposure.</text>
+  </g>
+
+  <!-- Stage 4: App & OAuth Controls -->
+  <g transform="translate(616, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#D97706"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#FEF3C7"/>
+    <!-- App grid icon -->
+    <rect x="24" y="33" width="7" height="7" rx="1.5" stroke="#D97706" stroke-width="2" fill="none"/>
+    <rect x="37" y="33" width="7" height="7" rx="1.5" stroke="#D97706" stroke-width="2" fill="none"/>
+    <rect x="24" y="44" width="7" height="7" rx="1.5" stroke="#D97706" stroke-width="2" fill="none"/>
+    <rect x="37" y="44" width="7" height="7" rx="1.5" stroke="#D97706" stroke-width="2" fill="none"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">4. Applications</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#D97706">API &amp; OAuth Access</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Block unconfigured apps</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Restrict Gmail/Drive APIs</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Admin approval requests</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Audit accessed apps list</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#FFFBEB"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#D97706">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400E">Stops OAuth consent</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400E">phishing attacks.</text>
+  </g>
+
+  <!-- Stage 5: Endpoint & Devices -->
+  <g transform="translate(808, 136)">
+    <rect width="176" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="176" height="8" rx="4" fill="#7C3AED"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#EDE9FE"/>
+    <!-- Phone/laptop icon -->
+    <rect x="25" y="33" width="18" height="22" rx="3" stroke="#7C3AED" stroke-width="2" fill="none"/>
+    <line x1="31" y1="50" x2="37" y2="50" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">5. Devices</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#7C3AED">Endpoint Hygiene</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Basic mobile management</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Mandatory screen lock</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Selective remote wipe</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Endpoint verification</text>
+
+    <rect x="12" y="296" width="152" height="72" rx="6" fill="#F5F3FF"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#7C3AED">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#5B21B6">Protects lost hardware</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#5B21B6">without invading privacy.</text>
+  </g>
+
+  <!-- Stage 6: Alerts & Offboarding -->
+  <g transform="translate(1000, 136)">
+    <rect width="160" height="384" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <rect x="0" y="0" width="160" height="8" rx="4" fill="#DC2626"/>
+    
+    <rect x="16" y="24" width="36" height="36" rx="8" fill="#FEE2E2"/>
+    <!-- Shield/bell icon -->
+    <path d="M34 32C29 32 25 36 25 41C25 47 22 49 22 49H46C46 49 43 47 43 41C43 36 39 32 34 32Z" stroke="#DC2626" stroke-width="2" fill="none"/>
+    <circle cx="34" cy="52" r="2" fill="#DC2626"/>
+
+    <text x="16" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#0F172A">6. Audit &amp; Exit</text>
+    <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#DC2626">Monitoring &amp; Offboarding</text>
+
+    <text x="16" y="132" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Key Settings:</text>
+    <text x="16" y="154" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Alert Center routing</text>
+    <text x="16" y="174" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Reset sign-in cookies</text>
+    <text x="16" y="194" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Transfer Drive assets</text>
+    <text x="16" y="214" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748B">• Routing to group alias</text>
+
+    <rect x="12" y="296" width="136" height="72" rx="6" fill="#FEF2F2"/>
+    <text x="20" y="316" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#DC2626">CORE BENEFIT</text>
+    <text x="20" y="332" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#991B1B">Preserves records and</text>
+    <text x="20" y="346" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#991B1B">prevents orphan access.</text>
+  </g>
+</svg>
