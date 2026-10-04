@@ -2,8 +2,22 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 
 const groups = [
-  { title: "Content", links: [["Cybersecurity Guides", "/guides"], ["Small Business Security", "/small-business"], ["Start Here", "/start-here"]] },
-  { title: "Site", links: [["About Kapil", "/about"]] },
+  {
+    title: "Content",
+    links: [
+      ["Cybersecurity Guides", "/guides"],
+      ["Small Business Security", "/small-business"],
+      ["Start Here", "/start-here"],
+    ],
+  },
+  {
+    title: "Site & Trust",
+    links: [
+      ["About Kapil", "/about"],
+      ["Editorial & Sourcing Policy", "/about#editorial-policy"],
+      ["Corrections & Feedback", "/about#feedback"],
+    ],
+  },
 ];
 
 export function SiteFooter() {

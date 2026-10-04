@@ -7,7 +7,21 @@ export const canonicalUrl = (path: string) => {
 };
 export function structuredData(value: unknown) { return JSON.stringify(value).replace(/</g, "\\u003c"); }
 export const websiteSchema = { "@context": "https://schema.org", "@type": "WebSite", name: "Kapil Shah", url: siteUrl, description: "Practical cybersecurity guidance for small businesses without a security team." };
-export const authorSchema = { "@context": "https://schema.org", "@type": "Person", name: "Kapil Shah", url: canonicalUrl("/about") };
+export const authorSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Kapil Shah",
+  url: canonicalUrl("/about"),
+  description: "Practical cybersecurity educator and author providing actionable security baselines for small businesses without a security team.",
+  knowsAbout: [
+    "Small Business Cybersecurity",
+    "Identity and Access Management",
+    "Phishing Protection",
+    "Business Email Compromise Defense",
+    "Endpoint Security",
+    "Incident Response Planning",
+  ],
+};
 export const profilePageSchema = { "@context": "https://schema.org", "@type": "ProfilePage", mainEntity: authorSchema };
 export function articleSchema(article: Article) { const url = canonicalUrl(`/guides/${article.slug}`); const cover = article.coverImage; return { "@context": "https://schema.org", "@type": "BlogPosting", headline: article.title, description: article.description, datePublished: article.publishedAt, dateModified: article.updatedAt ?? article.publishedAt, mainEntityOfPage: url, author: { "@type": "Person", name: article.author, url: canonicalUrl("/about") }, publisher: { "@type": "Person", name: "Kapil Shah", url: canonicalUrl("/about") }, ...(cover ? { image: { "@type": "ImageObject", url: canonicalUrl(cover.src), width: cover.width, height: cover.height, caption: cover.alt } } : {}) }; }
 export function guideBreadcrumbs(article: Article) {
