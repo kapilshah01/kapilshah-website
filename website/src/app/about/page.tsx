@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Mail } from "lucide-react";
+import Link from "next/link";
+import { Mail, ArrowRight, Code2 } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +34,31 @@ export default function AboutPage() {
               Independent cybersecurity educator and web technologist providing practical, vendor-neutral security baselines for small businesses without a dedicated security team.
             </p>
           </header>
+
+          {/* Interactive Developer Portfolio Callout */}
+          <div className="mt-8 rounded-xl border border-primary/30 bg-primary/5 p-5 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary">
+                  <Code2 className="h-4 w-4" />
+                  <span>Software Engineering Profile</span>
+                </div>
+                <h2 className="text-base font-bold text-foreground sm:text-lg">
+                  Interactive Developer Portfolio
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-xl">
+                  Explore my formal academic background (B.Tech CSE at JAIN University), technical skills in Python and backend systems, engineering mindset, and future trajectory.
+                </p>
+              </div>
+              <Link
+                href="/portfolio"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground hover:bg-primary-hover transition-colors shrink-0"
+              >
+                <span>View Portfolio</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
 
           <section className="mt-12 space-y-5">
             <h2 className="text-2xl font-bold tracking-tight text-foreground">

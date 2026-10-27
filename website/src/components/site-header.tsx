@@ -11,6 +11,7 @@ const navigation = [
   ["Checklist", "/checklist"],
   ["Small Business", "/small-business"],
   ["About", "/about"],
+  ["Portfolio", "/portfolio"],
 ] as const;
 
 export function SiteHeader() {

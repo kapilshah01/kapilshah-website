@@ -10,6 +10,7 @@ const footerNavigation = [
       ["Interactive Checklist", "/checklist"],
       ["Small Business Security", "/small-business"],
       ["Start Here Roadmap", "/start-here"],
+      ["Developer Portfolio", "/portfolio"],
     ],
   },
   {

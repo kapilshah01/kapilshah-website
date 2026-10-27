@@ -310,6 +310,31 @@ searchItems.push({
   content: "Start here: A simple place to begin with cybersecurity. 1. Secure accounts (MFA, password managers). 2. Secure email (phishing protection, BEC). 3. Secure work computers (encryption, patching). 4. Protect and back up data. 5. Prepare for incidents. 6. Build a repeatable security process.",
 });
 
+searchItems.push({
+  id: "page-portfolio",
+  slug: "portfolio",
+  title: "Developer Portfolio — Kapil Kumar Shah Sonar",
+  description: "Personal developer portfolio of Kapil Kumar Shah Sonar — B.Tech Computer Science Engineering student at JAIN (Bengaluru). Exploring backend engineering, Python, REST APIs, and software architecture.",
+  category: "security-management",
+  categoryLabel: "Developer Profile",
+  tags: ["portfolio", "developer", "kapil-shah", "python", "backend", "software-engineering", "rest-apis", "jain-university"],
+  readingTime: 6,
+  difficulty: "all-levels",
+  publishedAt: "2026-10-27",
+  type: "page",
+  href: "/portfolio",
+  content: "Kapil Kumar Shah Sonar Developer Portfolio. Computer Science Engineering Student at JAIN University Bengaluru. Current CGPA 9.03 / 10. Higher Secondary at Global College Nepal 86.25%. Technical skills in Python, JavaScript, SQL, C#, Flask, Node.js, Express.js, REST APIs, HTTP, JSON, CRUD, Git, GitHub, VS Code. Focus on backend systems, data validation, client-server architecture, and reliable software engineering.",
+  headings: [
+    { id: "hero", text: "Introduction & Hero" },
+    { id: "about", text: "About Kapil Shah" },
+    { id: "education", text: "Academic Foundation & Milestones" },
+    { id: "skills", text: "Technical Competencies" },
+    { id: "mindset", text: "Engineering Mindset & Principles" },
+    { id: "direction", text: "Current Direction & Trajectory" },
+    { id: "contact", text: "Connect & Collaborate" },
+  ],
+});
+
 const tsOutput = `// Auto-generated static search index for kapilshah.com.np
 // Zero runtime API calls, zero database, privacy-preserving client search.
 
