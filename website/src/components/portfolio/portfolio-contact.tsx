@@ -6,7 +6,7 @@ import { GithubIcon, LinkedinIcon } from "./portfolio-icons";
 
 export function PortfolioContact() {
   const [copied, setCopied] = useState(false);
-  const emailAddress = "kapilshah470@gmail.com";
+  const emailAddress = "kapilshahsonar@gmail.com";
 
   const handleCopyEmail = async () => {
     try {

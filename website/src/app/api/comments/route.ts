@@ -38,19 +38,19 @@ function validSubmission(value: unknown): CommentSubmission | null {
   return { name: cleanName, email: cleanEmail, body: cleanBody };
 }
 
-function apiError(message: string, status: number) {
-  return Response.json({ message }, { status, headers: { "Cache-Control": "no-store" } });
+function apiResponse(data: Record<string, unknown>, status: number = 200) {
+  return Response.json(data, { status, headers: { "Cache-Control": "no-store" } });
 }
 
 export async function GET(request: Request) {
   const slug = new URL(request.url).searchParams.get("articleSlug");
-  if (!slug) return apiError("An article is required to load comments.", 400);
-  if (!getArticleBySlug(slug)) return apiError("This guide is not available for comments.", 404);
+  if (!slug) return apiResponse({ message: "An article is required to load comments." }, 400);
+  if (!getArticleBySlug(slug)) return apiResponse({ message: "This guide is not available for comments." }, 404);
 
   const supabase = getSupabaseClient();
   if (!supabase) {
     console.error("Supabase comments are not configured.", supabaseConfigStatus());
-    return apiError("Comments are temporarily unavailable.", 503);
+    return apiResponse({ message: "Comments are temporarily offline.", unavailable: true, comments: [] }, 503);
   }
 
   try {
@@ -59,6 +59,7 @@ export async function GET(request: Request) {
       .select("id, article_slug, name, body, created_at")
       .eq("article_slug", slug)
       .order("created_at", { ascending: false });
+
     if (error) {
       console.error("Unable to load approved comments", {
         code: error.code,
@@ -66,42 +67,46 @@ export async function GET(request: Request) {
         details: error.details,
         hint: error.hint,
       });
-      return apiError("Comments are temporarily unavailable.", 500);
+      return apiResponse({ message: "Comments are temporarily offline.", unavailable: true, comments: [] }, 503);
     }
-    return Response.json({ comments: (data ?? []) as PublicComment[] }, { headers: { "Cache-Control": "no-store" } });
+
+    return apiResponse({ comments: (data ?? []) as PublicComment[] }, 200);
   } catch (error) {
     console.error("Unexpected error loading approved comments", error);
-    return apiError("Comments are temporarily unavailable.", 500);
+    return apiResponse({ message: "Comments are temporarily offline.", unavailable: true, comments: [] }, 503);
   }
 }
 
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") ?? 0);
-  if (contentLength > maxRequestBytes) return apiError("Comment submission is too large.", 413);
+  if (contentLength > maxRequestBytes) return apiResponse({ message: "Comment submission is too large." }, 413);
 
   let payload: { articleSlug?: unknown; comment?: unknown; companyWebsite?: unknown } | null;
   try {
     const rawBody = await request.text();
-    if (new TextEncoder().encode(rawBody).byteLength > maxRequestBytes) return apiError("Comment submission is too large.", 413);
+    if (new TextEncoder().encode(rawBody).byteLength > maxRequestBytes) return apiResponse({ message: "Comment submission is too large." }, 413);
     payload = JSON.parse(rawBody) as typeof payload;
   } catch {
-    return apiError("The comment request is invalid.", 400);
+    return apiResponse({ message: "The comment request is invalid." }, 400);
   }
 
   // Quietly accept honeypot submissions without storing them.
   if (typeof payload?.companyWebsite === "string" && payload.companyWebsite.trim()) {
-    return Response.json({ message: "Your comment has been submitted for review." }, { status: 201, headers: { "Cache-Control": "no-store" } });
+    return apiResponse({ message: "Your comment has been submitted for review." }, 201);
   }
 
   const slug = typeof payload?.articleSlug === "string" ? payload.articleSlug : "";
   const comment = validSubmission(payload?.comment);
-  if (!getArticleBySlug(slug)) return apiError("This guide is not available for comments.", 404);
-  if (!comment) return apiError("Please provide a name and a comment between 10 and 2,000 characters. Include a valid email if supplied.", 400);
+  if (!getArticleBySlug(slug)) return apiResponse({ message: "This guide is not available for comments." }, 404);
+  if (!comment) return apiResponse({ message: "Please provide a name and a comment between 10 and 2,000 characters. Include a valid email if supplied." }, 400);
 
   const supabase = getSupabaseClient();
   if (!supabase) {
     console.error("Supabase comments are not configured.", supabaseConfigStatus());
-    return apiError("Comment submissions are temporarily unavailable.", 503);
+    return apiResponse({
+      message: "Comment submissions are temporarily unavailable. Please email your feedback directly to kapilshahsonar@gmail.com.",
+      fallbackEmail: "kapilshahsonar@gmail.com",
+    }, 503);
   }
 
   try {
@@ -113,13 +118,21 @@ export async function POST(request: Request) {
       body: comment.body,
       status: "pending",
     });
+
     if (error) {
       console.error("Unable to submit comment", { code: error.code, message: error.message });
-      return apiError("We could not submit your comment right now. Please try again later.", 500);
+      return apiResponse({
+        message: "We could not save your comment right now. Please email your feedback directly to kapilshahsonar@gmail.com.",
+        fallbackEmail: "kapilshahsonar@gmail.com",
+      }, 503);
     }
-    return Response.json({ message: "Your comment has been submitted for review." }, { status: 201, headers: { "Cache-Control": "no-store" } });
+
+    return apiResponse({ message: "Your comment has been submitted for review." }, 201);
   } catch (error) {
     console.error("Unexpected error submitting comment", error);
-    return apiError("We could not submit your comment right now. Please try again later.", 500);
+    return apiResponse({
+      message: "We could not save your comment right now. Please email your feedback directly to kapilshahsonar@gmail.com.",
+      fallbackEmail: "kapilshahsonar@gmail.com",
+    }, 503);
   }
 }

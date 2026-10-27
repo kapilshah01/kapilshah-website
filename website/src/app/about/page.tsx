@@ -158,10 +158,10 @@ export default function AboutPage() {
                 <li>
                   <strong className="text-foreground">Email:</strong> Send details to{" "}
                   <a
-                    href="mailto:contact@kapilshah.com.np"
+                    href="mailto:kapilshahsonar@gmail.com"
                     className="font-medium text-primary hover:underline"
                   >
-                    contact@kapilshah.com.np
+                    kapilshahsonar@gmail.com
                   </a>
                 </li>
                 <li>
